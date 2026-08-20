@@ -181,12 +181,26 @@
     line-height:1.55;
   }
 
+  .section-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; font-weight:600;
+    letter-spacing:.08em;
+    color:var(--ink-soft);
+    display:flex; align-items:center; gap:10px;
+    margin:28px 0 10px 0;
+  }
+  .section-eyebrow::after{
+    content:''; flex:1; height:1px; background:var(--line);
+  }
+
   .overview-grid{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
     gap:14px;
   }
   .lookup-cell{
+    position:relative;
+    overflow:hidden;
     background:var(--surface);
     border:1px solid var(--line);
     border-radius:12px;
@@ -267,6 +281,15 @@
   }
   .lookup-cell .cta span{ transition:transform .15s ease; }
   .lookup-cell:hover .cta span{ transform:translateX(3px); }
+  .lookup-cell .big-num{
+    position:absolute; top:-6px; right:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:56px;
+    color:var(--line);
+    line-height:1; z-index:0; pointer-events:none;
+    opacity:0.6;
+  }
+  .lookup-cell h3, .lookup-cell p, .lookup-cell .tag, .lookup-cell .cta, .lookup-cell .example, .lookup-cell .wip-badge{ position:relative; z-index:1; }
   .lookup-cell[data-board="agenda"] .cta{ color:var(--agenda); }
   .lookup-cell[data-board="prio"] .cta{ color:var(--prio); }
   .lookup-cell[data-board="mytask"] .cta{ color:var(--mytask); }
@@ -1137,6 +1160,7 @@
     <h1 data-i18n="ov.h1">So nutzen wir ClickUp</h1>
     <p class="lede" data-i18n="ov.lede">Jedes Board hat einen klaren Job. Wenn alle denselben Eintrag ins gleiche Board packen, bleibt ClickUp für alle nutzbar. Hier steht, wofür wir jedes Board nutzen — für die genaue Anleitung einfach auf eine Karte klicken.</p>
 
+    <div class="section-eyebrow" data-i18n="ov.eyebrow.practice">PRAXIS &amp; REGELN</div>
     <div class="practice-teasers">
       <div class="howto-teaser" data-board="rules">
         <div class="howto-text">
@@ -1157,14 +1181,17 @@
       </div>
     </div>
 
+    <div class="section-eyebrow" data-i18n="ov.eyebrow.boards">DIE VIER BOARDS</div>
     <div class="lookup-grid overview-grid">
         <div class="lookup-cell" data-board="agenda">
+          <span class="big-num">01</span>
           <span class="tag">AGENDA</span>
           <h3 data-i18n="ov.agenda.h3">Für Themen, die wir besprechen müssen</h3>
           <p data-i18n="ov.agenda.p">Der Ort für alles, was zwei Personen oder ein Team gemeinsam klären müssen — im 1-2-1, im Team-Meeting oder in der Quartalsplanung. Hier sammelt man Themen, bevor man sie im Termin klärt, und hält fest, wenn sie geklärt sind.</p>
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
         <div class="lookup-cell" data-board="prio">
+          <span class="big-num">02</span>
           <span class="tag">PRIO BOARD</span>
           <h3 data-i18n="ov.prio.h3">Für die Projekte des Quartals</h3>
           <p data-i18n="ov.prio.p">Hier stehen ausschließlich Projekte — abgestimmt mit dem Supervisor in der Quartals- und Monatsplanung. Kleine Einzel-Tasks gehören hier bewusst nicht rein, damit die wirklich wichtigen Vorhaben nicht untergehen.</p>
@@ -1172,6 +1199,7 @@
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
         <div class="lookup-cell" data-board="mytask">
+          <span class="big-num">03</span>
           <span class="tag">MYTASK BOARD</span>
           <h3 data-i18n="ov.mytask.h3">Für deine persönliche Merkliste</h3>
           <p data-i18n="ov.mytask.p">Alles, was du selbst im Blick behalten musst — egal ob du es selbst erledigst oder nur nachverfolgst, weil du es an jemanden delegiert hast. Läuft laufend, ohne festen Rhythmus, wie eine persönliche To-Do-Liste.</p>
@@ -1179,6 +1207,7 @@
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
         <div class="lookup-cell" data-board="team">
+          <span class="big-num">04</span>
           <span class="tag">TEAM TASK BOARD</span>
           <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span>
           <h3 data-i18n="ov.team.h3">Für das Tagesgeschäft im Team</h3>
@@ -2967,6 +2996,8 @@ const I18N = {
   "ov.agenda.p": "Der Ort für alles, was zwei Personen oder ein Team gemeinsam klären müssen — im 1-2-1, im Team-Meeting oder in der Quartalsplanung. Hier sammelt man Themen, bevor man sie im Termin klärt, und hält fest, wenn sie geklärt sind.",
   "ov.delegate.h3": "Wie delegiere ich Tasks?",
   "ov.delegate.p": "Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.",
+  "ov.eyebrow.practice": "PRAXIS &amp; REGELN",
+  "ov.eyebrow.boards": "DIE VIER BOARDS",
   "ov.rules.tag": "ALLGEMEINE REGELN",
   "ov.rules.h3": "Board-übergreifende Grundregeln",
   "ov.rules.p": "Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.",
@@ -3503,6 +3534,8 @@ const I18N = {
   "ov.agenda.p": "The place for everything two people or a team need to work out together — in a 1-on-1, a team meeting, or quarterly planning. This is where topics get collected before the meeting, and marked as resolved once they are.",
   "ov.delegate.h3": "How do I delegate tasks?",
   "ov.delegate.p": "The board is one thing — delegating it properly is another. A short guide so nothing falls between the cracks.",
+  "ov.eyebrow.practice": "PRACTICE &amp; RULES",
+  "ov.eyebrow.boards": "THE FOUR BOARDS",
   "ov.rules.tag": "GENERAL RULES",
   "ov.rules.h3": "Cross-board basic rules",
   "ov.rules.p": "Inbox, replies, and assigned comments — the three things that need to be processed regularly, regardless of which board they touch.",
