@@ -815,16 +815,28 @@
     .kanban-col{ flex:1 1 45%; }
   }
 
+  .practice-teasers{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:20px;
+  }
+  @media (max-width:760px){
+    .practice-teasers{ grid-template-columns:1fr; }
+  }
+
   .howto-teaser{
-    margin-top:16px;
-    background:var(--surface);
-    border:1px solid var(--line);
+    margin-top:0;
+    background:linear-gradient(135deg, var(--surface) 0%, var(--delegate-soft) 130%);
+    border:1px dashed var(--delegate);
+    border-left:4px solid var(--delegate);
     border-radius:12px;
-    padding:20px 24px;
+    padding:20px 22px;
     display:flex;
-    align-items:center;
+    flex-direction:column;
+    align-items:flex-start;
     justify-content:space-between;
-    gap:20px;
+    gap:14px;
     cursor:pointer;
     transition:box-shadow .15s ease, transform .15s ease, border-color .15s ease;
   }
@@ -833,6 +845,14 @@
     transform:translateY(-2px);
     border-color:var(--delegate);
   }
+  .howto-teaser[data-board="rules"]{
+    background:linear-gradient(135deg, var(--surface) 0%, var(--rules-soft) 130%);
+    border-color:var(--rules);
+    border-left-color:var(--rules);
+  }
+  .howto-teaser[data-board="rules"]:hover{ border-color:var(--rules); }
+  .howto-teaser[data-board="rules"] .tag{ background:var(--rules-soft); color:var(--rules); }
+  .howto-teaser[data-board="rules"] .cta{ color:var(--rules); }
   .howto-teaser .tag{
     display:inline-block;
     font-family:'IBM Plex Mono', monospace;
@@ -846,7 +866,7 @@
     color:var(--delegate);
   }
   .howto-teaser h3{ font-size:15px; margin:0 0 4px 0; }
-  .howto-teaser p{ font-size:13px; color:var(--ink-soft); margin:0; max-width:480px; line-height:1.5; }
+  .howto-teaser p{ font-size:13px; color:var(--ink-soft); margin:0; line-height:1.5; }
   .howto-teaser .cta{
     font-family:'IBM Plex Mono', monospace;
     font-size:11.5px;
@@ -1100,11 +1120,11 @@
     <nav class="tabs">
       <button class="tab-btn" data-board="overview"><span class="dot"></span><span data-i18n="nav.overview">Übersicht</span></button>
       <button class="tab-btn" data-board="rules"><span class="dot"></span><span data-i18n="nav.rules">Allgemeine Regeln</span></button>
+      <button class="tab-btn" data-board="delegate"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
       <button class="tab-btn" data-board="agenda"><span class="dot"></span><span data-i18n="nav.agenda">Agenda</span></button>
       <button class="tab-btn" data-board="prio"><span class="dot"></span><span data-i18n="nav.prio">Prio Board</span></button>
       <button class="tab-btn" data-board="mytask"><span class="dot"></span><span data-i18n="nav.mytask">MyTask Board</span></button>
       <button class="tab-btn" data-board="team"><span class="dot"></span><span data-i18n="nav.team">Team Task Board</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
-      <button class="tab-btn" data-board="delegate"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
     </nav>
   </div>
 </div>
@@ -1116,14 +1136,27 @@
     <h1 data-i18n="ov.h1">So nutzen wir ClickUp</h1>
     <p class="lede" data-i18n="ov.lede">Jedes Board hat einen klaren Job. Wenn alle denselben Eintrag ins gleiche Board packen, bleibt ClickUp für alle nutzbar. Hier steht, wofür wir jedes Board nutzen — für die genaue Anleitung einfach auf eine Karte klicken.</p>
 
-    <div class="lookup-grid overview-grid">
-        <div class="lookup-cell" data-board="rules">
+    <div class="practice-teasers">
+      <div class="howto-teaser" data-board="rules">
+        <div class="howto-text">
           <span class="tag" data-i18n="ov.rules.tag">ALLGEMEINE REGELN</span>
           <h3 data-i18n="ov.rules.h3">Board-übergreifende Grundregeln</h3>
           <p data-i18n="ov.rules.p">Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.</p>
-          <div class="example" data-i18n="ov.rules.ex">"Inbox auf 0"</div>
-          <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
+        <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
+      </div>
+      <div class="howto-teaser" data-board="delegate">
+        <div class="howto-text">
+          <span class="tag" data-i18n="ov.delegate.tag">PRAXIS</span>
+          <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span>
+          <h3 data-i18n="ov.delegate.h3">Wie delegiere ich Tasks?</h3>
+          <p data-i18n="ov.delegate.p">Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.</p>
+        </div>
+        <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
+      </div>
+    </div>
+
+    <div class="lookup-grid overview-grid">
         <div class="lookup-cell" data-board="agenda">
           <span class="tag">AGENDA</span>
           <h3 data-i18n="ov.agenda.h3">Für Themen, die wir besprechen müssen</h3>
@@ -1152,16 +1185,6 @@
           <div class="example" data-i18n="ov.team.ex">"Bug in Zahlungsformular fixen"</div>
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
-    </div>
-
-    <div class="howto-teaser" data-board="delegate">
-      <div class="howto-text">
-        <span class="tag" data-i18n="ov.delegate.tag">PRAXIS</span>
-        <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span>
-        <h3 data-i18n="ov.delegate.h3">Wie delegiere ich Tasks?</h3>
-        <p data-i18n="ov.delegate.p">Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.</p>
-      </div>
-      <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
     </div>
   </div>
   </section>
