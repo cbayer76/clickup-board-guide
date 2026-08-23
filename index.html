@@ -1158,6 +1158,26 @@
   }
 
   /* ---------- Play 2 Learn ---------- */
+  .p2l-master-banner{
+    background:linear-gradient(135deg, #FDE68A, #F59E0B);
+    color:#78350F;
+    font-size:13.5px;
+    padding:14px 18px;
+    border-radius:12px;
+    margin-top:16px;
+    margin-bottom:4px;
+  }
+  .p2l-progress-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:16px;
+    margin-bottom:4px;
+  }
+  .p2l-medal{
+    font-size:15px;
+    margin-left:4px;
+  }
   .p2l-hub-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
@@ -1259,7 +1279,12 @@
     font-weight:700; font-size:32px;
     margin-bottom:8px;
   }
-  .p2l-result-msg{ color:var(--ink-soft); font-size:13.5px; margin:0 0 18px 0; }
+  .p2l-result-msg{ color:var(--ink-soft); font-size:13.5px; margin:0 0 10px 0; }
+  .p2l-result-medal{
+    font-size:14px; font-weight:600;
+    color:#B45309;
+    margin:0 0 18px 0;
+  }
   .p2l-result-actions{ display:flex; gap:10px; justify-content:center; }
 </style>
 </head>
@@ -2898,39 +2923,44 @@
       </div>
       <div>
         <h2><span data-i18n="play2learn.h2">Play 2 Learn</span></h2>
-        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 kurze Quizze, je 10 Runden.</p>
+        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 Quizze mit je 50 Fragen, 10 zufällige Runden pro Durchgang.</p>
       </div>
     </div>
 
+    <div id="p2lMasterBanner" class="p2l-master-banner" style="display:none;">
+      🏆 <b>Gold Member!</b> Du hast in allen 5 Spielen die Gold-Medaille (0 Fehler in einer Runde) geholt.
+    </div>
+    <div id="p2lProgressLine" class="p2l-progress-line">🥇 0/5 Gold-Medaillen — spiel eine Runde ohne Fehler, um eine Medaille zu holen.</div>
+
     <div id="p2lHub" class="p2l-hub-grid">
       <div class="p2l-game-card" data-game="board" style="--p2l-c:#5B6470;">
-        <div class="p2l-game-icon">🗂️</div>
+        <div class="p2l-game-icon">🗂️<span class="p2l-medal" data-medal="board"></span></div>
         <h4>Welches Board?</h4>
-        <p>Ordne 10 Beispiel-Aufgaben dem richtigen Board zu.</p>
+        <p>Ordne 10 Beispiel-Aufgaben dem richtigen Board zu — aus einem Pool von 50 Fragen.</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
       <div class="p2l-game-card" data-game="ee" style="--p2l-c:#16A34A;">
-        <div class="p2l-game-icon">🎯</div>
+        <div class="p2l-game-icon">🎯<span class="p2l-medal" data-medal="ee"></span></div>
         <h4>Gutes oder schlechtes EE?</h4>
-        <p>10 Titel + EE-Paare — erkennst du, was ein starkes Erwartetes Ergebnis ausmacht?</p>
+        <p>10 von 50 Titel + EE-Paaren — erkennst du, was ein starkes Erwartetes Ergebnis ausmacht?</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
       <div class="p2l-game-card" data-game="status" style="--p2l-c:#7C3AED;">
-        <div class="p2l-game-icon">🔍</div>
+        <div class="p2l-game-icon">🔍<span class="p2l-medal" data-medal="status"></span></div>
         <h4>Status-Detektiv</h4>
-        <p>10 Situationen — welcher Status passt: to do, in progress, blocked, on hold, done oder closed?</p>
+        <p>10 von 50 Situationen — welcher Status passt: to do, in progress, blocked, on hold, done oder closed?</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
       <div class="p2l-game-card" data-game="donts" style="--p2l-c:#B42318;">
-        <div class="p2l-game-icon">🚫</div>
+        <div class="p2l-game-icon">🚫<span class="p2l-medal" data-medal="donts"></span></div>
         <h4>Don't-Jäger</h4>
-        <p>10 Situationen, die gegen eine Board-Regel verstoßen — welches Board betrifft es?</p>
+        <p>10 von 50 Situationen, die gegen eine Board-Regel verstoßen — welches Board betrifft es?</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
       <div class="p2l-game-card" data-game="prioplan" style="--p2l-c:#EA580C;">
-        <div class="p2l-game-icon">🧩</div>
+        <div class="p2l-game-icon">🧩<span class="p2l-medal" data-medal="prioplan"></span></div>
         <h4>PRIO PLAN Quiz</h4>
-        <p>10 Runden rund um die PRIO-PLAN-Werte von Prio Board und Team Task Board.</p>
+        <p>10 von 50 Runden rund um die PRIO-PLAN-Werte von Prio Board und Team Task Board.</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
     </div>
@@ -2950,6 +2980,7 @@
       <div class="p2l-result" id="p2lResult" style="display:none;">
         <div class="p2l-result-score" id="p2lScoreText"></div>
         <p class="p2l-result-msg" id="p2lResultMsg"></p>
+        <p class="p2l-result-medal" id="p2lResultMedal" style="display:none;"></p>
         <div class="p2l-result-actions">
           <button type="button" class="p2l-next-btn" id="p2lRetry">Nochmal spielen</button>
           <button type="button" class="p2l-back-btn" id="p2lToHub">Zurück zur Spielauswahl</button>
@@ -4133,82 +4164,2782 @@ const I18N = {
 <script>
 (function(){
   const P2L_GAMES = {
-    board: {
-      title: "Welches Board?",
-      questions: [
-        {q: '„Rechnung Nr. 4021 von Anbieter Y prüfen und freigeben“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Ein einzelner, in sich abgeschlossener Schritt im Tagesgeschäft — gehört ins Team Task Board."},
-        {q: '„MVP-Launch für neue Marke“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Läuft über mehrere Wochen und bringt ein Abteilungsziel voran — ein klassisches Projekt fürs Prio Board."},
-        {q: '„Vertrag von X unterschreiben lassen“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Eine persönliche Merkaufgabe, die du selbst nachhältst — typisch fürs MyTask Board."},
-        {q: '„Sollen wir das Marketing-Budget für Q3 um 15 % erhöhen?“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Eine Frage, die eine gemeinsame Entscheidung braucht — gehört in die Agenda, nicht in ein Task-Board."},
-        {q: '„SSL-Zertifikat für die Shop-Domain erneuern“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Technischer Einzelschritt im Tagesgeschäft eines Teams — Team Task Board."},
-        {q: '„Neues CRM-System für den Vertrieb einführen (geplante Laufzeit: ein Quartal)“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Mehrere Wochen Laufzeit, mehrere Teilschritte — ein Projekt fürs Prio Board."},
-        {q: '„Rückmeldung vom Steuerberater zur Jahresabschluss-Frage einholen“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Eine einzelne Aufgabe, die du persönlich nachhältst — MyTask Board."},
-        {q: '„Sollen wir das Homeoffice-Modell auf 3 Tage pro Woche ausweiten?“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Eine Grundsatzfrage, die gemeinsam abgestimmt werden muss — ein Agendapunkt."},
-        {q: '„Wöchentlicher Datenbank-Backup-Check“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Wiederkehrender Routine-Check im Team — klassischer Team-Task-Board-Fall."},
-        {q: '„Kompletten Firmen-Webauftritt relaunchen (Laufzeit: 3 Monate)“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Großes, mehrwöchiges Vorhaben mit klaren Meilensteinen — gehört ins Prio Board."}
-      ]
-    },
-    ee: {
-      title: "Gutes oder schlechtes EE?",
-      questions: [
-        {q: 'Titel: „MVP-Launch für neue Marke“ — EE: „Landingpage live, Payment-Flow getestet, erste 100 Anmeldungen erreicht.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Drei konkrete, prüfbare Kriterien — jeder kann ohne Diskussion sagen, ob es fertig ist."},
-        {q: 'Titel: „Marketing Sachen“ — EE: „Kampagne umsetzen“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Beschreibt eine Tätigkeit, kein Ergebnis — „fertig“ bleibt Meinungssache."},
-        {q: 'Titel: „Onboarding-Video für neue Mitarbeiter erstellen“ — EE: „5-minütiges Video ist im Intranet veröffentlicht, von HR freigegeben, erste 3 neue Mitarbeiter haben es angeschaut.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Konkret, prüfbar, sogar mit einem Nutzungs-Nachweis."},
-        {q: 'Titel: „Website verbessern“ — EE: „Website ist besser“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Wiederholt nur den Titel — „besser“ ist nicht messbar."},
-        {q: 'Titel: „Support-Ticket-System evaluieren“ — EE: „Vergleich von 3 Anbietern liegt vor, Empfehlung inkl. Kostenschätzung an den Supervisor geschickt.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Klar erkennbares Endergebnis, das jeder nachprüfen kann."},
-        {q: 'Titel: „CRM aufsetzen“ — EE: „CRM ist eingerichtet“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Keine Kriterien — eingerichtet mit welchen Feldern, für wen, getestet?"},
-        {q: 'Titel: „Rückmeldung zu neuem Logo-Entwurf geben“ — EE: „Feedback zu Farbwahl und Skalierbarkeit ist als Kommentar an der Karte hinterlassen.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Klar, was zu tun ist und wo das Ergebnis landet."},
-        {q: 'Titel: „Team-Event planen“ — EE: „Event war gut“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"„Gut“ ist subjektiv und lässt sich vorher gar nicht als Ziel festlegen."},
-        {q: 'Titel: „Zahlungsanbieter Stripe für Region LATAM freischalten“ — EE: „Stripe ist in LATAM live, erste echte Transaktion erfolgreich verbucht, Refund-Flow getestet.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Deckt sowohl den Live-Gang als auch den Praxistest ab."},
-        {q: 'Titel: „Prozesse optimieren“ — EE: „Prozesse laufen besser“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Kein einziges prüfbares Kriterium — welche Prozesse, was heißt „besser“?"}
-      ]
-    },
-    status: {
-      title: "Status-Detektiv",
-      questions: [
-        {q: 'Ein Task ist eingetragen, aber noch niemand hat angefangen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:0, explain:"Noch nicht begonnen — klassisches „to do“."},
-        {q: 'Du arbeitest gerade aktiv an der Aufgabe.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Wird aktiv bearbeitet — „in progress“."},
-        {q: 'Du hast deinen Teil erledigt, wartest jetzt auf eine Rückmeldung von einem Kollegen, bevor es weitergehen kann.', options:["to do","in progress","blocked","on hold","done","closed"], correct:2, explain:"Ein externer Blocker verhindert das Weitermachen — „blocked“."},
-        {q: 'Du hast schon mal angefangen, pausierst jetzt aber bewusst — kein externer Blocker, du hast einfach etwas Wichtigeres vor.', options:["to do","in progress","blocked","on hold","done","closed"], correct:3, explain:"Bewusste Pause ohne Blocker — „on hold“."},
-        {q: 'Die Aufgabe ist inhaltlich fertig, wartet aber noch auf die Prüfung durch den Supervisor.', options:["to do","in progress","blocked","on hold","done","closed"], correct:4, explain:"Fertig, aber noch nicht final geprüft — „done“."},
-        {q: 'Der Supervisor hat die Karte geprüft und final bestätigt.', options:["to do","in progress","blocked","on hold","done","closed"], correct:5, explain:"Vollständig abgeschlossen und geprüft — „closed“."},
-        {q: 'Prio Board: Die Subtasks laufen aktiv, PRIO PLAN steht automatisch auf „This Week“.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Sobald an den Subtasks gearbeitet wird, steht die Prio-Karte auf „in progress“."},
-        {q: 'Ein Agendapunkt wird gerade im Meeting besprochen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Wird gerade geklärt bzw. besprochen — „in progress“."},
-        {q: 'Eine Team-Task-Karte liegt seit einer Woche unangetastet in „Weekly“, niemand hat begonnen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:0, explain:"Noch nicht begonnen, wartet auf Kapazität im Team — „to do“."},
-        {q: 'Du wartest auf eine Rückmeldung von Anbieter X, bevor du bei deiner MyTask-Karte weitermachen kannst.', options:["to do","in progress","blocked","on hold","done","closed"], correct:2, explain:"Hängt an einer anderen Person/Partei — „blocked“."}
-      ]
-    },
-    donts: {
-      title: "Don't-Jäger",
-      questions: [
-        {q: 'Ein Manager setzt für sein nächstes Quartal ganz allein neue Prioritäten, ohne den Supervisor einzubeziehen.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Prioritäten fürs Quartal/Monat dürfen nie allein gesetzt werden — nur gemeinsam mit dem Supervisor."},
-        {q: 'Eine nicht mehr benötigte Karte wird einfach aus dem Prio-Plan gelöscht.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Karten werden aus dem Plan nie gelöscht."},
-        {q: 'Ein Mitarbeiter setzt seine eigene Prio-Karte selbst auf „closed“.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"„closed“ setzen darf nur der Supervisor."},
-        {q: 'Im Team-Meeting wird spontan ein Thema besprochen, das nie vorher in die Agenda eingetragen wurde.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Besprochen wird nur, was auch tatsächlich in der Agenda steht — keine Ad-hoc-Themen."},
-        {q: 'Ein 1-2-1-Punkt, der noch nicht fertig durchdacht ist, wird trotzdem schon auf „AGENDA - OPEN“ gesetzt.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Unvollständige Punkte bleiben ehrlich auf „NOT READY“."},
-        {q: 'Jemand trägt 15 Aufgaben gleichzeitig in „Today\'s Worklist“ im MyTask Board ein.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Maximal ca. 10 Aufgaben — sonst wird „Today“ selbst wieder zur Ablage."},
-        {q: 'Eine delegierte Aufgabe wird im MyTask Board nachgehalten, aber ohne EE in der Beschreibung.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Bei delegierten Aufgaben gehört immer ein EE ins Description-Feld."},
-        {q: 'Ein Teammitglied hat gleichzeitig 3 Karten auf „in progress“ im Team Task Board.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"WIP-Limit: maximal 1 Karte gleichzeitig auf „in progress“."},
-        {q: 'Ein Task wird auf Status „done“ gesetzt, aber PRIO PLAN bleibt auf „Today“ stehen, statt auf „For Review“ zu wechseln.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Bei Fertigstellung müssen Status UND PRIO PLAN gemeinsam gesetzt werden."},
-        {q: 'Eine Prio-Karte selbst (nicht ihre Subtasks) wird auf PRIO PLAN „Today\'s Worklist“ gesetzt.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"„Today\'s Worklist“ ist nur für Subtasks, nie für die Prio-Karte selbst."}
-      ]
-    },
-    prioplan: {
-      title: "PRIO PLAN Quiz",
-      questions: [
-        {q: 'Welcher PRIO PLAN Wert im Prio Board bedeutet: „nur für Subtasks, nie für die Prio-Karte selbst“?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:0, explain:"Today's Worklist ist im Prio Board ausschließlich für Subtasks gedacht."},
-        {q: '„Für diese Woche priorisiert, gesetzt im Weekly Manager Meeting“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:1, explain:"This Week wird im wöchentlichen Manager-Meeting gesetzt."},
-        {q: '„Für diesen Monat eingeplant, aus der Monatsplanung“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:2, explain:"This Month kommt direkt aus der Monatsplanung."},
-        {q: '„Standard-Sammelplatz aus der Quartalsplanung, noch nicht auf Monat oder Woche heruntergebrochen“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:3, explain:"This Quartal ist der Ausgangspunkt direkt nach der Quartalsplanung."},
-        {q: 'Im Team Task Board: „für Teammitglieder mit eingeschränktem Account, die kein eigenes MyTask Board haben“ — welcher Wert?', options:["Backlog","Weekly","Today","For Review"], correct:0, explain:"Backlog fängt auf, was sonst ins MyTask Board gehören würde."},
-        {q: '„Sammelbecken für alle Aufgaben, die diese Woche grundsätzlich anfallen, noch nicht auf einen Tag festgelegt“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:1, explain:"Weekly sammelt alles, was diese Woche dran ist, ohne festen Tag."},
-        {q: '„Aus Weekly rausgezogen, sobald jemand die Aufgabe heute angehen soll“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:2, explain:"Today wird meist im Daily Stand-up aus Weekly gezogen."},
-        {q: '„Aufgabe ist aus Sicht des Bearbeiters fertig (Status: done) und wartet auf Kontrolle durch den Supervisor“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:3, explain:"For Review ist die Kontroll-Spalte für den Supervisor."},
-        {q: 'In welchem Board hat PRIO PLAN die Werte Backlog / Weekly / Today / For Review?', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Diese vier Werte gruppieren das Kanban Board im Team Task Board."},
-        {q: 'In welchem Board hat PRIO PLAN die Werte Today\'s Worklist / This Week / This Month / This Quartal?', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Das ist der Planungs-Rhythmus im Prio Board."}
-      ]
-    }
-  };
+  "board": {
+    "title": "Welches Board?",
+    "questions": [
+      {
+        "q": "„Rechnung Nr. 4021 von Anbieter Y prüfen und freigeben“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Ein einzelner, in sich abgeschlossener Schritt im Tagesgeschäft — gehört ins Team Task Board."
+      },
+      {
+        "q": "„MVP-Launch für neue Marke“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Läuft über mehrere Wochen und bringt ein Abteilungsziel voran — ein klassisches Projekt fürs Prio Board."
+      },
+      {
+        "q": "„Vertrag von X unterschreiben lassen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Eine persönliche Merkaufgabe, die du selbst nachhältst — typisch fürs MyTask Board."
+      },
+      {
+        "q": "„Sollen wir das Marketing-Budget für Q3 um 15 % erhöhen?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Eine Frage, die eine gemeinsame Entscheidung braucht — gehört in die Agenda, nicht in ein Task-Board."
+      },
+      {
+        "q": "„SSL-Zertifikat für die Shop-Domain erneuern“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Technischer Einzelschritt im Tagesgeschäft eines Teams — Team Task Board."
+      },
+      {
+        "q": "„Neues CRM-System für den Vertrieb einführen (geplante Laufzeit: ein Quartal)“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Mehrere Wochen Laufzeit, mehrere Teilschritte — ein Projekt fürs Prio Board."
+      },
+      {
+        "q": "„Rückmeldung vom Steuerberater zur Jahresabschluss-Frage einholen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Eine einzelne Aufgabe, die du persönlich nachhältst — MyTask Board."
+      },
+      {
+        "q": "„Sollen wir das Homeoffice-Modell auf 3 Tage pro Woche ausweiten?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Eine Grundsatzfrage, die gemeinsam abgestimmt werden muss — ein Agendapunkt."
+      },
+      {
+        "q": "„Wöchentlicher Datenbank-Backup-Check“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Wiederkehrender Routine-Check im Team — klassischer Team-Task-Board-Fall."
+      },
+      {
+        "q": "„Kompletten Firmen-Webauftritt relaunchen (Laufzeit: 3 Monate)“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Großes, mehrwöchiges Vorhaben mit klaren Meilensteinen — gehört ins Prio Board."
+      },
+      {
+        "q": "„Zugangsdaten-Reset für ausgeschiedenen Mitarbeiter durchführen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Einzelner, schnell erledigter Sicherheits-Task im Tagesgeschäft — Team Task Board."
+      },
+      {
+        "q": "„Neuen Mitarbeiter-Laptop einrichten“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Konkreter Einzelschritt im Team-Alltag — Team Task Board."
+      },
+      {
+        "q": "„DNS-Einträge für neue Subdomain setzen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Technisches Setup, in Stunden erledigt — Team Task Board."
+      },
+      {
+        "q": "„Monatlicher Server-Health-Check“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Wiederkehrender Routine-Check — Team Task Board."
+      },
+      {
+        "q": "„Zugangsdaten für neues Tool im Team anlegen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Kleiner Setup-Task im Tagesgeschäft — Team Task Board."
+      },
+      {
+        "q": "„Fehlerhafte Weiterleitung auf der Landingpage beheben“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Ein Bugfix — klassischer Team-Task-Board-Fall."
+      },
+      {
+        "q": "„Rechnung von Hosting-Anbieter für Q3 prüfen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Einzelne Rechnungsprüfung — Team Task Board."
+      },
+      {
+        "q": "„Passwort-Manager-Zugänge für neues Teammitglied einrichten“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Setup-Aufgabe im Team-Alltag — Team Task Board."
+      },
+      {
+        "q": "„Wöchentlicher Uptime-Check der Hauptwebsite“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Wiederkehrender Routine-Check — Team Task Board."
+      },
+      {
+        "q": "„Kaputten Link im Newsletter-Template reparieren“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Kleiner technischer Fix — Team Task Board."
+      },
+      {
+        "q": "„Expansion nach Region LATAM vorbereiten“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Großes, mehrwöchiges Vorhaben mit vielen Teilschritten — Prio Board."
+      },
+      {
+        "q": "„Onboarding-Prozess für neue Mitarbeiter überarbeiten“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Mehrwöchiges Projekt mit klaren Meilensteinen — Prio Board."
+      },
+      {
+        "q": "„Affiliate-Programm für Q4 aufbauen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Strategisches Quartalsprojekt — Prio Board."
+      },
+      {
+        "q": "„Migration auf neue Zahlungsplattform“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Größeres technisches Projekt über mehrere Wochen — Prio Board."
+      },
+      {
+        "q": "„Employer-Branding-Kampagne für die nächsten 2 Monate“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Mehrmonatiges Vorhaben mit Abteilungsziel — Prio Board."
+      },
+      {
+        "q": "„Internes Wissensmanagement-System einführen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Mehrwöchiges Projekt mit mehreren Teilschritten — Prio Board."
+      },
+      {
+        "q": "„Neue Preisstruktur für alle Produkte entwickeln“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Strategisches, mehrwöchiges Vorhaben — Prio Board."
+      },
+      {
+        "q": "„TES Prague 2026 organisieren“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Großes Event-Projekt mit vielen Teilschritten — Prio Board."
+      },
+      {
+        "q": "„Automatisierung der Rechnungsstellung aufbauen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Technisches Projekt über mehrere Wochen — Prio Board."
+      },
+      {
+        "q": "„Redesign des kompletten Checkout-Flows“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Mehrwöchiges Projekt mit klaren Meilensteinen — Prio Board."
+      },
+      {
+        "q": "„Flugtickets für Konferenz in Prag buchen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliche Einzelaufgabe mit Frist — MyTask Board."
+      },
+      {
+        "q": "„Nachfassen, ob Lucie das Onboarding-Dokument aktualisiert hat“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliches Nachhalten einer delegierten Aufgabe — MyTask Board."
+      },
+      {
+        "q": "„Rückmeldung von Anbieter X zum neuen Angebot einholen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliche Merkaufgabe — MyTask Board."
+      },
+      {
+        "q": "„Eigenen Jahresurlaub für Q4 eintragen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Rein persönliche Aufgabe — MyTask Board."
+      },
+      {
+        "q": "„Feedback zur eigenen Präsentation vom letzten Meeting einholen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliches Nachhalten — MyTask Board."
+      },
+      {
+        "q": "„Erinnerung: Laptop-Versicherung erneuern“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliche Merkaufgabe mit Frist — MyTask Board."
+      },
+      {
+        "q": "„Rückmeldung zum unterschriebenen Mietvertrag fürs neue Büro abwarten“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliches Nachhalten — MyTask Board."
+      },
+      {
+        "q": "„Termin beim Wirtschaftsprüfer vereinbaren“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Einzelne persönliche Aufgabe — MyTask Board."
+      },
+      {
+        "q": "„Visum für Geschäftsreise nach Brasilien beantragen“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliche Merkaufgabe — MyTask Board."
+      },
+      {
+        "q": "„Prüfen, ob die Gehaltsabrechnung für den neuen Mitarbeiter korrekt war“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Persönliches Nachhalten einer einzelnen Sache — MyTask Board."
+      },
+      {
+        "q": "„Freigabe für neuen Affiliate-Vertrag mit Partner X“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Braucht eine Entscheidung/Freigabe — Agendapunkt."
+      },
+      {
+        "q": "„Feedback zu meiner Präsentation vom letzten Quartalsmeeting“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Feedback zu etwas Konkretem — Agendapunkt."
+      },
+      {
+        "q": "„Brainstorming: Wie erhöhen wir die Anmeldequote im Onboarding?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Gemeinsames Ideensammeln — Agendapunkt."
+      },
+      {
+        "q": "„Info: Neuer Zahlungsanbieter für DACH-Region ab nächster Woche live“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Reine Information an alle — Agendapunkt."
+      },
+      {
+        "q": "„Sollen wir eine vierte Kernpriorität fürs Quartal aufnehmen?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Eine Entscheidung, die gemeinsam getroffen werden muss — Agendapunkt."
+      },
+      {
+        "q": "„Diskussion: Sollten wir den Bürostandort wechseln?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Grundsatzdiskussion — Agendapunkt."
+      },
+      {
+        "q": "„Freigabe für das neue Gehaltsmodell im Vertrieb“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Braucht eine Freigabe — Agendapunkt."
+      },
+      {
+        "q": "„Sollen wir zusätzliches Budget für Recruiting freigeben?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Entscheidung über Budget — Agendapunkt."
+      },
+      {
+        "q": "„Feedback zur neuen Reisekostenrichtlinie“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Feedback zu etwas Konkretem — Agendapunkt."
+      },
+      {
+        "q": "„Sollen wir künftig 4-Tage-Wochen testen?“",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Grundsatzfrage, die gemeinsam entschieden wird — Agendapunkt."
+      }
+    ]
+  },
+  "ee": {
+    "title": "Gutes oder schlechtes EE?",
+    "questions": [
+      {
+        "q": "Titel: „MVP-Launch für neue Marke“ — EE: „Landingpage live, Payment-Flow getestet, erste 100 Anmeldungen erreicht.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Drei konkrete, prüfbare Kriterien — jeder kann ohne Diskussion sagen, ob es fertig ist."
+      },
+      {
+        "q": "Titel: „Onboarding-Video für neue Mitarbeiter erstellen“ — EE: „5-minütiges Video ist im Intranet veröffentlicht, von HR freigegeben, erste 3 neue Mitarbeiter haben es angeschaut.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkret, prüfbar, sogar mit einem Nutzungs-Nachweis."
+      },
+      {
+        "q": "Titel: „Support-Ticket-System evaluieren“ — EE: „Vergleich von 3 Anbietern liegt vor, Empfehlung inkl. Kostenschätzung an Supervisor geschickt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Klar erkennbares Endergebnis, das jeder nachprüfen kann."
+      },
+      {
+        "q": "Titel: „Rückmeldung zu neuem Logo-Entwurf geben“ — EE: „Feedback zu Farbwahl und Skalierbarkeit als Kommentar an der Karte hinterlassen.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Klar, was zu tun ist und wo das Ergebnis landet."
+      },
+      {
+        "q": "Titel: „Zahlungsanbieter Stripe für LATAM freischalten“ — EE: „Stripe live in LATAM, erste echte Transaktion verbucht, Refund-Flow getestet.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Deckt sowohl den Live-Gang als auch den Praxistest ab."
+      },
+      {
+        "q": "Titel: „Neues CRM-System einführen“ — EE: „CRM ist für Vertrieb live, alle bestehenden Kontakte migriert, 3 Vertriebler geschult.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Drei konkrete, unabhängig prüfbare Teilergebnisse."
+      },
+      {
+        "q": "Titel: „Server-Migration auf neuen Hosting-Anbieter“ — EE: „Alle Dienste laufen auf neuem Server, DNS umgestellt, 48h ohne Ausfall bestätigt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Technisch präzise, mit echtem Stabilitätsnachweis."
+      },
+      {
+        "q": "Titel: „Newsletter-Anmeldeprozess überarbeiten“ — EE: „Neuer Flow live, Double-Opt-In funktioniert, Test-Anmeldung erfolgreich abgeschlossen.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkret und mit echtem Funktionstest."
+      },
+      {
+        "q": "Titel: „Rabattcode-System im Shop einführen“ — EE: „Rabattcodes funktionieren im Checkout, 3 Testbestellungen erfolgreich mit Code abgeschlossen.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Prüfbares Ergebnis mit konkretem Test."
+      },
+      {
+        "q": "Titel: „Recruiting-Prozess für Entwickler überarbeiten“ — EE: „Neuer Prozess dokumentiert, erste 2 Kandidaten erfolgreich durchlaufen, Time-to-hire gemessen.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Klar messbar und dokumentiert."
+      },
+      {
+        "q": "Titel: „Interne Wissensdatenbank aufsetzen“ — EE: „Wiki live mit mind. 20 Artikeln, Team hat Zugriff, Feedback von 3 Testnutzern eingeholt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete Zahlen als Kriterium."
+      },
+      {
+        "q": "Titel: „Rückerstattungs-Prozess für Kunden dokumentieren“ — EE: „Klarer Ablauf steht in ClickUp Doc, vom Support-Team gegengelesen und freigegeben.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Ergebnis ist ein konkretes, geprüftes Dokument."
+      },
+      {
+        "q": "Titel: „Google Ads Kampagne für neues Produkt starten“ — EE: „Kampagne live, erste 500 Klicks erreicht, CPC unter Zielwert von 0,80 €.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Messbare Zielwerte statt vager Absicht."
+      },
+      {
+        "q": "Titel: „Mitarbeiter-Zufriedenheitsumfrage durchführen“ — EE: „Umfrage an alle verschickt, Rücklaufquote über 70 %, Ergebnisse als Report ans Management.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete Quote und klares Endergebnis."
+      },
+      {
+        "q": "Titel: „Rechnungsvorlage für neue Region anpassen“ — EE: „Vorlage enthält korrekte Steuersätze, von Buchhaltung freigegeben, erste Testrechnung erfolgreich verschickt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Geprüft und mit echtem Test versehen."
+      },
+      {
+        "q": "Titel: „Zwei-Faktor-Authentifizierung einführen“ — EE: „2FA für alle Admin-Accounts aktiv, Anleitung im Wiki, 100 % der Admins haben es eingerichtet.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Vollständige, messbare Abdeckung."
+      },
+      {
+        "q": "Titel: „Kundenservice-Chat auf der Website integrieren“ — EE: „Chat-Widget live, erste 10 echte Anfragen beantwortet, Reaktionszeit unter 2 Minuten.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete Praxis- und Zeitkriterien."
+      },
+      {
+        "q": "Titel: „Freelancer-Vertragsvorlage aktualisieren“ — EE: „Neue Vorlage von Rechtsabteilung freigegeben, erster neuer Vertrag damit unterschrieben.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Geprüft und bereits einmal angewendet."
+      },
+      {
+        "q": "Titel: „A/B-Test für neue Checkout-Seite durchführen“ — EE: „Test lief 2 Wochen, Ergebnis zeigt höhere Conversion, Gewinner-Variante live gestellt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Klarer Ablauf mit messbarem Ergebnis."
+      },
+      {
+        "q": "Titel: „Firmenweite Passwortrichtlinie einführen“ — EE: „Richtlinie dokumentiert, per E-Mail kommuniziert, in ClickUp als Pflichtlektüre markiert.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete, nachvollziehbare Schritte."
+      },
+      {
+        "q": "Titel: „Social-Media-Kalender für Q4 erstellen“ — EE: „Kalender mit allen Posts für Oktober–Dezember steht, von Marketing-Lead freigegeben.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Klar abgegrenztes, geprüftes Ergebnis."
+      },
+      {
+        "q": "Titel: „Kundenreferenzen für die Website sammeln“ — EE: „5 schriftliche Referenzen mit Freigabe der Kunden liegen vor, auf der Website veröffentlicht.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete Anzahl plus sichtbares Ergebnis."
+      },
+      {
+        "q": "Titel: „Automatisiertes Reporting für Vertriebszahlen aufbauen“ — EE: „Dashboard aktualisiert sich täglich automatisch, von 2 Vertriebsleitern getestet und bestätigt.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Funktionsnachweis durch echte Nutzer."
+      },
+      {
+        "q": "Titel: „Barrierefreiheit der Website verbessern“ — EE: „Alle Bilder haben Alt-Texte, Kontrastwerte erfüllen WCAG AA, mit Screenreader getestet.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Konkrete Standards und echter Test."
+      },
+      {
+        "q": "Titel: „Interne Eskalationsroutine für Support-Fälle festlegen“ — EE: „Klare 3-Stufen-Routine dokumentiert, vom Support-Team im Testfall erfolgreich angewendet.“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 0,
+        "explain": "Dokumentiert und bereits erprobt."
+      },
+      {
+        "q": "Titel: „Marketing Sachen“ — EE: „Kampagne umsetzen“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Beschreibt eine Tätigkeit, kein Ergebnis — „fertig“ bleibt Meinungssache."
+      },
+      {
+        "q": "Titel: „Website verbessern“ — EE: „Website ist besser“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Wiederholt nur den Titel — „besser“ ist nicht messbar."
+      },
+      {
+        "q": "Titel: „CRM aufsetzen“ — EE: „CRM ist eingerichtet“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Keine Kriterien — eingerichtet mit welchen Feldern, für wen, getestet?"
+      },
+      {
+        "q": "Titel: „Team-Event planen“ — EE: „Event war gut“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "„Gut“ ist subjektiv und lässt sich vorher gar nicht als Ziel festlegen."
+      },
+      {
+        "q": "Titel: „Prozesse optimieren“ — EE: „Prozesse laufen besser“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein einziges prüfbares Kriterium — welche Prozesse, was heißt „besser“?"
+      },
+      {
+        "q": "Titel: „Server-Sachen“ — EE: „alles läuft“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Weder Titel noch EE sagen, worum es konkret geht."
+      },
+      {
+        "q": "Titel: „Kundenservice verbessern“ — EE: „Kunden sind zufriedener“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Nicht messbar, ohne konkrete Zahl oder Quelle."
+      },
+      {
+        "q": "Titel: „Neue Landingpage“ — EE: „Landingpage fertig“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Wiederholt nur den Titel, kein zusätzliches Kriterium."
+      },
+      {
+        "q": "Titel: „Onboarding optimieren“ — EE: „Onboarding ist besser“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "„Besser“ ist subjektiv, kein Prüfkriterium."
+      },
+      {
+        "q": "Titel: „Rechnungen aufräumen“ — EE: „Rechnungen sind aktuell“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Unklar, was „aktuell“ konkret bedeutet."
+      },
+      {
+        "q": "Titel: „Social Media“ — EE: „Posts sind online“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein erkennbares Ziel oder Erfolgskriterium."
+      },
+      {
+        "q": "Titel: „Reporting verbessern“ — EE: „Reports sehen besser aus“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Rein optische, nicht messbare Aussage."
+      },
+      {
+        "q": "Titel: „Sicherheit erhöhen“ — EE: „System ist sicherer“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein konkretes, prüfbares Kriterium."
+      },
+      {
+        "q": "Titel: „Prozess dokumentieren“ — EE: „Dokumentation ist fertig“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Wiederholt den Titel, ohne zu sagen, was „fertig“ bedeutet."
+      },
+      {
+        "q": "Titel: „Recruiting verbessern“ — EE: „Wir haben mehr Bewerber“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Keine Zahl, kein Zeitraum, nicht prüfbar."
+      },
+      {
+        "q": "Titel: „Newsletter optimieren“ — EE: „Newsletter ist besser“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "„Besser“ ist keine messbare Aussage."
+      },
+      {
+        "q": "Titel: „Kampagne launchen“ — EE: „Kampagne läuft“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein Erfolgskriterium, nur ein Zustand."
+      },
+      {
+        "q": "Titel: „Datenqualität verbessern“ — EE: „Daten sind sauberer“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Nicht messbar, keine Zahl oder Kriterium."
+      },
+      {
+        "q": "Titel: „Support-Zeiten verkürzen“ — EE: „Support ist schneller“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Ohne Zielwert nicht prüfbar."
+      },
+      {
+        "q": "Titel: „Design überarbeiten“ — EE: „Design sieht moderner aus“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Subjektiv, nicht überprüfbar."
+      },
+      {
+        "q": "Titel: „Mitarbeiter schulen“ — EE: „Team ist geschult“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein Kriterium, woran man das erkennt."
+      },
+      {
+        "q": "Titel: „Budget planen“ — EE: „Budget steht“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein Kriterium, was genau „steht“ bedeutet."
+      },
+      {
+        "q": "Titel: „Tools konsolidieren“ — EE: „weniger Tools im Einsatz“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Keine konkrete Zahl oder Zielgröße."
+      },
+      {
+        "q": "Titel: „Feedback einholen“ — EE: „Feedback ist da“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Kein Kriterium für Menge, Qualität oder Quelle."
+      },
+      {
+        "q": "Titel: „Struktur verbessern“ — EE: „alles ist übersichtlicher“",
+        "options": [
+          "Gutes EE",
+          "Schlechtes EE"
+        ],
+        "correct": 1,
+        "explain": "Rein subjektiv, nicht überprüfbar."
+      }
+    ]
+  },
+  "status": {
+    "title": "Status-Detektiv",
+    "questions": [
+      {
+        "q": "Ein Task ist eingetragen, aber noch niemand hat angefangen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — klassisches „to do“."
+      },
+      {
+        "q": "Eine Team-Task-Karte liegt seit einer Woche unangetastet in „Weekly“, niemand hat begonnen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen, wartet auf Kapazität im Team — „to do“."
+      },
+      {
+        "q": "Ein neuer Agendapunkt wurde eben erst eingetragen, noch nicht mal gelesen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Frisch eingetragen, noch keine Klärung begonnen — „to do“."
+      },
+      {
+        "q": "Eine MyTask-Karte wartet, bis du selbst Zeit dafür hast.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Eine Prio-Karte für nächstes Quartal ist angelegt, aber noch niemand hat mit den Subtasks begonnen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Ein Backlog-Eintrag im Team Task Board wurde noch nicht mal gesichtet.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Ein delegierter Task wurde gerade erst zugewiesen, die Person hat noch nicht reagiert.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Ein Rechnungsprüfungs-Task liegt frisch im Team-Board, noch ohne jede Aktivität.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Eine neue Projektkarte im Prio Board wartet auf den Start nach der Monatsplanung.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 0,
+        "explain": "Noch nicht begonnen — „to do“."
+      },
+      {
+        "q": "Du arbeitest gerade aktiv an der Aufgabe.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Wird aktiv bearbeitet — „in progress“."
+      },
+      {
+        "q": "Prio Board: Die Subtasks laufen aktiv, PRIO PLAN steht automatisch auf „This Week“.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Sobald an den Subtasks gearbeitet wird, steht die Prio-Karte auf „in progress“."
+      },
+      {
+        "q": "Ein Agendapunkt wird gerade im Meeting besprochen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Wird gerade geklärt bzw. besprochen — „in progress“."
+      },
+      {
+        "q": "Ein Teammitglied hat die Karte gerade auf „Today“ gezogen und arbeitet daran.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Aktiv in Bearbeitung — „in progress“."
+      },
+      {
+        "q": "Du verfolgst aktiv, dass die Person, an die du delegiert hast, gerade arbeitet.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Aktive Verfolgung einer laufenden Aufgabe — „in progress“."
+      },
+      {
+        "q": "Eine 1-2-1-Agenda wird gerade schriftlich per Kommentar geklärt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Wird gerade geklärt — „in progress“."
+      },
+      {
+        "q": "Ein Bugfix wird von einem Entwickler gerade umgesetzt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Aktiv in Bearbeitung — „in progress“."
+      },
+      {
+        "q": "Eine Prio-Karte hat gerade ihren ersten Subtask in Bearbeitung.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Arbeit hat begonnen — „in progress“."
+      },
+      {
+        "q": "Ein Task im MyTask Board wird gerade von dir selbst abgearbeitet.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 1,
+        "explain": "Aktiv in Bearbeitung — „in progress“."
+      },
+      {
+        "q": "Du hast deinen Teil erledigt, wartest jetzt auf eine Rückmeldung von einem Kollegen, bevor es weitergehen kann.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Ein externer Blocker verhindert das Weitermachen — „blocked“."
+      },
+      {
+        "q": "Du wartest auf eine Rückmeldung von Anbieter X, bevor du bei deiner MyTask-Karte weitermachen kannst.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Hängt an einer anderen Person/Partei — „blocked“."
+      },
+      {
+        "q": "Ein Team-Task wartet auf die Freigabe eines externen Partners.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Externer Blocker — „blocked“."
+      },
+      {
+        "q": "Eine Prio-Karte kann nicht weiterlaufen, weil ein delegierter Subtask noch offen ist.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Wartet auf eine andere Person — „blocked“."
+      },
+      {
+        "q": "Ein Agendapunkt wartet auf eine Antwort der zuständigen Person, bevor er geklärt werden kann.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Wartet auf Antwort — „blocked“."
+      },
+      {
+        "q": "Du kannst mit dem Vertrag nicht weitermachen, weil die Rechtsabteilung noch nicht geantwortet hat.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Externer Blocker — „blocked“."
+      },
+      {
+        "q": "Ein Bugfix hängt fest, weil auf Zugangsdaten vom Hosting-Anbieter gewartet wird.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Wartet auf externe Zugangsdaten — „blocked“."
+      },
+      {
+        "q": "Eine Team-Task-Karte wartet auf ein fehlendes Tool, das erst freigeschaltet werden muss.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Wartet auf eine Voraussetzung — „blocked“."
+      },
+      {
+        "q": "Ein Prio-Projekt kann nicht weitergehen, weil das Budget noch nicht final freigegeben ist.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 2,
+        "explain": "Wartet auf eine Freigabe — „blocked“."
+      },
+      {
+        "q": "Du hast schon mal angefangen, pausierst jetzt aber bewusst — kein externer Blocker, du hast einfach etwas Wichtigeres vor.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause ohne Blocker — „on hold“."
+      },
+      {
+        "q": "Ein Team-Task ist bewusst zurückgestellt, weil aktuell Wichtigeres anliegt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause, kein Blocker — „on hold“."
+      },
+      {
+        "q": "Ein MyTask-Eintrag wird bewusst pausiert, du kommst später dazu.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause — „on hold“."
+      },
+      {
+        "q": "Ein Agendapunkt ist zurückgestellt, weil er aktuell nicht mehr dringend ist — kein Blocker.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusst zurückgestellt — „on hold“."
+      },
+      {
+        "q": "Eine Prio-Karte wird bewusst pausiert, weil die Priorität diesen Monat woanders liegt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause — „on hold“."
+      },
+      {
+        "q": "Ein Feature wird bewusst on hold gesetzt, bis mehr Kapazität im Team frei ist.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause ohne externen Blocker — „on hold“."
+      },
+      {
+        "q": "Ein Rechnungs-Check wird bewusst verschoben, weil aktuell dringendere Team-Tasks vorgehen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Priorisierung — „on hold“."
+      },
+      {
+        "q": "Eine Recherche-Aufgabe im MyTask Board wird bewusst pausiert, bis mehr Informationen vorliegen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 3,
+        "explain": "Bewusste Pause — „on hold“."
+      },
+      {
+        "q": "Die Aufgabe ist inhaltlich fertig, wartet aber noch auf die Prüfung durch den Supervisor.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig, aber noch nicht final geprüft — „done“."
+      },
+      {
+        "q": "Ein Team-Task ist erledigt und bereit zur Kontrolle.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig, wartet auf Kontrolle — „done“."
+      },
+      {
+        "q": "Eine Prio-Karte ist inhaltlich abgeschlossen, wartet auf die finale Supervisor-Prüfung.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig, aber noch nicht final geprüft — „done“."
+      },
+      {
+        "q": "Ein Agendapunkt hat ein Ergebnis, das als Kommentar dokumentiert wurde.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Ergebnis liegt vor — „done“."
+      },
+      {
+        "q": "Ein MyTask-Eintrag ist erledigt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig — „done“."
+      },
+      {
+        "q": "Ein Bugfix ist umgesetzt und getestet, wartet auf finale Abnahme.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig, wartet auf Abnahme — „done“."
+      },
+      {
+        "q": "Eine Rechnungsprüfung ist abgeschlossen, wartet auf Bestätigung durch den Supervisor.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig, aber noch nicht final bestätigt — „done“."
+      },
+      {
+        "q": "Ein Team-Task-Ergebnis liegt vor, PRIO PLAN steht schon auf „For Review“.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 4,
+        "explain": "Fertig aus Bearbeitersicht — „done“."
+      },
+      {
+        "q": "Der Supervisor hat die Karte geprüft und final bestätigt.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Vollständig abgeschlossen und geprüft — „closed“."
+      },
+      {
+        "q": "Ein Agendapunkt ist vollständig abgeschlossen, inklusive ausgelagerter Folgeaufgabe.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Vollständig abgeschlossen — „closed“."
+      },
+      {
+        "q": "Eine Prio-Karte wurde vom Supervisor geprüft und bestätigt — verschwindet von der aktiven Liste.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Final abgeschlossen — „closed“."
+      },
+      {
+        "q": "Ein Team-Task wurde vom Supervisor kontrolliert und final geschlossen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Final geschlossen — „closed“."
+      },
+      {
+        "q": "Ein MyTask-Eintrag ist erledigt und verschwindet von deiner aktiven Liste.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Final abgeschlossen — „closed“."
+      },
+      {
+        "q": "Eine 1-2-1-Agenda ist vollständig geklärt und dokumentiert, keine offenen Punkte mehr.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Vollständig abgeschlossen — „closed“."
+      },
+      {
+        "q": "Ein Projekt im Prio Board wurde final abgenommen und geschlossen.",
+        "options": [
+          "to do",
+          "in progress",
+          "blocked",
+          "on hold",
+          "done",
+          "closed"
+        ],
+        "correct": 5,
+        "explain": "Final abgeschlossen — „closed“."
+      }
+    ]
+  },
+  "donts": {
+    "title": "Don't-Jäger",
+    "questions": [
+      {
+        "q": "Im Team-Meeting wird spontan ein Thema besprochen, das nie vorher in die Agenda eingetragen wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Besprochen wird nur, was auch tatsächlich in der Agenda steht — keine Ad-hoc-Themen."
+      },
+      {
+        "q": "Jemand bringt im Quartalsmeeting ein komplett neues Thema ein, das nicht auf der Liste steht.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Nur eingetragene Themen werden besprochen — Agenda."
+      },
+      {
+        "q": "Im 1-2-1 wird plötzlich über ein Thema gesprochen, das nicht vorher eingetragen wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Ad-hoc-Themen gehören nicht ins Meeting — Agenda."
+      },
+      {
+        "q": "Ein Agendapunkt wird auf „closed“ gesetzt, ohne dass ein Ergebnis in der Description steht.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "closed erst, wenn Ergebnis dokumentiert und Folgeaufgabe ausgelagert ist — Agenda."
+      },
+      {
+        "q": "Ein Punkt wird abgeschlossen, obwohl die nötige Folgeaufgabe nie ins MyTask Board ausgelagert wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Erst beides — Ergebnis + Folgeaufgabe — dann closed — Agenda."
+      },
+      {
+        "q": "Eine Agenda-Karte wird auf „closed“ gesetzt, direkt nachdem sie „done“ wurde, ohne dass die Zusammenfassung geschrieben wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Ergebnis muss erst in der Description stehen — Agenda."
+      },
+      {
+        "q": "Jemand trägt „Neue Homepage bauen“ als Agendapunkt ein, obwohl das eigentlich Wochen an Arbeit braucht.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Braucht die Antwort Handarbeit, ist es ein Task, kein Agendapunkt — Agenda."
+      },
+      {
+        "q": "Ein Agendapunkt lautet „Budget-Tabelle aktualisieren“ — das ist reine Handarbeit, kein Diskussionsthema.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Das ist ein Task, kein Agendapunkt — Agenda."
+      },
+      {
+        "q": "„Kundenliste bereinigen“ wird als Agendapunkt eingetragen, obwohl das ein Task ist, keine Diskussion.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Ein Agendapunkt wird mit dem Kopf beantwortet, nicht mit den Händen — Agenda."
+      },
+      {
+        "q": "Ein 1-2-1-Punkt, der noch nicht fertig durchdacht ist, wird trotzdem schon auf „AGENDA - OPEN“ gesetzt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Unvollständige Punkte bleiben ehrlich auf „NOT READY“ — Agenda."
+      },
+      {
+        "q": "Ein halbfertiger 1-2-1-Punkt wird ins nächste Meeting gedrückt, statt ehrlich auf „NOT READY“ zu bleiben.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Erst vollständig formulieren, dann „OPEN“ — Agenda."
+      },
+      {
+        "q": "Jemand markiert einen 1-2-1-Punkt als bereit zur Diskussion, obwohl noch wichtige Informationen fehlen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 0,
+        "explain": "Unehrlich markierte Punkte verwässern die Vorbereitung — Agenda."
+      },
+      {
+        "q": "Ein Manager setzt für sein nächstes Quartal ganz allein neue Prioritäten, ohne den Supervisor einzubeziehen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Prioritäten fürs Quartal/Monat dürfen nie allein gesetzt werden — nur gemeinsam mit dem Supervisor."
+      },
+      {
+        "q": "Ein Manager plant die Monatsprioritäten im Alleingang, ohne Rücksprache mit dem Supervisor.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Auch die Monatsplanung läuft nie allein — Prio Board."
+      },
+      {
+        "q": "Die Quartalsplanung wird komplett ohne den Supervisor durchgeführt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Quartalsplanung ist immer eine gemeinsame Sache — Prio Board."
+      },
+      {
+        "q": "Eine nicht mehr benötigte Karte wird einfach aus dem Prio-Plan gelöscht.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Karten werden aus dem Plan nie gelöscht — Prio Board."
+      },
+      {
+        "q": "Ein Projekt, das nicht mehr relevant ist, wird aus dem Board entfernt statt dokumentiert abgeschlossen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Nicht löschen, sondern dokumentiert abschließen — Prio Board."
+      },
+      {
+        "q": "Statt eine Karte auf „closed“ zu setzen, wird sie einfach gelöscht, um Platz zu schaffen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Löschen ist nie die Lösung — Prio Board."
+      },
+      {
+        "q": "Ein Mitarbeiter setzt seine eigene Prio-Karte selbst auf „closed“.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "„closed“ setzen darf nur der Supervisor — Prio Board."
+      },
+      {
+        "q": "Ein Manager ändert eigenständig die Deadline seiner Prio-Karte, ohne den Supervisor zu fragen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Deadlines im Monatsplan darf nur der Supervisor ändern — Prio Board."
+      },
+      {
+        "q": "Ein Manager markiert sein eigenes Projekt als final abgeschlossen, ohne Prüfung durch den Supervisor.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Final abschließen ist Supervisor-Sache — Prio Board."
+      },
+      {
+        "q": "Eine Prio-Karte selbst (nicht ihre Subtasks) wird auf PRIO PLAN „Today's Worklist“ gesetzt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "„Today's Worklist“ ist nur für Subtasks, nie für die Prio-Karte selbst — Prio Board."
+      },
+      {
+        "q": "Ein Manager setzt seine ganze Prio-Karte auf „Today“, weil er heute daran arbeiten will.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Die Prio-Karte selbst gehört nie auf „Today“ — Prio Board."
+      },
+      {
+        "q": "Statt die Subtasks auf „Today“ zu setzen, wird direkt die übergeordnete Prio-Karte dort eingeordnet.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Today gilt nur für Subtasks — Prio Board."
+      },
+      {
+        "q": "Der Supervisor wird bei einer grundlegenden Prioritätenänderung mitten im Quartal nicht einbezogen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Auch ungeplante Änderungen laufen gemeinsam mit dem Supervisor — Prio Board."
+      },
+      {
+        "q": "Jemand trägt 15 Aufgaben gleichzeitig in „Today's Worklist“ im MyTask Board ein.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Maximal ca. 10 Aufgaben — sonst wird „Today“ selbst wieder zur Ablage."
+      },
+      {
+        "q": "Eine Person packt an einem Tag über 20 Aufgaben auf „Today's Worklist“.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Das WIP-Limit von ca. 10 Aufgaben wird überschritten — MyTask Board."
+      },
+      {
+        "q": "„Today's Worklist“ wird als allgemeine Ablage für alles benutzt, was irgendwann mal anfällt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Today ist für die Tagesplanung, keine Ablage — MyTask Board."
+      },
+      {
+        "q": "Eine dir zugewiesene Aufgabe wird nicht ins MyTask Board verlinkt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Alles Zugewiesene muss verlinkt werden — MyTask Board."
+      },
+      {
+        "q": "Ein wichtiger delegierter Task taucht nirgends im eigenen MyTask Board auf, weil er nicht verlinkt wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Fehlende Verlinkung verstößt gegen die Grundregel „Alles verlinken“ — MyTask Board."
+      },
+      {
+        "q": "Ein Manager verlinkt seine zugewiesenen Team-Tasks nicht in sein persönliches MyTask Board.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Auch Manager müssen alles verlinken — MyTask Board."
+      },
+      {
+        "q": "Eine delegierte Aufgabe wird nachgehalten, ohne ein EE ins Description-Feld zu schreiben.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Bei delegierten Aufgaben gehört immer ein EE ins Description-Feld — MyTask Board."
+      },
+      {
+        "q": "Ein Manager trägt „an Team X delegiert“ ein, ohne festzuhalten, woran er den Erfolg später erkennt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Ohne EE bleibt „fertig“ Meinungssache — MyTask Board."
+      },
+      {
+        "q": "Ein nachgehaltener Task hat kein EE, sodass später niemand weiß, ob die Person wirklich fertig ist.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "EE fehlt — MyTask Board."
+      },
+      {
+        "q": "Erledigtes bleibt tagelang offen, statt es zeitnah auf „closed“ zu setzen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Konsequent schließen gehört zu den Praxis-Tipps — MyTask Board."
+      },
+      {
+        "q": "Fertige MyTask-Einträge sammeln sich seit Wochen an, weil niemand sie abschließt.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Nicht zeitnah geschlossen — MyTask Board."
+      },
+      {
+        "q": "Ein längst erledigter Task steht immer noch auf „done“, nie auf „closed“.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 2,
+        "explain": "Sollte zeitnah geschlossen werden — MyTask Board."
+      },
+      {
+        "q": "Ein Teammitglied hat gleichzeitig 3 Karten auf „in progress“ im Team Task Board.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "WIP-Limit: maximal 1 Karte gleichzeitig auf „in progress“."
+      },
+      {
+        "q": "Jemand startet gleichzeitig 4 Aufgaben und setzt sie alle auf „in progress“.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Verstößt gegen das WIP-Limit von 1 Karte — Team Task Board."
+      },
+      {
+        "q": "Ein Teammitglied springt zwischen 3 parallelen „in progress“-Karten hin und her.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Verwässert den Fokus, WIP-Limit verletzt — Team Task Board."
+      },
+      {
+        "q": "Eine Karte im Team Task Board hat keinen Assignee, obwohl sie längst in Weekly steht.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Ohne Assignee sieht es keiner als „seins“ an — Team Task Board."
+      },
+      {
+        "q": "Eine Aufgabe wird ins Board geworfen, ohne dass jemand dafür zuständig gemacht wird — außerhalb vom Backlog.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Assignee ist außerhalb vom Backlog Pflicht — Team Task Board."
+      },
+      {
+        "q": "Eine Today-Karte hat niemanden zugewiesen, obwohl sie heute erledigt werden soll.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Ohne Assignee bleibt unklar, wer sie bearbeitet — Team Task Board."
+      },
+      {
+        "q": "Bei einer delegierten Aufgabe wird kein EE in die Beschreibung geschrieben.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Ein aussagekräftiges EE ist Pflicht — Team Task Board."
+      },
+      {
+        "q": "Ein Team-Task wird an ein Teammitglied delegiert, ohne festzulegen, was „fertig“ bedeutet.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "EE fehlt — Team Task Board."
+      },
+      {
+        "q": "Eine Team-Task-Karte hat keine Erfolgskriterien, obwohl sie an jemand anderen delegiert wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "EE ist bei Delegation Pflicht — Team Task Board."
+      },
+      {
+        "q": "Ein Task wird auf Status „done“ gesetzt, aber PRIO PLAN bleibt auf „Today“ stehen, statt auf „For Review“ zu wechseln.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Bei Fertigstellung müssen Status UND PRIO PLAN gemeinsam gesetzt werden — Team Task Board."
+      },
+      {
+        "q": "Jemand setzt PRIO PLAN auf „For Review“, vergisst aber den Status auf „done“ zu setzen.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Beide Felder müssen gemeinsam gesetzt werden — Team Task Board."
+      },
+      {
+        "q": "Eine fertige Karte taucht in der Review-Spalte nicht auf, weil nur der Status, nicht das Feld aktualisiert wurde.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Sync-Fehler zwischen Status und PRIO PLAN — Team Task Board."
+      },
+      {
+        "q": "Ein Teammitglied hat 2 Karten dauerhaft auf „in progress“ liegen, ohne wirklich an beiden zu arbeiten.",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Verstößt gegen das WIP-Limit — Team Task Board."
+      }
+    ]
+  },
+  "prioplan": {
+    "title": "PRIO PLAN Quiz",
+    "questions": [
+      {
+        "q": "Welcher PRIO PLAN Wert im Prio Board bedeutet: „nur für Subtasks, nie für die Prio-Karte selbst“?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "This Month",
+          "This Quartal"
+        ],
+        "correct": 0,
+        "explain": "Today's Worklist ist im Prio Board ausschließlich für Subtasks gedacht."
+      },
+      {
+        "q": "„Für diese Woche priorisiert, gesetzt im Weekly Manager Meeting“ — welcher Wert (Prio Board)?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "This Month",
+          "This Quartal"
+        ],
+        "correct": 1,
+        "explain": "This Week wird im wöchentlichen Manager-Meeting gesetzt."
+      },
+      {
+        "q": "„Für diesen Monat eingeplant, aus der Monatsplanung“ — welcher Wert (Prio Board)?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "This Month",
+          "This Quartal"
+        ],
+        "correct": 2,
+        "explain": "This Month kommt direkt aus der Monatsplanung."
+      },
+      {
+        "q": "„Standard-Sammelplatz aus der Quartalsplanung, noch nicht auf Monat oder Woche heruntergebrochen“ — welcher Wert (Prio Board)?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "This Month",
+          "This Quartal"
+        ],
+        "correct": 3,
+        "explain": "This Quartal ist der Ausgangspunkt direkt nach der Quartalsplanung."
+      },
+      {
+        "q": "Im Team Task Board: „für Teammitglieder mit eingeschränktem Account, die kein eigenes MyTask Board haben“ — welcher Wert?",
+        "options": [
+          "Backlog",
+          "Weekly",
+          "Today",
+          "For Review"
+        ],
+        "correct": 0,
+        "explain": "Backlog fängt auf, was sonst ins MyTask Board gehören würde."
+      },
+      {
+        "q": "„Sammelbecken für alle Aufgaben, die diese Woche grundsätzlich anfallen, noch nicht auf einen Tag festgelegt“ — welcher Wert (Team Task Board)?",
+        "options": [
+          "Backlog",
+          "Weekly",
+          "Today",
+          "For Review"
+        ],
+        "correct": 1,
+        "explain": "Weekly sammelt alles, was diese Woche dran ist, ohne festen Tag."
+      },
+      {
+        "q": "„Aus Weekly rausgezogen, sobald jemand die Aufgabe heute angehen soll“ — welcher Wert (Team Task Board)?",
+        "options": [
+          "Backlog",
+          "Weekly",
+          "Today",
+          "For Review"
+        ],
+        "correct": 2,
+        "explain": "Today wird meist im Daily Stand-up aus Weekly gezogen."
+      },
+      {
+        "q": "„Aufgabe ist aus Sicht des Bearbeiters fertig (Status: done) und wartet auf Kontrolle durch den Supervisor“ — welcher Wert (Team Task Board)?",
+        "options": [
+          "Backlog",
+          "Weekly",
+          "Today",
+          "For Review"
+        ],
+        "correct": 3,
+        "explain": "For Review ist die Kontroll-Spalte für den Supervisor."
+      },
+      {
+        "q": "In welchem Board hat PRIO PLAN die Werte Backlog / Weekly / Today / For Review?",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 3,
+        "explain": "Diese vier Werte gruppieren das Kanban Board im Team Task Board."
+      },
+      {
+        "q": "In welchem Board hat PRIO PLAN die Werte Today's Worklist / This Week / This Month / This Quartal?",
+        "options": [
+          "Agenda",
+          "Prio Board",
+          "MyTask Board",
+          "Team Task Board"
+        ],
+        "correct": 1,
+        "explain": "Das ist der Planungs-Rhythmus im Prio Board."
+      },
+      {
+        "q": "Welches Meeting setzt PRIO PLAN im Prio Board auf „This Quartal“?",
+        "options": [
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Weekly Manager Meeting",
+          "Daily Stand-up"
+        ],
+        "correct": 0,
+        "explain": "Die Quartalsplanung zieht alles zurück auf This Quartal."
+      },
+      {
+        "q": "Welches Meeting setzt PRIO PLAN im Prio Board auf „This Month“?",
+        "options": [
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Weekly Manager Meeting",
+          "Daily Stand-up"
+        ],
+        "correct": 1,
+        "explain": "Die Monatsplanung macht die Quartalsliste für den nächsten Monat konkret."
+      },
+      {
+        "q": "Welches Meeting setzt PRIO PLAN im Prio Board auf „This Week“?",
+        "options": [
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Weekly Manager Meeting",
+          "Daily Stand-up"
+        ],
+        "correct": 2,
+        "explain": "Im Weekly Manager Meeting wird der Weekly Plan festgelegt."
+      },
+      {
+        "q": "Welches Meeting zieht Team-Task-Karten von „Weekly“ auf „Today“?",
+        "options": [
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Weekly Manager Meeting",
+          "Daily Stand-up"
+        ],
+        "correct": 3,
+        "explain": "Im Daily Stand-up wird abgeglichen, was heute dran ist."
+      },
+      {
+        "q": "Darf die Prio-Karte selbst jemals auf „Today's Worklist“ stehen?",
+        "options": [
+          "Ja, immer",
+          "Nein, nur Subtasks dürfen das",
+          "Ja, aber nur im Quartal",
+          "Nein, generell darf gar kein Feld gesetzt werden"
+        ],
+        "correct": 1,
+        "explain": "Today's Worklist ist ausschließlich für Subtasks gedacht."
+      },
+      {
+        "q": "Was passiert mit Projekten, die auf „This Week“ oder „This Month“ stehen, wenn die Quartalsplanung beginnt?",
+        "options": [
+          "Sie bleiben unverändert",
+          "Sie werden gelöscht",
+          "Sie werden zurück auf „This Quartal“ gesetzt",
+          "Sie werden automatisch geschlossen"
+        ],
+        "correct": 2,
+        "explain": "Vor der Neuplanung wird alles zurück auf This Quartal gesetzt und neu evaluiert."
+      },
+      {
+        "q": "Was passiert mit Projekten auf „This Week“, wenn die Monatsplanung beginnt?",
+        "options": [
+          "Sie werden zurück auf „This Month“ gesetzt",
+          "Sie bleiben auf „This Week“",
+          "Sie werden gelöscht",
+          "Sie werden auf „This Quartal“ gesetzt"
+        ],
+        "correct": 0,
+        "explain": "Wie im Quartal wird zuerst alles auf This Month zurückgezogen."
+      },
+      {
+        "q": "Wer setzt im Team Task Board eine Karte final von „For Review“ auf geschlossen?",
+        "options": [
+          "Der Assignee selbst",
+          "Der Supervisor",
+          "Irgendein Teammitglied",
+          "Niemand, das passiert automatisch"
+        ],
+        "correct": 1,
+        "explain": "Der Supervisor prüft die Review-Spalte und schließt final ab."
+      },
+      {
+        "q": "Ein Task ist im Team Task Board „done“ UND „For Review“ — was bedeutet das?",
+        "options": [
+          "Er ist noch nicht begonnen",
+          "Bearbeiter ist fertig, wartet auf Supervisor-Kontrolle",
+          "Er ist final geschlossen",
+          "Er ist blockiert"
+        ],
+        "correct": 1,
+        "explain": "Status done + PRIO PLAN For Review heißt: fertig aus Bearbeitersicht, Kontrolle steht noch aus."
+      },
+      {
+        "q": "Warum sollte man beim Fertigstellen im Team Task Board sowohl Status als auch PRIO PLAN setzen?",
+        "options": [
+          "Nur aus Formalität",
+          "Sonst zeigt die Karte in einer der beiden Ansichten nicht korrekt an",
+          "Das Feld PRIO PLAN ist optional",
+          "ClickUp verlangt das aus Lizenzgründen"
+        ],
+        "correct": 1,
+        "explain": "Nur eins von beiden zu setzen führt zu einer inkorrekten Darstellung in einer der Ansichten."
+      },
+      {
+        "q": "Welcher PRIO-PLAN-Wert im Prio Board ist bei Status „in progress“ automatisch gesetzt?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "This Month",
+          "This Quartal"
+        ],
+        "correct": 1,
+        "explain": "Ist die Karte in progress, steht PRIO PLAN automatisch auf This Week."
+      },
+      {
+        "q": "Wie viele PRIO PLAN Werte hat das Feld im Prio Board insgesamt?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "correct": 2,
+        "explain": "Today's Worklist, This Week, This Month, This Quartal — vier Werte."
+      },
+      {
+        "q": "Wie viele PRIO PLAN Werte hat das Feld im Team Task Board insgesamt?",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "correct": 2,
+        "explain": "Backlog, Weekly, Today, For Review — vier Werte."
+      },
+      {
+        "q": "Welcher Wert im Team Task Board ist NICHT gleichzeitig ein Wert im Prio Board?",
+        "options": [
+          "Today's Worklist",
+          "This Week",
+          "Backlog",
+          "This Quartal"
+        ],
+        "correct": 2,
+        "explain": "Backlog gibt es nur im Team Task Board."
+      },
+      {
+        "q": "Wofür steht „For Review“ im Team Task Board?",
+        "options": [
+          "Für Aufgaben, die noch nicht begonnen wurden",
+          "Für Aufgaben, die auf Supervisor-Kontrolle warten",
+          "Für Aufgaben, die abgelehnt wurden",
+          "Für persönliche Merkposten"
+        ],
+        "correct": 1,
+        "explain": "For Review ist die Kontroll-Spalte für den Supervisor."
+      },
+      {
+        "q": "Wofür steht „Backlog“ im Team Task Board vor allem?",
+        "options": [
+          "Für erledigte Aufgaben",
+          "Für Aufgaben von Mitgliedern ohne eigenes MyTask Board",
+          "Für Aufgaben des Supervisors",
+          "Für gelöschte Aufgaben"
+        ],
+        "correct": 1,
+        "explain": "Backlog fängt persönliche Merkposten für Accounts ohne MyTask Board auf."
+      },
+      {
+        "q": "Im MyTask Board ist PRIO PLAN dasselbe Feld wie im Prio Board — welche zwei Werte sind dort am wichtigsten?",
+        "options": [
+          "This Month und This Quartal",
+          "Today's Worklist und This Week",
+          "Backlog und Weekly",
+          "Today und For Review"
+        ],
+        "correct": 1,
+        "explain": "Im MyTask Board zählen vor allem Today's Worklist und This Week."
+      },
+      {
+        "q": "Welche PRIO PLAN Werte sind im MyTask Board eher selten relevant?",
+        "options": [
+          "Today's Worklist und This Week",
+          "This Month und This Quartal",
+          "Backlog und Weekly",
+          "Today und For Review"
+        ],
+        "correct": 1,
+        "explain": "This Month und This Quartal sind vor allem Prio-Board-Werte."
+      },
+      {
+        "q": "Ein Teammitglied mit eingeschränktem Account hat eine persönliche Merkaufgabe. Wohin damit?",
+        "options": [
+          "Ins Prio Board",
+          "Ins Backlog des Team Task Boards",
+          "Gar nicht eintragen",
+          "In die Agenda"
+        ],
+        "correct": 1,
+        "explain": "Ohne eigenes MyTask Board landet so etwas im Backlog des Team Task Boards."
+      },
+      {
+        "q": "Wann wird im Prio Board für ein Projekt zum ersten Mal eine Deadline Pflicht?",
+        "options": [
+          "Sofort bei Anlage",
+          "Erst wenn PRIO PLAN auf This Week steht",
+          "Spätestens beim Übergang in den Monatsplan",
+          "Nie, Deadlines sind optional"
+        ],
+        "correct": 2,
+        "explain": "Spätestens im Monatsplan ist die Deadline für jedes Projekt Pflicht."
+      },
+      {
+        "q": "Wer darf die Deadline einer Prio-Karte im Monatsplan ändern?",
+        "options": [
+          "Jeder im Team",
+          "Nur der zuständige Manager",
+          "Nur der Supervisor",
+          "Niemand, sie ist fix"
+        ],
+        "correct": 2,
+        "explain": "Nur der Supervisor darf die Deadline ändern."
+      },
+      {
+        "q": "Was bedeutet PRIO PLAN „This Quartal“ NICHT?",
+        "options": [
+          "Noch nicht auf Monat/Woche heruntergebrochen",
+          "Standard-Sammelplatz nach der Quartalsplanung",
+          "Die Aufgabe ist schon fertig",
+          "Kommt aus der Quartalsplanung"
+        ],
+        "correct": 2,
+        "explain": "This Quartal sagt nichts über den Fertigstellungsgrad aus."
+      },
+      {
+        "q": "Ein Projekt wird von „This Quartal“ auf „This Month“ gesetzt — in welchem Meeting passiert das normalerweise?",
+        "options": [
+          "Weekly Manager Meeting",
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Daily Stand-up"
+        ],
+        "correct": 2,
+        "explain": "Die Monatsplanung macht die Quartalsliste für den nächsten Monat konkret."
+      },
+      {
+        "q": "Ein Projekt wird von „This Month“ auf „This Week“ gesetzt — in welchem Meeting passiert das normalerweise?",
+        "options": [
+          "Weekly Manager Meeting",
+          "Quartalsplanung",
+          "Monatsplanung",
+          "Daily Stand-up"
+        ],
+        "correct": 0,
+        "explain": "Im Weekly Manager Meeting wird priorisiert, was diese Woche dran ist."
+      },
+      {
+        "q": "Eine Team-Task-Karte wird von „Weekly“ auf „Today“ gezogen — wann passiert das typischerweise?",
+        "options": [
+          "Im Quartalsmeeting",
+          "Im Daily Stand-up",
+          "Im Monatsmeeting",
+          "Nie, das macht der Supervisor allein"
+        ],
+        "correct": 1,
+        "explain": "Im Daily Stand-up zieht das Team, was heute drankommt."
+      },
+      {
+        "q": "Was zeigt die kurze zeitliche Reihenfolge der Prio-Board-Werte (Quartal → Monat → Woche → Today)?",
+        "options": [
+          "Dass alle Werte gleich wichtig sind",
+          "Einen abnehmenden Zeithorizont, vom Quartal bis zum Tag",
+          "Dass ältere Werte automatisch verschwinden",
+          "Dass nur der letzte Wert zählt"
+        ],
+        "correct": 1,
+        "explain": "Die Werte bilden einen Trichter von grob (Quartal) zu fein (Today, nur für Subtasks)."
+      },
+      {
+        "q": "Stimmt diese Aussage? „Der Status einer Team-Task-Karte läuft unabhängig von PRIO PLAN.“",
+        "options": [
+          "Ja, das stimmt",
+          "Nein, beide Felder sind identisch",
+          "Nein, PRIO PLAN bestimmt den Status",
+          "Nur bei Backlog-Karten"
+        ],
+        "correct": 0,
+        "explain": "Status und PRIO PLAN laufen bewusst unabhängig voneinander."
+      },
+      {
+        "q": "Kann eine Team-Task-Karte gleichzeitig „blocked“ (Status) und „Today“ (PRIO PLAN) sein?",
+        "options": [
+          "Nein, das widerspricht sich",
+          "Ja, beide Felder sind unabhängig",
+          "Nur wenn der Supervisor zustimmt",
+          "Nein, blocked erzwingt automatisch Backlog"
+        ],
+        "correct": 1,
+        "explain": "Genau das ist der Sinn der Trennung von Status und PRIO PLAN."
+      },
+      {
+        "q": "Was gruppiert die Spalten im Kanban Board View des Team Task Boards?",
+        "options": [
+          "Der Status",
+          "Das Feld PRIO PLAN",
+          "Der Assignee",
+          "Die Deadline"
+        ],
+        "correct": 1,
+        "explain": "PRIO PLAN bestimmt die Spalten im Kanban Board."
+      },
+      {
+        "q": "Welches Feld zeigt bei einer Team-Task-Karte als kleines Badge an, unabhängig von der Spalte?",
+        "options": [
+          "PRIO PLAN",
+          "Der Status",
+          "Die Deadline",
+          "Der Assignee"
+        ],
+        "correct": 1,
+        "explain": "Der Status läuft als Badge unabhängig von der PRIO-PLAN-Spalte mit."
+      },
+      {
+        "q": "Ein Prio-Board-Projekt hat 3 Subtasks. Wo dürfen diese auf „Today's Worklist“ stehen?",
+        "options": [
+          "Nur die Subtasks, nie die Prio-Karte selbst",
+          "Nur die Prio-Karte, nie die Subtasks",
+          "Beides gleichzeitig ist verboten",
+          "Gar nicht, das Feld gilt nicht für Subtasks"
+        ],
+        "correct": 0,
+        "explain": "Today's Worklist ist explizit für Subtasks gedacht."
+      },
+      {
+        "q": "Wie viele Projekte stehen laut Guide üblicherweise am Ende der Quartalsplanung im Prio Board?",
+        "options": [
+          "1–2",
+          "3–5",
+          "10–20",
+          "50–100"
+        ],
+        "correct": 2,
+        "explain": "Das Ergebnis der Quartalsplanung ist eine finale Liste von 10–20 Projekten."
+      },
+      {
+        "q": "Was wird im Rückblick der Quartalsplanung gemeinsam mit dem Supervisor besprochen?",
+        "options": [
+          "Nur neue Ideen",
+          "Was wurde fertig, was nicht, und warum",
+          "Nur das Budget",
+          "Nur die Team-Zusammensetzung"
+        ],
+        "correct": 1,
+        "explain": "Der Rückblick klärt ehrlich, was fertig wurde und was nicht."
+      },
+      {
+        "q": "Was passiert mit nicht abgeschlossenen Projekten in der Quartalsplanung?",
+        "options": [
+          "Sie werden automatisch gelöscht",
+          "Bewusst entschieden: übernehmen oder streichen",
+          "Sie bleiben für immer offen",
+          "Der Supervisor entscheidet ohne den Manager"
+        ],
+        "correct": 1,
+        "explain": "Es wird bewusst entschieden, was übernommen und was gestrichen wird."
+      },
+      {
+        "q": "Wer schlägt in der Monatsplanung vor, welche Projekte in den nächsten 4 Wochen bearbeitet werden?",
+        "options": [
+          "Der Supervisor allein",
+          "Der Manager",
+          "Das ganze Team per Abstimmung",
+          "Niemand, das ist automatisiert"
+        ],
+        "correct": 1,
+        "explain": "Der Manager macht den Vorschlag, der Supervisor setzt die Deadline."
+      },
+      {
+        "q": "Wann findet das Weekly Manager Meeting laut Guide statt?",
+        "options": [
+          "Montags 9 Uhr",
+          "Mittwochs 13 Uhr",
+          "Freitags 17 Uhr",
+          "Es gibt keinen festen Termin"
+        ],
+        "correct": 1,
+        "explain": "Jeden Mittwoch, 13:00 Uhr, mit allen Managern."
+      },
+      {
+        "q": "Was ist das Ziel des Weekly Manager Meetings, verglichen mit Quartal/Monat?",
+        "options": [
+          "Auch hier muss alles fertig werden",
+          "Nur ein Update, nichts muss zwingend fertig werden",
+          "Es ersetzt die Monatsplanung",
+          "Es ist nur für neue Manager gedacht"
+        ],
+        "correct": 1,
+        "explain": "Anders als Quartal/Monat ist das Weekly nur ein Update, kein bindendes Ziel."
+      },
+      {
+        "q": "Wo werden im Weekly Manager Meeting Blocker und Hilfebedarf angesprochen?",
+        "options": [
+          "Nirgends, das gehört ins 1-2-1",
+          "Direkt im Weekly Manager Meeting",
+          "Nur per E-Mail an den Supervisor",
+          "Im Team Task Board als Kommentar"
+        ],
+        "correct": 1,
+        "explain": "Genau hier kommen Blocker auf den Tisch, statt im Board zu verstauben."
+      },
+      {
+        "q": "Ein Manager hat kein eigenes MyTask-Board-Pendant im Prio Board — wohin mit persönlichen Merkposten zu einem Prio-Projekt?",
+        "options": [
+          "Ins Prio Board als neue Karte",
+          "Ins eigene MyTask Board, ggf. verlinkt mit dem Projekt",
+          "Gar nicht dokumentieren",
+          "In die Agenda"
+        ],
+        "correct": 1,
+        "explain": "Persönliche Merkposten gehören ins eigene MyTask Board, nicht als neue Prio-Karte."
+      },
+      {
+        "q": "Welche Farbe hat „Today's Worklist“ im Guide typischerweise, im Vergleich zu den anderen Prio-Board-Werten?",
+        "options": [
+          "Die hellste Farbe, wie This Quartal",
+          "Eine eigene, auffällige Farbe (Pink)",
+          "Dieselbe Farbe wie This Month",
+          "Es gibt keine Farbcodierung"
+        ],
+        "correct": 1,
+        "explain": "Today's Worklist sticht farblich bewusst heraus, weil es der kürzeste Zeithorizont ist."
+      }
+    ]
+  }
+};
 
   const hub = document.getElementById('p2lHub');
   const quizWrap = document.getElementById('p2lQuiz');
@@ -4222,20 +6953,69 @@ const I18N = {
   const questionCard = quizWrap ? quizWrap.querySelector('.p2l-question-card') : null;
   const scoreText = document.getElementById('p2lScoreText');
   const resultMsg = document.getElementById('p2lResultMsg');
+  const resultMedal = document.getElementById('p2lResultMedal');
   const backBtn = document.getElementById('p2lBack');
   const retryBtn = document.getElementById('p2lRetry');
   const toHubBtn = document.getElementById('p2lToHub');
+  const masterBanner = document.getElementById('p2lMasterBanner');
+  const progressLine = document.getElementById('p2lProgressLine');
 
   if (!hub || !quizWrap) return;
 
+  const GAME_IDS = Object.keys(P2L_GAMES);
+  const MEDAL_KEY = 'p2lMedals_v1';
+
+  function loadMedals(){
+    try {
+      const raw = localStorage.getItem(MEDAL_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+  function saveMedals(m){
+    try { localStorage.setItem(MEDAL_KEY, JSON.stringify(m)); } catch (e) {}
+  }
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function renderMedals(){
+    const medals = loadMedals();
+    let goldCount = 0;
+    GAME_IDS.forEach(id => {
+      const el = document.querySelector(`.p2l-medal[data-medal="${id}"]`);
+      const has = !!medals[id];
+      if (has) goldCount++;
+      if (el) el.textContent = has ? '🥇' : '';
+    });
+    if (progressLine) {
+      progressLine.textContent = `🥇 ${goldCount}/${GAME_IDS.length} Gold-Medaillen` + (goldCount < GAME_IDS.length ? ' — spiel eine Runde ohne Fehler, um eine Medaille zu holen.' : '.');
+    }
+    if (masterBanner) {
+      masterBanner.style.display = (goldCount === GAME_IDS.length) ? 'block' : 'none';
+    }
+    return goldCount;
+  }
+
   let currentGameId = null;
+  let currentQuestions = [];
   let currentIndex = 0;
   let score = 0;
+  let shuffledOptions = [];
 
   function startGame(gameId){
     currentGameId = gameId;
     currentIndex = 0;
     score = 0;
+    const pool = P2L_GAMES[gameId].questions;
+    currentQuestions = shuffle(pool).slice(0, 10);
     hub.style.display = 'none';
     quizWrap.style.display = 'block';
     resultEl.style.display = 'none';
@@ -4245,30 +7025,30 @@ const I18N = {
   }
 
   function renderQuestion(){
-    const game = P2L_GAMES[currentGameId];
-    const q = game.questions[currentIndex];
-    progressEl.textContent = `Frage ${currentIndex + 1}/${game.questions.length} · Punkte: ${score}`;
+    const q = currentQuestions[currentIndex];
+    progressEl.textContent = `Frage ${currentIndex + 1}/${currentQuestions.length} · Punkte: ${score}`;
     questionEl.textContent = q.q;
     explainEl.style.display = 'none';
     nextBtn.style.display = 'none';
     optionsEl.innerHTML = '';
-    q.options.forEach((opt, i) => {
+    shuffledOptions = shuffle(q.options.map((opt, i) => ({ text: opt, correct: i === q.correct })));
+    shuffledOptions.forEach((opt, i) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'p2l-option';
-      btn.textContent = opt;
+      btn.textContent = opt.text;
       btn.addEventListener('click', () => selectAnswer(i));
       optionsEl.appendChild(btn);
     });
   }
 
   function selectAnswer(i){
-    const game = P2L_GAMES[currentGameId];
-    const q = game.questions[currentIndex];
+    const q = currentQuestions[currentIndex];
     const btns = optionsEl.querySelectorAll('.p2l-option');
     btns.forEach(b => b.disabled = true);
-    btns[q.correct].classList.add('correct');
-    if (i !== q.correct) {
+    const correctIdx = shuffledOptions.findIndex(o => o.correct);
+    btns[correctIdx].classList.add('correct');
+    if (i !== correctIdx) {
       btns[i].classList.add('wrong');
     } else {
       score++;
@@ -4276,14 +7056,13 @@ const I18N = {
     explainEl.textContent = q.explain;
     explainEl.style.display = 'block';
     nextBtn.style.display = 'inline-block';
-    nextBtn.textContent = (currentIndex === game.questions.length - 1) ? 'Ergebnis ansehen →' : 'Weiter →';
-    progressEl.textContent = `Frage ${currentIndex + 1}/${game.questions.length} · Punkte: ${score}`;
+    nextBtn.textContent = (currentIndex === currentQuestions.length - 1) ? 'Ergebnis ansehen →' : 'Weiter →';
+    progressEl.textContent = `Frage ${currentIndex + 1}/${currentQuestions.length} · Punkte: ${score}`;
   }
 
   nextBtn && nextBtn.addEventListener('click', () => {
-    const game = P2L_GAMES[currentGameId];
     currentIndex++;
-    if (currentIndex >= game.questions.length) {
+    if (currentIndex >= currentQuestions.length) {
       showResult();
     } else {
       renderQuestion();
@@ -4291,25 +7070,43 @@ const I18N = {
   });
 
   function showResult(){
-    const game = P2L_GAMES[currentGameId];
     questionCard.style.display = 'none';
     resultEl.style.display = 'block';
-    scoreText.textContent = `${score} / ${game.questions.length}`;
-    const pct = score / game.questions.length;
+    scoreText.textContent = `${score} / ${currentQuestions.length}`;
+    const pct = score / currentQuestions.length;
     let msg;
     if (pct === 1) msg = 'Perfekt! Du kennst die Regeln in- und auswendig.';
     else if (pct >= 0.7) msg = 'Stark! Nur Kleinigkeiten fehlen noch.';
     else if (pct >= 0.4) msg = 'Guter Start — ein Blick zurück in den Guide lohnt sich.';
     else msg = 'Zeit für eine Wiederholung — schau dir die passende Board-Seite noch mal an.';
     resultMsg.textContent = msg;
+
+    resultMedal.style.display = 'none';
+    if (score === currentQuestions.length) {
+      const medals = loadMedals();
+      if (!medals[currentGameId]) {
+        medals[currentGameId] = true;
+        saveMedals(medals);
+        const goldCount = renderMedals();
+        resultMedal.style.display = 'block';
+        resultMedal.textContent = (goldCount === GAME_IDS.length)
+          ? '🏆 0 Fehler — Gold-Medaille geholt! Und damit hast du jetzt in allen 5 Spielen Gold: Gold Member / MASTER!'
+          : '🥇 0 Fehler — Gold-Medaille für dieses Spiel geholt!';
+      } else {
+        resultMedal.style.display = 'block';
+        resultMedal.textContent = '🥇 0 Fehler — diese Gold-Medaille hast du schon. Stark gespielt!';
+      }
+    }
   }
 
   document.querySelectorAll('.p2l-game-card').forEach(card => {
     card.addEventListener('click', () => startGame(card.dataset.game));
   });
-  backBtn && backBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; });
-  toHubBtn && toHubBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; });
+  backBtn && backBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; renderMedals(); });
+  toHubBtn && toHubBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; renderMedals(); });
   retryBtn && retryBtn.addEventListener('click', () => startGame(currentGameId));
+
+  renderMedals();
 })();
 </script>
 
