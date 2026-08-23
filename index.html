@@ -1154,7 +1154,113 @@
     .chain{ flex-direction:column; align-items:flex-start; }
     .chain .arrow{ transform:rotate(90deg); margin:2px 0 2px 18px; }
     .howto-teaser{ flex-direction:column; align-items:flex-start; }
+    .p2l-hub-grid{ grid-template-columns:1fr; }
   }
+
+  /* ---------- Play 2 Learn ---------- */
+  .p2l-hub-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-top:8px;
+  }
+  .p2l-game-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-top:3px solid var(--p2l-c);
+    border-radius:12px;
+    padding:18px 18px 16px 18px;
+    cursor:pointer;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .p2l-game-card:hover{
+    box-shadow:0 6px 18px rgba(20,26,31,0.09);
+    transform:translateY(-2px);
+  }
+  .p2l-game-icon{ font-size:26px; margin-bottom:8px; }
+  .p2l-game-card h4{ font-size:14.5px; margin:0 0 6px 0; }
+  .p2l-game-card p{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
+  .p2l-play-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; font-weight:600;
+    color:var(--p2l-c);
+    margin-top:12px;
+  }
+
+  .p2l-back, .p2l-back-btn{
+    appearance:none; border:none; background:none; cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; font-weight:600;
+    color:var(--ink-soft);
+    padding:0; margin-bottom:14px;
+  }
+  .p2l-back:hover, .p2l-back-btn:hover{ color:var(--ink); }
+  .p2l-quiz-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .p2l-quiz-head h3{ margin:0; font-size:18px; }
+  .p2l-progress{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--ink-soft);
+  }
+  .p2l-question-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 24px;
+  }
+  .p2l-question{ font-size:15.5px; font-weight:500; margin:0 0 16px 0; line-height:1.5; }
+  .p2l-options{ display:flex; flex-direction:column; gap:8px; }
+  .p2l-option{
+    appearance:none;
+    text-align:left;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:11px 14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .p2l-option:hover:not(:disabled){ border-color:var(--ink-soft); }
+  .p2l-option:disabled{ cursor:default; }
+  .p2l-option.correct{ background:#DCFCE7; border-color:#16A34A; color:#166534; font-weight:600; }
+  .p2l-option.wrong{ background:#FEE2E2; border-color:#DC2626; color:#991B1B; font-weight:600; }
+  .p2l-explain{
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  .p2l-next-btn{
+    appearance:none; border:none; cursor:pointer;
+    background:var(--ink); color:#fff;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600; font-size:13px;
+    padding:9px 18px;
+    border-radius:9px;
+    margin-top:16px;
+  }
+  .p2l-next-btn:hover{ opacity:0.88; }
+  .p2l-result{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:32px 24px;
+    text-align:center;
+  }
+  .p2l-result-score{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:32px;
+    margin-bottom:8px;
+  }
+  .p2l-result-msg{ color:var(--ink-soft); font-size:13.5px; margin:0 0 18px 0; }
+  .p2l-result-actions{ display:flex; gap:10px; justify-content:center; }
 </style>
 </head>
 <body>
@@ -2791,12 +2897,64 @@
         </svg>
       </div>
       <div>
-        <h2><span data-i18n="play2learn.h2">Play 2 Learn</span> <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span></h2>
-        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — kleine Spiele und Quizze folgen hier bald.</p>
+        <h2><span data-i18n="play2learn.h2">Play 2 Learn</span></h2>
+        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 kurze Quizze, je 10 Runden.</p>
       </div>
     </div>
-    <div class="card">
-      <p class="note" style="margin:0; padding:0; border:none;" data-i18n="play2learn.soon">Wird gerade konzipiert. Schau bald wieder vorbei!</p>
+
+    <div id="p2lHub" class="p2l-hub-grid">
+      <div class="p2l-game-card" data-game="board" style="--p2l-c:#5B6470;">
+        <div class="p2l-game-icon">🗂️</div>
+        <h4>Welches Board?</h4>
+        <p>Ordne 10 Beispiel-Aufgaben dem richtigen Board zu.</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+      <div class="p2l-game-card" data-game="ee" style="--p2l-c:#16A34A;">
+        <div class="p2l-game-icon">🎯</div>
+        <h4>Gutes oder schlechtes EE?</h4>
+        <p>10 Titel + EE-Paare — erkennst du, was ein starkes Erwartetes Ergebnis ausmacht?</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+      <div class="p2l-game-card" data-game="status" style="--p2l-c:#7C3AED;">
+        <div class="p2l-game-icon">🔍</div>
+        <h4>Status-Detektiv</h4>
+        <p>10 Situationen — welcher Status passt: to do, in progress, blocked, on hold, done oder closed?</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+      <div class="p2l-game-card" data-game="donts" style="--p2l-c:#B42318;">
+        <div class="p2l-game-icon">🚫</div>
+        <h4>Don't-Jäger</h4>
+        <p>10 Situationen, die gegen eine Board-Regel verstoßen — welches Board betrifft es?</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+      <div class="p2l-game-card" data-game="prioplan" style="--p2l-c:#EA580C;">
+        <div class="p2l-game-icon">🧩</div>
+        <h4>PRIO PLAN Quiz</h4>
+        <p>10 Runden rund um die PRIO-PLAN-Werte von Prio Board und Team Task Board.</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+    </div>
+
+    <div id="p2lQuiz" class="p2l-quiz-wrap" style="display:none;">
+      <button type="button" class="p2l-back" id="p2lBack">← Zurück zur Spielauswahl</button>
+      <div class="p2l-quiz-head">
+        <h3 id="p2lTitle"></h3>
+        <span class="p2l-progress" id="p2lProgress"></span>
+      </div>
+      <div class="p2l-question-card">
+        <p class="p2l-question" id="p2lQuestion"></p>
+        <div class="p2l-options" id="p2lOptions"></div>
+        <div class="p2l-explain" id="p2lExplain" style="display:none;"></div>
+        <button type="button" class="p2l-next-btn" id="p2lNext" style="display:none;">Weiter →</button>
+      </div>
+      <div class="p2l-result" id="p2lResult" style="display:none;">
+        <div class="p2l-result-score" id="p2lScoreText"></div>
+        <p class="p2l-result-msg" id="p2lResultMsg"></p>
+        <div class="p2l-result-actions">
+          <button type="button" class="p2l-next-btn" id="p2lRetry">Nochmal spielen</button>
+          <button type="button" class="p2l-back-btn" id="p2lToHub">Zurück zur Spielauswahl</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -3100,8 +3258,7 @@ const I18N = {
   "nav.rules": "Allgemeine Regeln",
   "nav.play2learn": "Play 2 Learn",
   "play2learn.h2": "Play 2 Learn",
-  "play2learn.tagline": "Die Board-Regeln spielerisch lernen, statt nur zu lesen — kleine Spiele und Quizze folgen hier bald.",
-  "play2learn.soon": "Wird gerade konzipiert. Schau bald wieder vorbei!",
+  "play2learn.tagline": "Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 kurze Quizze, je 10 Runden.",
   "nofields": "Keine eigenen Pflichtfelder. Es reichen die ClickUp-Standardfelder — Assignee, Fälligkeitsdatum, Priorität.",
   "ov.agenda.h3": "Für Themen, die wir besprechen müssen",
   "ov.agenda.p": "Der Ort für alles, was zwei Personen oder ein Team gemeinsam klären müssen — im 1-2-1, im Team-Meeting oder in der Quartalsplanung. Hier sammelt man Themen, bevor man sie im Termin klärt, und hält fest, wenn sie geklärt sind.",
@@ -3659,8 +3816,7 @@ const I18N = {
   "nav.rules": "General Rules",
   "nav.play2learn": "Play 2 Learn",
   "play2learn.h2": "Play 2 Learn",
-  "play2learn.tagline": "Learn the board rules by playing instead of just reading — small games and quizzes are coming soon.",
-  "play2learn.soon": "Currently being designed. Check back soon!",
+  "play2learn.tagline": "Learn the board rules by playing instead of just reading — 5 short quizzes, 10 rounds each.",
   "nofields": "No dedicated required fields. The standard ClickUp fields are enough — assignee, due date, priority.",
   "ov.agenda.h3": "For topics we need to discuss",
   "ov.agenda.p": "The place for everything two people or a team need to work out together — in a 1-on-1, a team meeting, or quarterly planning. This is where topics get collected before the meeting, and marked as resolved once they are.",
@@ -3972,6 +4128,189 @@ const I18N = {
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.addEventListener('click', () => applyLang(b.dataset.lang));
   });
+</script>
+
+<script>
+(function(){
+  const P2L_GAMES = {
+    board: {
+      title: "Welches Board?",
+      questions: [
+        {q: '„Rechnung Nr. 4021 von Anbieter Y prüfen und freigeben“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Ein einzelner, in sich abgeschlossener Schritt im Tagesgeschäft — gehört ins Team Task Board."},
+        {q: '„MVP-Launch für neue Marke“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Läuft über mehrere Wochen und bringt ein Abteilungsziel voran — ein klassisches Projekt fürs Prio Board."},
+        {q: '„Vertrag von X unterschreiben lassen“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Eine persönliche Merkaufgabe, die du selbst nachhältst — typisch fürs MyTask Board."},
+        {q: '„Sollen wir das Marketing-Budget für Q3 um 15 % erhöhen?“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Eine Frage, die eine gemeinsame Entscheidung braucht — gehört in die Agenda, nicht in ein Task-Board."},
+        {q: '„SSL-Zertifikat für die Shop-Domain erneuern“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Technischer Einzelschritt im Tagesgeschäft eines Teams — Team Task Board."},
+        {q: '„Neues CRM-System für den Vertrieb einführen (geplante Laufzeit: ein Quartal)“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Mehrere Wochen Laufzeit, mehrere Teilschritte — ein Projekt fürs Prio Board."},
+        {q: '„Rückmeldung vom Steuerberater zur Jahresabschluss-Frage einholen“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Eine einzelne Aufgabe, die du persönlich nachhältst — MyTask Board."},
+        {q: '„Sollen wir das Homeoffice-Modell auf 3 Tage pro Woche ausweiten?“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Eine Grundsatzfrage, die gemeinsam abgestimmt werden muss — ein Agendapunkt."},
+        {q: '„Wöchentlicher Datenbank-Backup-Check“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Wiederkehrender Routine-Check im Team — klassischer Team-Task-Board-Fall."},
+        {q: '„Kompletten Firmen-Webauftritt relaunchen (Laufzeit: 3 Monate)“', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Großes, mehrwöchiges Vorhaben mit klaren Meilensteinen — gehört ins Prio Board."}
+      ]
+    },
+    ee: {
+      title: "Gutes oder schlechtes EE?",
+      questions: [
+        {q: 'Titel: „MVP-Launch für neue Marke“ — EE: „Landingpage live, Payment-Flow getestet, erste 100 Anmeldungen erreicht.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Drei konkrete, prüfbare Kriterien — jeder kann ohne Diskussion sagen, ob es fertig ist."},
+        {q: 'Titel: „Marketing Sachen“ — EE: „Kampagne umsetzen“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Beschreibt eine Tätigkeit, kein Ergebnis — „fertig“ bleibt Meinungssache."},
+        {q: 'Titel: „Onboarding-Video für neue Mitarbeiter erstellen“ — EE: „5-minütiges Video ist im Intranet veröffentlicht, von HR freigegeben, erste 3 neue Mitarbeiter haben es angeschaut.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Konkret, prüfbar, sogar mit einem Nutzungs-Nachweis."},
+        {q: 'Titel: „Website verbessern“ — EE: „Website ist besser“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Wiederholt nur den Titel — „besser“ ist nicht messbar."},
+        {q: 'Titel: „Support-Ticket-System evaluieren“ — EE: „Vergleich von 3 Anbietern liegt vor, Empfehlung inkl. Kostenschätzung an den Supervisor geschickt.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Klar erkennbares Endergebnis, das jeder nachprüfen kann."},
+        {q: 'Titel: „CRM aufsetzen“ — EE: „CRM ist eingerichtet“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Keine Kriterien — eingerichtet mit welchen Feldern, für wen, getestet?"},
+        {q: 'Titel: „Rückmeldung zu neuem Logo-Entwurf geben“ — EE: „Feedback zu Farbwahl und Skalierbarkeit ist als Kommentar an der Karte hinterlassen.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Klar, was zu tun ist und wo das Ergebnis landet."},
+        {q: 'Titel: „Team-Event planen“ — EE: „Event war gut“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"„Gut“ ist subjektiv und lässt sich vorher gar nicht als Ziel festlegen."},
+        {q: 'Titel: „Zahlungsanbieter Stripe für Region LATAM freischalten“ — EE: „Stripe ist in LATAM live, erste echte Transaktion erfolgreich verbucht, Refund-Flow getestet.“', options:["Gutes EE","Schlechtes EE"], correct:0, explain:"Deckt sowohl den Live-Gang als auch den Praxistest ab."},
+        {q: 'Titel: „Prozesse optimieren“ — EE: „Prozesse laufen besser“', options:["Gutes EE","Schlechtes EE"], correct:1, explain:"Kein einziges prüfbares Kriterium — welche Prozesse, was heißt „besser“?"}
+      ]
+    },
+    status: {
+      title: "Status-Detektiv",
+      questions: [
+        {q: 'Ein Task ist eingetragen, aber noch niemand hat angefangen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:0, explain:"Noch nicht begonnen — klassisches „to do“."},
+        {q: 'Du arbeitest gerade aktiv an der Aufgabe.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Wird aktiv bearbeitet — „in progress“."},
+        {q: 'Du hast deinen Teil erledigt, wartest jetzt auf eine Rückmeldung von einem Kollegen, bevor es weitergehen kann.', options:["to do","in progress","blocked","on hold","done","closed"], correct:2, explain:"Ein externer Blocker verhindert das Weitermachen — „blocked“."},
+        {q: 'Du hast schon mal angefangen, pausierst jetzt aber bewusst — kein externer Blocker, du hast einfach etwas Wichtigeres vor.', options:["to do","in progress","blocked","on hold","done","closed"], correct:3, explain:"Bewusste Pause ohne Blocker — „on hold“."},
+        {q: 'Die Aufgabe ist inhaltlich fertig, wartet aber noch auf die Prüfung durch den Supervisor.', options:["to do","in progress","blocked","on hold","done","closed"], correct:4, explain:"Fertig, aber noch nicht final geprüft — „done“."},
+        {q: 'Der Supervisor hat die Karte geprüft und final bestätigt.', options:["to do","in progress","blocked","on hold","done","closed"], correct:5, explain:"Vollständig abgeschlossen und geprüft — „closed“."},
+        {q: 'Prio Board: Die Subtasks laufen aktiv, PRIO PLAN steht automatisch auf „This Week“.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Sobald an den Subtasks gearbeitet wird, steht die Prio-Karte auf „in progress“."},
+        {q: 'Ein Agendapunkt wird gerade im Meeting besprochen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:1, explain:"Wird gerade geklärt bzw. besprochen — „in progress“."},
+        {q: 'Eine Team-Task-Karte liegt seit einer Woche unangetastet in „Weekly“, niemand hat begonnen.', options:["to do","in progress","blocked","on hold","done","closed"], correct:0, explain:"Noch nicht begonnen, wartet auf Kapazität im Team — „to do“."},
+        {q: 'Du wartest auf eine Rückmeldung von Anbieter X, bevor du bei deiner MyTask-Karte weitermachen kannst.', options:["to do","in progress","blocked","on hold","done","closed"], correct:2, explain:"Hängt an einer anderen Person/Partei — „blocked“."}
+      ]
+    },
+    donts: {
+      title: "Don't-Jäger",
+      questions: [
+        {q: 'Ein Manager setzt für sein nächstes Quartal ganz allein neue Prioritäten, ohne den Supervisor einzubeziehen.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Prioritäten fürs Quartal/Monat dürfen nie allein gesetzt werden — nur gemeinsam mit dem Supervisor."},
+        {q: 'Eine nicht mehr benötigte Karte wird einfach aus dem Prio-Plan gelöscht.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Karten werden aus dem Plan nie gelöscht."},
+        {q: 'Ein Mitarbeiter setzt seine eigene Prio-Karte selbst auf „closed“.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"„closed“ setzen darf nur der Supervisor."},
+        {q: 'Im Team-Meeting wird spontan ein Thema besprochen, das nie vorher in die Agenda eingetragen wurde.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Besprochen wird nur, was auch tatsächlich in der Agenda steht — keine Ad-hoc-Themen."},
+        {q: 'Ein 1-2-1-Punkt, der noch nicht fertig durchdacht ist, wird trotzdem schon auf „AGENDA - OPEN“ gesetzt.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:0, explain:"Unvollständige Punkte bleiben ehrlich auf „NOT READY“."},
+        {q: 'Jemand trägt 15 Aufgaben gleichzeitig in „Today\'s Worklist“ im MyTask Board ein.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Maximal ca. 10 Aufgaben — sonst wird „Today“ selbst wieder zur Ablage."},
+        {q: 'Eine delegierte Aufgabe wird im MyTask Board nachgehalten, aber ohne EE in der Beschreibung.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:2, explain:"Bei delegierten Aufgaben gehört immer ein EE ins Description-Feld."},
+        {q: 'Ein Teammitglied hat gleichzeitig 3 Karten auf „in progress“ im Team Task Board.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"WIP-Limit: maximal 1 Karte gleichzeitig auf „in progress“."},
+        {q: 'Ein Task wird auf Status „done“ gesetzt, aber PRIO PLAN bleibt auf „Today“ stehen, statt auf „For Review“ zu wechseln.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Bei Fertigstellung müssen Status UND PRIO PLAN gemeinsam gesetzt werden."},
+        {q: 'Eine Prio-Karte selbst (nicht ihre Subtasks) wird auf PRIO PLAN „Today\'s Worklist“ gesetzt.', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"„Today\'s Worklist“ ist nur für Subtasks, nie für die Prio-Karte selbst."}
+      ]
+    },
+    prioplan: {
+      title: "PRIO PLAN Quiz",
+      questions: [
+        {q: 'Welcher PRIO PLAN Wert im Prio Board bedeutet: „nur für Subtasks, nie für die Prio-Karte selbst“?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:0, explain:"Today's Worklist ist im Prio Board ausschließlich für Subtasks gedacht."},
+        {q: '„Für diese Woche priorisiert, gesetzt im Weekly Manager Meeting“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:1, explain:"This Week wird im wöchentlichen Manager-Meeting gesetzt."},
+        {q: '„Für diesen Monat eingeplant, aus der Monatsplanung“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:2, explain:"This Month kommt direkt aus der Monatsplanung."},
+        {q: '„Standard-Sammelplatz aus der Quartalsplanung, noch nicht auf Monat oder Woche heruntergebrochen“ — welcher Wert (Prio Board)?', options:["Today's Worklist","This Week","This Month","This Quartal"], correct:3, explain:"This Quartal ist der Ausgangspunkt direkt nach der Quartalsplanung."},
+        {q: 'Im Team Task Board: „für Teammitglieder mit eingeschränktem Account, die kein eigenes MyTask Board haben“ — welcher Wert?', options:["Backlog","Weekly","Today","For Review"], correct:0, explain:"Backlog fängt auf, was sonst ins MyTask Board gehören würde."},
+        {q: '„Sammelbecken für alle Aufgaben, die diese Woche grundsätzlich anfallen, noch nicht auf einen Tag festgelegt“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:1, explain:"Weekly sammelt alles, was diese Woche dran ist, ohne festen Tag."},
+        {q: '„Aus Weekly rausgezogen, sobald jemand die Aufgabe heute angehen soll“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:2, explain:"Today wird meist im Daily Stand-up aus Weekly gezogen."},
+        {q: '„Aufgabe ist aus Sicht des Bearbeiters fertig (Status: done) und wartet auf Kontrolle durch den Supervisor“ — welcher Wert (Team Task Board)?', options:["Backlog","Weekly","Today","For Review"], correct:3, explain:"For Review ist die Kontroll-Spalte für den Supervisor."},
+        {q: 'In welchem Board hat PRIO PLAN die Werte Backlog / Weekly / Today / For Review?', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:3, explain:"Diese vier Werte gruppieren das Kanban Board im Team Task Board."},
+        {q: 'In welchem Board hat PRIO PLAN die Werte Today\'s Worklist / This Week / This Month / This Quartal?', options:["Agenda","Prio Board","MyTask Board","Team Task Board"], correct:1, explain:"Das ist der Planungs-Rhythmus im Prio Board."}
+      ]
+    }
+  };
+
+  const hub = document.getElementById('p2lHub');
+  const quizWrap = document.getElementById('p2lQuiz');
+  const titleEl = document.getElementById('p2lTitle');
+  const progressEl = document.getElementById('p2lProgress');
+  const questionEl = document.getElementById('p2lQuestion');
+  const optionsEl = document.getElementById('p2lOptions');
+  const explainEl = document.getElementById('p2lExplain');
+  const nextBtn = document.getElementById('p2lNext');
+  const resultEl = document.getElementById('p2lResult');
+  const questionCard = quizWrap ? quizWrap.querySelector('.p2l-question-card') : null;
+  const scoreText = document.getElementById('p2lScoreText');
+  const resultMsg = document.getElementById('p2lResultMsg');
+  const backBtn = document.getElementById('p2lBack');
+  const retryBtn = document.getElementById('p2lRetry');
+  const toHubBtn = document.getElementById('p2lToHub');
+
+  if (!hub || !quizWrap) return;
+
+  let currentGameId = null;
+  let currentIndex = 0;
+  let score = 0;
+
+  function startGame(gameId){
+    currentGameId = gameId;
+    currentIndex = 0;
+    score = 0;
+    hub.style.display = 'none';
+    quizWrap.style.display = 'block';
+    resultEl.style.display = 'none';
+    questionCard.style.display = 'block';
+    titleEl.textContent = P2L_GAMES[gameId].title;
+    renderQuestion();
+  }
+
+  function renderQuestion(){
+    const game = P2L_GAMES[currentGameId];
+    const q = game.questions[currentIndex];
+    progressEl.textContent = `Frage ${currentIndex + 1}/${game.questions.length} · Punkte: ${score}`;
+    questionEl.textContent = q.q;
+    explainEl.style.display = 'none';
+    nextBtn.style.display = 'none';
+    optionsEl.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'p2l-option';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => selectAnswer(i));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(i){
+    const game = P2L_GAMES[currentGameId];
+    const q = game.questions[currentIndex];
+    const btns = optionsEl.querySelectorAll('.p2l-option');
+    btns.forEach(b => b.disabled = true);
+    btns[q.correct].classList.add('correct');
+    if (i !== q.correct) {
+      btns[i].classList.add('wrong');
+    } else {
+      score++;
+    }
+    explainEl.textContent = q.explain;
+    explainEl.style.display = 'block';
+    nextBtn.style.display = 'inline-block';
+    nextBtn.textContent = (currentIndex === game.questions.length - 1) ? 'Ergebnis ansehen →' : 'Weiter →';
+    progressEl.textContent = `Frage ${currentIndex + 1}/${game.questions.length} · Punkte: ${score}`;
+  }
+
+  nextBtn && nextBtn.addEventListener('click', () => {
+    const game = P2L_GAMES[currentGameId];
+    currentIndex++;
+    if (currentIndex >= game.questions.length) {
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  });
+
+  function showResult(){
+    const game = P2L_GAMES[currentGameId];
+    questionCard.style.display = 'none';
+    resultEl.style.display = 'block';
+    scoreText.textContent = `${score} / ${game.questions.length}`;
+    const pct = score / game.questions.length;
+    let msg;
+    if (pct === 1) msg = 'Perfekt! Du kennst die Regeln in- und auswendig.';
+    else if (pct >= 0.7) msg = 'Stark! Nur Kleinigkeiten fehlen noch.';
+    else if (pct >= 0.4) msg = 'Guter Start — ein Blick zurück in den Guide lohnt sich.';
+    else msg = 'Zeit für eine Wiederholung — schau dir die passende Board-Seite noch mal an.';
+    resultMsg.textContent = msg;
+  }
+
+  document.querySelectorAll('.p2l-game-card').forEach(card => {
+    card.addEventListener('click', () => startGame(card.dataset.game));
+  });
+  backBtn && backBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; });
+  toHubBtn && toHubBtn.addEventListener('click', () => { quizWrap.style.display = 'none'; hub.style.display = ''; });
+  retryBtn && retryBtn.addEventListener('click', () => startGame(currentGameId));
+})();
 </script>
 
 </body>
