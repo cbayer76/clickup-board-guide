@@ -193,51 +193,6 @@
     content:''; flex:1; height:1px; background:var(--line);
   }
 
-  .donts-overview{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:14px;
-  }
-  @media (max-width:760px){
-    .donts-overview{ grid-template-columns:1fr; }
-  }
-  .donts-group{
-    background:#FBEAEA;
-    border:1px solid #F3C6C6;
-    border-left:4px solid var(--line);
-    border-radius:12px;
-    padding:16px 18px;
-    cursor:pointer;
-    transition:box-shadow .15s ease, transform .15s ease;
-  }
-  .donts-group:hover{
-    box-shadow:0 6px 18px rgba(20,26,31,0.09);
-    transform:translateY(-2px);
-  }
-  .donts-group[data-board="prio"]{ border-left-color:var(--prio); }
-  .donts-group[data-board="delegate"]{ border-left-color:var(--delegate); }
-  .donts-group-head{
-    display:flex; align-items:center; gap:8px;
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600; font-size:13.5px;
-    margin-bottom:10px;
-    color:#B42318;
-  }
-  .donts-group-head .dot{ width:8px; height:8px; border-radius:50%; }
-  .donts-group[data-board="prio"] .donts-group-head .dot{ background:var(--prio); }
-  .donts-group[data-board="delegate"] .donts-group-head .dot{ background:var(--delegate); }
-  .donts-group ul{ margin:0; padding-left:18px; font-size:13px; line-height:1.6; color:var(--ink); }
-  .donts-group li{ margin-bottom:6px; }
-  .donts-group .goto{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px; font-weight:600;
-    color:#B42318;
-    display:inline-flex; align-items:center; gap:6px;
-    margin-top:4px;
-  }
-  .donts-group .goto span:last-child{ transition:transform .15s ease; }
-  .donts-group:hover .goto span:last-child{ transform:translateX(3px); }
-
   .overview-grid{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
@@ -1262,29 +1217,6 @@
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
     </div>
-
-    <div class="section-eyebrow" data-i18n="ov.eyebrow.donts">DIE WICHTIGSTEN DON'TS</div>
-    <div class="donts-overview">
-      <div class="donts-group" data-board="prio">
-        <div class="donts-group-head"><span class="dot"></span><span data-i18n="nav.prio">Prio Board</span></div>
-        <ul>
-          <li data-i18n="prio.03.never1">Prioritäten fürs Quartal — und später für den Monat — setzen: <b>nur gemeinsam mit dem Supervisor</b>, nie alleine. Sonst hat die ganze Planung keinen Sinn.</li>
-          <li data-i18n="prio.03.never2">Karten aus dem Plan löschen</li>
-          <li data-i18n="prio.03.never3">Eine Karte auf <b>closed</b> setzen oder andere Änderungen am Plan vornehmen — das darf nur der Supervisor</li>
-          <li data-i18n="prio.n7.p">Die Prio-Karte selbst darf nie auf PRIO PLAN <b>Today's Worklist</b> stehen — dafür ist sie zu groß. Für die Subtasks ergibt "Today" dagegen durchaus Sinn.</li>
-        </ul>
-        <div class="goto"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
-      </div>
-      <div class="donts-group" data-board="delegate">
-        <div class="donts-group-head"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span></div>
-        <ul>
-          <li data-i18n="delegate.chaos1">Aufgabe ohne Assignee "irgendwo" ins Board werfen</li>
-          <li data-i18n="delegate.chaos2">Für jede Rückfrage einen neuen Task anlegen</li>
-          <li data-i18n="delegate.chaos3">Mündlich delegieren, ohne es in ClickUp festzuhalten</li>
-        </ul>
-        <div class="goto"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
-      </div>
-    </div>
   </div>
   </section>
 
@@ -1520,6 +1452,19 @@
       </div>
     </div>
 
+    <div class="card">
+      <h3><span class="num">11</span><span data-i18n="donts.h3">Don'ts</span></h3>
+      <div class="inout no">
+        <div class="label" data-i18n="donts.label">✕ UNBEDINGT VERMEIDEN</div>
+        <ul>
+          <li data-i18n="agenda.donts.1">Themen ins Meeting bringen, die vorher nicht in der Agenda eingetragen wurden — besprochen wird nur, was auch tatsächlich drinsteht.</li>
+          <li data-i18n="agenda.donts.2">Einen Punkt auf <b>closed</b> setzen, bevor das Ergebnis in der Description steht und eine nötige Folgeaufgabe ausgelagert ist.</li>
+          <li data-i18n="agenda.donts.3">Einen Punkt eintragen, dessen Antwort selbst schon Arbeit braucht — das ist ein Task, kein Agendapunkt.</li>
+          <li data-i18n="agenda.donts.4">Einen unvollständigen 1-2-1-Punkt schon auf <b>AGENDA - OPEN</b> setzen, statt ihn ehrlich auf <b>NOT READY</b> zu lassen.</li>
+        </ul>
+      </div>
+    </div>
+
     <button type="button" class="more-examples-link" id="toggleExamplesAgenda">
       <div class="mel-text">
         <h4 data-i18n="agenda.moreex.h4">5 gute & 5 schlechte Agenda-Punkte ansehen</h4>
@@ -1617,14 +1562,6 @@
       <h3><span class="num">03</span><span data-i18n="prio.03.h3">Wer nutzt das Prio Board?</span></h3>
       <p data-i18n="prio.03.p">Jeder Manager mit eigenem Bereich (z. B. Central, MVP, Mediabuying) — gemeinsam mit seinem Supervisor. Beide pflegen es zusammen: in der Quartalsplanung und danach jeden Monat erneut.</p>
       <p data-i18n="prio.03.p2">Das Board macht außerdem die Abstimmung sehr einfach — mit dem Supervisor genauso wie mit anderen Abteilungen. Jeder sieht auf einen Blick, was woanders gerade läuft.</p>
-      <div class="inout no" style="margin-top:14px;">
-        <div class="label" data-i18n="prio.03.never.label">✕ NIEMALS ALLEIN</div>
-        <ul>
-          <li data-i18n="prio.03.never1">Prioritäten fürs Quartal — und später für den Monat — setzen: <b>nur gemeinsam mit dem Supervisor</b>, nie alleine. Sonst hat die ganze Planung keinen Sinn.</li>
-          <li data-i18n="prio.03.never2">Karten aus dem Plan löschen</li>
-          <li data-i18n="prio.03.never3">Eine Karte auf <b>closed</b> setzen oder andere Änderungen am Plan vornehmen — das darf nur der Supervisor</li>
-        </ul>
-      </div>
     </div>
 
     <div class="card">
@@ -1899,6 +1836,19 @@
         <span class="crumb">MANAGER STANDARD BOARDS</span>→
         <span class="crumb">PRIORITY BOARDS</span>→
         <span class="crumb">PRIOB: [Name]</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">10</span><span data-i18n="donts.h3">Don'ts</span></h3>
+      <div class="inout no">
+        <div class="label" data-i18n="donts.label">✕ UNBEDINGT VERMEIDEN</div>
+        <ul>
+          <li data-i18n="prio.03.never1">Prioritäten fürs Quartal — und später für den Monat — setzen: <b>nur gemeinsam mit dem Supervisor</b>, nie alleine. Sonst hat die ganze Planung keinen Sinn.</li>
+          <li data-i18n="prio.03.never2">Karten aus dem Plan löschen</li>
+          <li data-i18n="prio.03.never3">Eine Karte auf <b>closed</b> setzen oder andere Änderungen am Plan vornehmen — das darf nur der Supervisor</li>
+          <li data-i18n="prio.n7.p">Die Prio-Karte selbst darf nie auf PRIO PLAN <b>Today's Worklist</b> stehen — dafür ist sie zu groß. Für die Subtasks ergibt "Today" dagegen durchaus Sinn.</li>
+        </ul>
       </div>
     </div>
 
@@ -2254,6 +2204,19 @@
         <span class="crumb">&lt;&lt;&lt;MY TASKS&gt;&gt;&gt; [Name]</span>
       </div>
     </div>
+
+    <div class="card">
+      <h3><span class="num">11</span><span data-i18n="donts.h3">Don'ts</span></h3>
+      <div class="inout no">
+        <div class="label" data-i18n="donts.label">✕ UNBEDINGT VERMEIDEN</div>
+        <ul>
+          <li data-i18n="mytask.donts.1">Eine dir zugewiesene Aufgabe nicht ins MyTask Board verlinken — sonst zeigt es nicht wirklich alles, woran du arbeiten sollst.</li>
+          <li data-i18n="mytask.donts.2">Mehr als ca. 10 Aufgaben gleichzeitig auf <b>Today's Worklist</b> packen — dann wird "Today" selbst wieder zur Ablage.</li>
+          <li data-i18n="mytask.donts.3">Eine delegierte Aufgabe nachhalten, ohne ein EE ins Description-Feld zu schreiben.</li>
+          <li data-i18n="mytask.donts.4">Erledigtes tagelang offen lassen, statt es zeitnah auf <b>closed</b> zu setzen.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ TEAM TASK BOARD ============ -->
@@ -2568,6 +2531,19 @@
         <span class="crumb">TTB: [Team]</span>
       </div>
     </div>
+
+    <div class="card">
+      <h3><span class="num">10</span><span data-i18n="donts.h3">Don'ts</span></h3>
+      <div class="inout no">
+        <div class="label" data-i18n="donts.label">✕ UNBEDINGT VERMEIDEN</div>
+        <ul>
+          <li data-i18n="team.donts.1">Mehr als 1 Karte gleichzeitig auf <b>in progress</b> haben — das verwässert den Fokus.</li>
+          <li data-i18n="team.donts.2">Eine Karte ohne Assignee liegen lassen — außer im <b>Backlog</b>, dort ist das am Anfang normal.</li>
+          <li data-i18n="team.donts.3">Bei einer delegierten Aufgabe kein EE in die Beschreibung schreiben.</li>
+          <li data-i18n="team.donts.4">Nur Status auf <b>done</b> ODER nur PRIO PLAN auf <b>For Review</b> setzen — ohne beides zusammen taucht die Karte nicht korrekt in beiden Ansichten auf.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <!-- ============ DELEGIEREN ============ -->
@@ -2778,7 +2754,7 @@
 </footer>
 
 <script>
-  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser, .donts-group');
+  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser');
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
 
@@ -3075,7 +3051,6 @@ const I18N = {
   "ov.delegate.p": "Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.",
   "ov.eyebrow.practice": "PRAXIS &amp; REGELN",
   "ov.eyebrow.boards": "DIE VIER BOARDS",
-  "ov.eyebrow.donts": "DIE WICHTIGSTEN DON'TS",
   "ov.rules.tag": "ALLGEMEINE REGELN",
   "ov.rules.h3": "Board-übergreifende Grundregeln",
   "ov.rules.p": "Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.",
@@ -3117,7 +3092,6 @@ const I18N = {
   "prio.03.h3": "Wer nutzt das Prio Board?",
   "prio.03.p": "Jeder Manager mit eigenem Bereich (z. B. Central, MVP, Mediabuying) — gemeinsam mit seinem Supervisor. Beide pflegen es zusammen: in der Quartalsplanung und danach jeden Monat erneut.",
   "prio.03.p2": "Das Board macht außerdem die Abstimmung sehr einfach — mit dem Supervisor genauso wie mit anderen Abteilungen. Jeder sieht auf einen Blick, was woanders gerade läuft.",
-  "prio.03.never.label": "✕ NIEMALS ALLEIN",
   "prio.03.never1": "Prioritäten fürs Quartal — und später für den Monat — setzen: <b>nur gemeinsam mit dem Supervisor</b>, nie alleine. Sonst hat die ganze Planung keinen Sinn.",
   "prio.03.never2": "Karten aus dem Plan löschen",
   "prio.03.never3": "Eine Karte auf <b>closed</b> setzen oder andere Änderungen am Plan vornehmen — das darf nur der Supervisor",
@@ -3253,6 +3227,20 @@ const I18N = {
   "prio.n5.p": "Gearbeitet wird immer über Subtasks — eigene oder delegierte. Ohne Subtasks ist es kein Projekt: Kein Prio-Board-Eintrag ohne mindestens einen Subtask. Die Prio-Karte selbst bleibt aber immer bei der verantwortlichen Person zugewiesen.",
   "prio.tagline": "Nur Projekte. Die Vorhaben, die das Quartal wirklich prägen — keine kleinen Tasks.",
   "section.clickup": "Zu finden in ClickUp",
+  "donts.h3": "Don'ts",
+  "donts.label": "✕ UNBEDINGT VERMEIDEN",
+  "agenda.donts.1": "Themen ins Meeting bringen, die vorher nicht in der Agenda eingetragen wurden — besprochen wird nur, was auch tatsächlich drinsteht.",
+  "agenda.donts.2": "Einen Punkt auf <b>closed</b> setzen, bevor das Ergebnis in der Description steht und eine nötige Folgeaufgabe ausgelagert ist.",
+  "agenda.donts.3": "Einen Punkt eintragen, dessen Antwort selbst schon Arbeit braucht — das ist ein Task, kein Agendapunkt.",
+  "agenda.donts.4": "Einen unvollständigen 1-2-1-Punkt schon auf <b>AGENDA - OPEN</b> setzen, statt ihn ehrlich auf <b>NOT READY</b> zu lassen.",
+  "mytask.donts.1": "Eine dir zugewiesene Aufgabe nicht ins MyTask Board verlinken — sonst zeigt es nicht wirklich alles, woran du arbeiten sollst.",
+  "mytask.donts.2": "Mehr als ca. 10 Aufgaben gleichzeitig auf <b>Today's Worklist</b> packen — dann wird \"Today\" selbst wieder zur Ablage.",
+  "mytask.donts.3": "Eine delegierte Aufgabe nachhalten, ohne ein EE ins Description-Feld zu schreiben.",
+  "mytask.donts.4": "Erledigtes tagelang offen lassen, statt es zeitnah auf <b>closed</b> zu setzen.",
+  "team.donts.1": "Mehr als 1 Karte gleichzeitig auf <b>in progress</b> haben — das verwässert den Fokus.",
+  "team.donts.2": "Eine Karte ohne Assignee liegen lassen — außer im <b>Backlog</b>, dort ist das am Anfang normal.",
+  "team.donts.3": "Bei einer delegierten Aufgabe kein EE in die Beschreibung schreiben.",
+  "team.donts.4": "Nur Status auf <b>done</b> ODER nur PRIO PLAN auf <b>For Review</b> setzen — ohne beides zusammen taucht die Karte nicht korrekt in beiden Ansichten auf.",
   "status.closed": "Endgültig abgeschlossen.",
   "status.done": "Inhaltlich fertig.",
   "status.inprogress": "Wird aktuell bearbeitet.",
@@ -3618,7 +3606,6 @@ const I18N = {
   "ov.delegate.p": "The board is one thing — delegating it properly is another. A short guide so nothing falls between the cracks.",
   "ov.eyebrow.practice": "PRACTICE &amp; RULES",
   "ov.eyebrow.boards": "THE FOUR BOARDS",
-  "ov.eyebrow.donts": "THE MOST IMPORTANT DON'TS",
   "ov.rules.tag": "GENERAL RULES",
   "ov.rules.h3": "Cross-board basic rules",
   "ov.rules.p": "Inbox, replies, and assigned comments — the three things that need to be processed regularly, regardless of which board they touch.",
@@ -3660,7 +3647,6 @@ const I18N = {
   "prio.03.h3": "Who uses the Prio Board?",
   "prio.03.p": "Every manager with their own area (e.g. Central, MVP, Mediabuying) — together with their supervisor. Both maintain it together: during quarterly planning, and then again every month.",
   "prio.03.p2": "The board also makes it easy to stay aligned — with the supervisor and with other departments. Everyone can see at a glance what's happening elsewhere.",
-  "prio.03.never.label": "✕ NEVER ALONE",
   "prio.03.never1": "Setting priorities for the quarter — and later the month — is done <b>only together with the supervisor</b>, never alone. Otherwise the whole planning process is pointless.",
   "prio.03.never2": "Deleting cards from the plan",
   "prio.03.never3": "Setting a card to <b>closed</b> or making other changes to the plan — only the supervisor may do this",
@@ -3796,6 +3782,20 @@ const I18N = {
   "prio.n5.p": "Work always happens through subtasks — your own or delegated ones. No subtasks means no project: no Prio Board card without at least one subtask. The Prio card itself, though, always stays assigned to the responsible person.",
   "prio.tagline": "Projects only. The initiatives that actually define the quarter — no small tasks.",
   "section.clickup": "Where to find it in ClickUp",
+  "donts.h3": "Don'ts",
+  "donts.label": "✕ AVOID AT ALL COSTS",
+  "agenda.donts.1": "Bringing topics into the meeting that weren't entered into the agenda beforehand — only what's actually listed gets discussed.",
+  "agenda.donts.2": "Setting a point to <b>closed</b> before the result is written into the description and any needed follow-up task has been spun out.",
+  "agenda.donts.3": "Entering a point whose answer itself already requires work — that's a task, not an agenda point.",
+  "agenda.donts.4": "Marking an incomplete 1-2-1 point as <b>AGENDA - OPEN</b> instead of honestly leaving it on <b>NOT READY</b>.",
+  "mytask.donts.1": "Not linking a task assigned to you into the MyTask Board — otherwise it doesn't actually show everything you're on the hook for.",
+  "mytask.donts.2": "Piling more than ~10 tasks onto <b>Today's Worklist</b> at once — then \"Today\" itself turns back into a dumping ground.",
+  "mytask.donts.3": "Tracking a delegated task without writing an EE into the description field.",
+  "mytask.donts.4": "Leaving finished items open for days instead of promptly setting them to <b>closed</b>.",
+  "team.donts.1": "Having more than 1 card on <b>in progress</b> at the same time — that dilutes focus.",
+  "team.donts.2": "Leaving a card without an assignee — except in <b>Backlog</b>, where that's normal early on.",
+  "team.donts.3": "Skipping the EE in the description for a delegated task.",
+  "team.donts.4": "Setting only Status to <b>done</b> OR only PRIO PLAN to <b>For Review</b> — without both together, the card won't show up correctly in both views.",
   "status.closed": "Permanently closed.",
   "status.done": "Substantively finished.",
   "status.inprogress": "Currently being worked on.",
