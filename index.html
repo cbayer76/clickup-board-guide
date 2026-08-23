@@ -193,6 +193,51 @@
     content:''; flex:1; height:1px; background:var(--line);
   }
 
+  .donts-overview{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:14px;
+  }
+  @media (max-width:760px){
+    .donts-overview{ grid-template-columns:1fr; }
+  }
+  .donts-group{
+    background:#FBEAEA;
+    border:1px solid #F3C6C6;
+    border-left:4px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+    cursor:pointer;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+  .donts-group:hover{
+    box-shadow:0 6px 18px rgba(20,26,31,0.09);
+    transform:translateY(-2px);
+  }
+  .donts-group[data-board="prio"]{ border-left-color:var(--prio); }
+  .donts-group[data-board="delegate"]{ border-left-color:var(--delegate); }
+  .donts-group-head{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600; font-size:13.5px;
+    margin-bottom:10px;
+    color:#B42318;
+  }
+  .donts-group-head .dot{ width:8px; height:8px; border-radius:50%; }
+  .donts-group[data-board="prio"] .donts-group-head .dot{ background:var(--prio); }
+  .donts-group[data-board="delegate"] .donts-group-head .dot{ background:var(--delegate); }
+  .donts-group ul{ margin:0; padding-left:18px; font-size:13px; line-height:1.6; color:var(--ink); }
+  .donts-group li{ margin-bottom:6px; }
+  .donts-group .goto{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; font-weight:600;
+    color:#B42318;
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:4px;
+  }
+  .donts-group .goto span:last-child{ transition:transform .15s ease; }
+  .donts-group:hover .goto span:last-child{ transform:translateX(3px); }
+
   .overview-grid{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
@@ -1216,6 +1261,29 @@
           <div class="example" data-i18n="ov.team.ex">"Bug in Zahlungsformular fixen"</div>
           <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
         </div>
+    </div>
+
+    <div class="section-eyebrow" data-i18n="ov.eyebrow.donts">DIE WICHTIGSTEN DON'TS</div>
+    <div class="donts-overview">
+      <div class="donts-group" data-board="prio">
+        <div class="donts-group-head"><span class="dot"></span><span data-i18n="nav.prio">Prio Board</span></div>
+        <ul>
+          <li data-i18n="prio.03.never1">Prioritäten fürs Quartal — und später für den Monat — setzen: <b>nur gemeinsam mit dem Supervisor</b>, nie alleine. Sonst hat die ganze Planung keinen Sinn.</li>
+          <li data-i18n="prio.03.never2">Karten aus dem Plan löschen</li>
+          <li data-i18n="prio.03.never3">Eine Karte auf <b>closed</b> setzen oder andere Änderungen am Plan vornehmen — das darf nur der Supervisor</li>
+          <li data-i18n="prio.n7.p">Die Prio-Karte selbst darf nie auf PRIO PLAN <b>Today's Worklist</b> stehen — dafür ist sie zu groß. Für die Subtasks ergibt "Today" dagegen durchaus Sinn.</li>
+        </ul>
+        <div class="goto"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
+      </div>
+      <div class="donts-group" data-board="delegate">
+        <div class="donts-group-head"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span></div>
+        <ul>
+          <li data-i18n="delegate.chaos1">Aufgabe ohne Assignee "irgendwo" ins Board werfen</li>
+          <li data-i18n="delegate.chaos2">Für jede Rückfrage einen neuen Task anlegen</li>
+          <li data-i18n="delegate.chaos3">Mündlich delegieren, ohne es in ClickUp festzuhalten</li>
+        </ul>
+        <div class="goto"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
+      </div>
     </div>
   </div>
   </section>
@@ -2710,7 +2778,7 @@
 </footer>
 
 <script>
-  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser');
+  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser, .donts-group');
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
 
@@ -3007,6 +3075,7 @@ const I18N = {
   "ov.delegate.p": "Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.",
   "ov.eyebrow.practice": "PRAXIS &amp; REGELN",
   "ov.eyebrow.boards": "DIE VIER BOARDS",
+  "ov.eyebrow.donts": "DIE WICHTIGSTEN DON'TS",
   "ov.rules.tag": "ALLGEMEINE REGELN",
   "ov.rules.h3": "Board-übergreifende Grundregeln",
   "ov.rules.p": "Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.",
@@ -3549,6 +3618,7 @@ const I18N = {
   "ov.delegate.p": "The board is one thing — delegating it properly is another. A short guide so nothing falls between the cracks.",
   "ov.eyebrow.practice": "PRACTICE &amp; RULES",
   "ov.eyebrow.boards": "THE FOUR BOARDS",
+  "ov.eyebrow.donts": "THE MOST IMPORTANT DON'TS",
   "ov.rules.tag": "GENERAL RULES",
   "ov.rules.h3": "Cross-board basic rules",
   "ov.rules.p": "Inbox, replies, and assigned comments — the three things that need to be processed regularly, regardless of which board they touch.",
