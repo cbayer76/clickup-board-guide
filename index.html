@@ -80,10 +80,38 @@
     color:var(--ink-soft);
     font-family:'IBM Plex Mono', monospace;
   }
+  .header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-left:auto;
+  }
+  .play-btn{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(135deg, #F59E0B, #EC4899);
+    color:#fff;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:9px 16px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(236,72,153,0.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .play-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 5px 14px rgba(236,72,153,0.45);
+  }
+  .play-btn .emoji{ font-size:15px; }
+
   .lang-switch{
     display:flex;
     gap:2px;
-    margin-left:auto;
     background:var(--surface);
     border:1px solid var(--line);
     border-radius:8px;
@@ -1136,9 +1164,12 @@
     <div class="brand">
       <span class="mark">ClickUp Board-Guide</span>
       <span class="sub" data-i18n="brand.sub">Intermax Group · interne Referenz</span>
-      <div class="lang-switch">
-        <button class="lang-btn active" data-lang="de">DE</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+      <div class="header-actions">
+        <button class="play-btn" data-board="play2learn"><span class="emoji">🎮</span><span data-i18n="nav.play2learn">Play 2 Learn</span></button>
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="de">DE</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
     </div>
     <nav class="tabs">
@@ -2746,6 +2777,29 @@
     </div>
   </section>
 
+  <!-- ============ PLAY 2 LEARN ============ -->
+  <section class="board-panel" id="panel-play2learn" data-accent="rules">
+    <div class="back-link" data-board="overview">← <span data-i18n="back.overview">Übersicht</span></div>
+    <div class="board-header" data-accent="rules">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="8" width="18" height="10" rx="4"/>
+          <path d="M8 12h.01M8 14.5h.01"/>
+          <path d="M6.5 13.2h3"/>
+          <circle cx="15.5" cy="12" r="0.6" fill="currentColor"/>
+          <circle cx="17.5" cy="14" r="0.6" fill="currentColor"/>
+        </svg>
+      </div>
+      <div>
+        <h2><span data-i18n="play2learn.h2">Play 2 Learn</span> <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span></h2>
+        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — kleine Spiele und Quizze folgen hier bald.</p>
+      </div>
+    </div>
+    <div class="card">
+      <p class="note" style="margin:0; padding:0; border:none;" data-i18n="play2learn.soon">Wird gerade konzipiert. Schau bald wieder vorbei!</p>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -2754,7 +2808,7 @@
 </footer>
 
 <script>
-  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser');
+  const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser, .play-btn');
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
 
@@ -3044,6 +3098,10 @@ const I18N = {
   "nav.prio": "Prio Board",
   "nav.team": "Team Task Board",
   "nav.rules": "Allgemeine Regeln",
+  "nav.play2learn": "Play 2 Learn",
+  "play2learn.h2": "Play 2 Learn",
+  "play2learn.tagline": "Die Board-Regeln spielerisch lernen, statt nur zu lesen — kleine Spiele und Quizze folgen hier bald.",
+  "play2learn.soon": "Wird gerade konzipiert. Schau bald wieder vorbei!",
   "nofields": "Keine eigenen Pflichtfelder. Es reichen die ClickUp-Standardfelder — Assignee, Fälligkeitsdatum, Priorität.",
   "ov.agenda.h3": "Für Themen, die wir besprechen müssen",
   "ov.agenda.p": "Der Ort für alles, was zwei Personen oder ein Team gemeinsam klären müssen — im 1-2-1, im Team-Meeting oder in der Quartalsplanung. Hier sammelt man Themen, bevor man sie im Termin klärt, und hält fest, wenn sie geklärt sind.",
@@ -3599,6 +3657,10 @@ const I18N = {
   "nav.prio": "Prio Board",
   "nav.team": "Team Task Board",
   "nav.rules": "General Rules",
+  "nav.play2learn": "Play 2 Learn",
+  "play2learn.h2": "Play 2 Learn",
+  "play2learn.tagline": "Learn the board rules by playing instead of just reading — small games and quizzes are coming soon.",
+  "play2learn.soon": "Currently being designed. Check back soon!",
   "nofields": "No dedicated required fields. The standard ClickUp fields are enough — assignee, due date, priority.",
   "ov.agenda.h3": "For topics we need to discuss",
   "ov.agenda.p": "The place for everything two people or a team need to work out together — in a 1-on-1, a team meeting, or quarterly planning. This is where topics get collected before the meeting, and marked as resolved once they are.",
