@@ -3000,6 +3000,7 @@
   const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser, .play-btn');
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
+  const LOCKED_BOARDS = ['rules', 'delegate', 'team'];
 
   function activate(board){
     panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + board));
@@ -3008,6 +3009,10 @@
   }
 
   buttons.forEach(el => {
+    if (LOCKED_BOARDS.includes(el.dataset.board)) {
+      el.style.cursor = 'default';
+      return;
+    }
     el.addEventListener('click', () => activate(el.dataset.board));
   });
 
