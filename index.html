@@ -963,6 +963,29 @@
     text-transform:uppercase;
   }
   .decide-a.next{ background:var(--paper); border:1px dashed var(--line); }
+  .rule-list{ margin:10px 0 0 0; padding-left:18px; font-size:13.5px; line-height:1.6; }
+  .rule-list li{ margin-bottom:5px; }
+  .inout.neutral{ background:var(--paper); }
+  .inout.neutral .label{ color:var(--rules); }
+  .route-list{ display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .route{
+    display:flex; align-items:center; gap:12px;
+    background:var(--paper); border-radius:10px;
+    padding:10px 14px; font-size:13.5px;
+  }
+  .route-q{ flex:1; }
+  .route-arrow{ color:var(--ink-soft); }
+  .route-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; font-weight:600;
+    padding:3px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .route-tag[data-tag="agenda"]{ background:var(--agenda-soft); color:var(--agenda); }
+  .route-tag[data-tag="prio"]{ background:var(--prio-soft); color:var(--prio); }
+  .route-tag[data-tag="mytask"]{ background:var(--mytask-soft); color:var(--mytask); }
+  .route-tag[data-tag="team"]{ background:var(--team-soft); color:var(--team); }
+  .route-tag[data-tag="delegate"]{ background:var(--delegate-soft); color:var(--delegate); }
+  @media (max-width:760px){ .route{ flex-wrap:wrap; } }
   .role-tag{
     font-family:'IBM Plex Mono', monospace;
     font-size:10.5px; font-weight:600;
@@ -1349,7 +1372,7 @@
     </div>
     <nav class="tabs">
       <button class="tab-btn" data-board="overview"><span class="dot"></span><span data-i18n="nav.overview">Übersicht</span></button>
-      <button class="tab-btn" data-board="rules"><span class="dot"></span><span data-i18n="nav.rules">Allgemeine Regeln</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
+      <button class="tab-btn" data-board="rules"><span class="dot"></span><span data-i18n="nav.rules">Allgemeine Regeln</span></button>
       <button class="tab-btn" data-board="delegate"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span></button>
       <button class="tab-btn" data-board="agenda"><span class="dot"></span><span data-i18n="nav.agenda">Agenda</span></button>
       <button class="tab-btn" data-board="prio"><span class="dot"></span><span data-i18n="nav.prio">Prio Board</span></button>
@@ -1371,9 +1394,8 @@
       <div class="howto-teaser" data-board="rules">
         <div class="howto-text">
           <span class="tag" data-i18n="ov.rules.tag">ALLGEMEINE REGELN</span>
-          <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span>
           <h3 data-i18n="ov.rules.h3">Board-übergreifende Grundregeln</h3>
-          <p data-i18n="ov.rules.p">Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.</p>
+          <p data-i18n="ov.rules.p">Das Grundprinzip, die Pflichtregeln für Inbox, Antworten und Erwähnungen, die Tagesroutine, Status, Wegweiser und Glossar — alles, was für jedes Board gilt.</p>
         </div>
         <div class="cta"><span data-i18n="cta.details">Details ansehen</span><span>→</span></div>
       </div>
@@ -2978,8 +3000,8 @@
         </svg>
       </div>
       <div>
-        <h2><span data-i18n="rules.h2">Allgemeine Regeln von ClickUp</span> <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span></h2>
-        <p data-i18n="rules.tagline">Kein eigenes Board — sondern drei Dinge, die board-unabhängig jeden Tag abgearbeitet werden müssen.</p>
+        <h2><span data-i18n="rules.h2">Allgemeine Regeln von ClickUp</span></h2>
+        <p data-i18n="rules.tagline">Kein eigenes Board — sondern die Grundregeln, die in jedem Board gelten: vom Grundprinzip über die Tagesroutine bis zum Glossar.</p>
       </div>
     </div>
 
@@ -2996,8 +3018,13 @@
       <p data-i18n="rules.pzz.zweck"><b>Der Zweck:</b> Damit nichts nur deshalb verloren geht, weil es zufällig nicht in einer Karte, sondern in einer Benachrichtigung steckte.</p>
     </div>
 
+    <div class="rule-box" style="margin-bottom:16px;">
+      <span class="kicker" data-i18n="rules.p0.kicker">Das Grundprinzip</span>
+      <span data-i18n="rules.p0.text"><b>Was nicht in ClickUp steht, gibt es nicht.</b> Jede Aufgabe, jede Absprache und jede Entscheidung gehört in ClickUp — an den passenden Task, die passende Karte oder den passenden Agendapunkt. Was mündlich, im Chat, per WhatsApp oder per E-Mail besprochen wurde, wird nachgetragen. Rückfragen laufen als Kommentar am Task, nicht nebenher. Nur so kann jeder nachvollziehen, was vereinbart ist — auch in drei Wochen noch.</span>
+    </div>
+
     <div class="card">
-      <h3><span class="num">01</span><span data-i18n="rules.steps.h3">Die drei Grundregeln</span></h3>
+      <h3><span class="num">01</span><span data-i18n="rules.steps.h3">Die Grundregeln</span></h3>
       <div class="steps-vertical">
         <div class="step-v">
           <span class="sv-num">1</span>
@@ -3020,11 +3047,101 @@
             <p data-i18n="rules.r3.p">Ein zugewiesener Kommentar ist ein <b>Mini Task</b>, also ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.</p>
           </div>
         </div>
+        <div class="step-v">
+          <span class="sv-num">4</span>
+          <div>
+            <h4><span data-i18n="rules.r4.h">Personen erwähnen, wenn du eine Reaktion willst</span> <span class="pill on" style="margin-left:4px;" data-i18n="prio.n3.badge">Pflicht</span></h4>
+            <p data-i18n="rules.r4.p">Sprichst du in einem Kommentar eine bestimmte Person an und willst eine Reaktion — eine Antwort, eine Freigabe, eine Info —, dann <b>erwähnst du sie immer mit @Name</b>. Nur eine Erwähnung landet sicher in ihrer Inbox. <b>Bei Erwähnungen geht nichts verloren</b>; ohne Erwähnung sieht die Person deinen Kommentar nur, wenn sie den Task zufällig beobachtet oder öffnet.</p>
+            <ul class="rule-list">
+              <li data-i18n="rules.r4.l1"><b>Direkt ansprechen:</b> „@Lisa, bitte schick mir bis 15 Uhr die Zahlen“ statt „kann das mal jemand machen?“</li>
+              <li data-i18n="rules.r4.l2"><b>Mehrere Personen?</b> Jede einzeln erwähnen, die etwas beitragen soll — und dazuschreiben, wer was tun soll.</li>
+              <li data-i18n="rules.r4.l3"><b>Erwähnungen für alle</b> (ganze Teams, @everyone) nur, wenn es wirklich alle betrifft — sonst füllst du die Inbox von Leuten, die nichts damit zu tun haben.</li>
+              <li data-i18n="rules.r4.l4"><b>Soll die Person etwas erledigen?</b> Dann reicht die Erwähnung nicht: Kommentar zuweisen (Mini Task) oder einen DELTA-Task anlegen — siehe Delegieren.</li>
+              <li data-i18n="rules.r4.l5">Wer erwähnt wird, antwortet <b>innerhalb von 24 Stunden</b> (Regel 2).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-v">
+          <span class="sv-num">5</span>
+          <div>
+            <h4><span data-i18n="rules.r5.h">Beobachten aufräumen</span></h4>
+            <p data-i18n="rules.r5.p">Wer einen Task beobachtet (Watcher), bekommt jede Statusänderung und jeden Kommentar in die Inbox. Tasks, die du nicht mehr verfolgen musst, <b>entfolgst du</b> — sonst geht das Wichtige zwischen fremden Updates unter und die Inbox wird nie leer.</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <h3><span class="num">02</span><span data-i18n="section.clickup">Zu finden in ClickUp</span></h3>
+      <h3><span class="num">02</span><span data-i18n="rules.routine.h3">Die Tagesroutine</span></h3>
+      <p data-i18n="rules.routine.intro">Fünf Minuten am Morgen, zehn am Abend — so greifen die Regeln aller Boards im Alltag ineinander.</p>
+      <div class="two-col" style="margin-top:12px;">
+        <div class="inout neutral">
+          <div class="label" data-i18n="rules.routine.am.label">☀️ MORGENS</div>
+          <ul>
+            <li data-i18n="rules.routine.am1">Inbox durchgehen: neue Erwähnungen, Zuweisungen und Rückfragen</li>
+            <li data-i18n="rules.routine.am2">Mini Tasks direkt erledigen und als erledigt markieren</li>
+            <li data-i18n="rules.routine.am3">Today's Worklist und Prioritätenbox prüfen — dann in dieser Reihenfolge abarbeiten</li>
+          </ul>
+        </div>
+        <div class="inout neutral">
+          <div class="label" data-i18n="rules.routine.pm.label">🌙 ABENDS</div>
+          <ul>
+            <li data-i18n="rules.routine.pm1">Inbox auf null — was noch nicht klärbar ist, pausieren</li>
+            <li data-i18n="rules.routine.pm2">Alle Rückfragen beantworten, bevor sie älter als 24 Stunden werden</li>
+            <li data-i18n="rules.routine.pm3">Status der eigenen Karten aktualisieren (in progress, blocked, done)</li>
+            <li data-i18n="rules.routine.pm4">Den nächsten Tag planen: Today's Worklist für morgen setzen, maximal ca. 10 Aufgaben</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" data-i18n="rules.routine.note">Mit eingeschränktem Account ohne MyTask Board? Dann entsteht der Tagesplan im Daily Stand-up des Team Task Boards.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">03</span><span data-i18n="rules.status.h3">Die Status — in jedem Board gleich</span></h3>
+      <div class="field-list">
+        <div class="field"><span class="fname">to do</span><span class="fdesc" data-i18n="rules.st.todo">Noch nicht begonnen.</span></div>
+        <div class="field"><span class="fname">in progress</span><span class="fdesc" data-i18n="rules.st.inprogress">Wird aktiv bearbeitet.</span></div>
+        <div class="field"><span class="fname">blocked</span><span class="fdesc" data-i18n="rules.st.blocked">Du kommst nicht weiter, weil du auf jemand anderen wartest — eine Person, einen Partner, eine Freigabe.</span></div>
+        <div class="field"><span class="fname">on hold</span><span class="fdesc" data-i18n="rules.st.onhold">Bewusst pausiert, ohne externen Blocker — du hast entschieden, später weiterzumachen.</span></div>
+        <div class="field"><span class="fname">done</span><span class="fdesc" data-i18n="rules.st.done">Fertig aus Sicht des Bearbeiters — wartet, wo vorgesehen, noch auf die Prüfung.</span></div>
+        <div class="field"><span class="fname">closed</span><span class="fdesc" data-i18n="rules.st.closed">Geprüft und abgeschlossen — verschwindet aus der aktiven Liste.</span></div>
+      </div>
+      <div class="rule-box" style="margin-top:16px; margin-bottom:0;">
+        <span class="kicker" data-i18n="rules.status.kicker">Der häufigste Stolperstein</span>
+        <span data-i18n="rules.status.rule"><b>blocked</b> heißt: Es liegt an jemand anderem. <b>on hold</b> heißt: Es liegt bewusst an dir. Faustregel: Könntest du morgen weitermachen, wenn du wolltest? Ja → on hold. Nein → blocked.</span>
+      </div>
+      <p class="note" data-i18n="rules.status.note">Wer auf closed setzen darf, regelt jedes Board selbst: Beim Prio Board und Team Task Board ist es der Supervisor, bei delegierten Tasks der, der delegiert hat.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">04</span><span data-i18n="rules.route.h3">Wohin damit?</span></h3>
+      <p data-i18n="rules.route.intro">Der schnelle Wegweiser, wenn du nicht sicher bist, wo ein Eintrag hingehört:</p>
+      <div class="route-list">
+        <div class="route"><span class="route-q" data-i18n="rules.route.1">Ein Thema, das besprochen oder entschieden werden muss</span><span class="route-arrow">→</span><span class="route-tag" data-tag="agenda" data-i18n="nav.agenda">Agenda</span></div>
+        <div class="route"><span class="route-q" data-i18n="rules.route.2">Ein Projekt, das über Tage oder Wochen läuft und ein Ziel voranbringt</span><span class="route-arrow">→</span><span class="route-tag" data-tag="prio" data-i18n="nav.prio">Prio Board</span></div>
+        <div class="route"><span class="route-q" data-i18n="rules.route.3">Eine einzelne Aufgabe, die du selbst im Blick behalten musst</span><span class="route-arrow">→</span><span class="route-tag" data-tag="mytask" data-i18n="nav.mytask">MyTask Board</span></div>
+        <div class="route"><span class="route-q" data-i18n="rules.route.4">Tagesgeschäft eines Teams — Bugfix, Setup, Routine-Check. Auch persönliche Aufgaben von Teammitgliedern ohne eigenes MyTask Board (dort ins Backlog)</span><span class="route-arrow">→</span><span class="route-tag" data-tag="team" data-i18n="nav.team">Team Task Board</span></div>
+        <div class="route"><span class="route-q" data-i18n="rules.route.5">Eine Aufgabe, die jemand anderes erledigen soll — als Mini Task oder DELTA-Task</span><span class="route-arrow">→</span><span class="route-tag" data-tag="delegate" data-i18n="nav.delegate">Delegieren</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">05</span><span data-i18n="rules.gloss.h3">Glossar</span></h3>
+      <div class="field-list">
+        <div class="field"><span class="fname">EE</span><span class="fdesc" data-i18n="rules.g.ee">Erwartetes Ergebnis — beschreibt, woran man erkennt, dass etwas wirklich fertig ist.</span></div>
+        <div class="field"><span class="fname">DELTA</span><span class="fdesc" data-i18n="rules.g.delta">Task Type für delegierte Tasks — daran erkennt jeder, dass der Task an jemanden übergeben wurde.</span></div>
+        <div class="field"><span class="fname">Mini Task</span><span class="fdesc" data-i18n="rules.g.mini">Ein zugewiesener Kommentar für einen kurzen Handgriff, z. B. „Bitte schick mir das Dokument zu“.</span></div>
+        <div class="field"><span class="fname">PRIO PLAN</span><span class="fdesc" data-i18n="rules.g.prioplan">Dropdown-Feld für den Zeithorizont: im Prio Board und MyTask Board von Today's Worklist bis This Quartal, im Team Task Board Backlog, Weekly, Today und For Review.</span></div>
+        <div class="field"><span class="fname">Assignee</span><span class="fdesc" data-i18n="rules.g.assignee">Die Person, die eine Aufgabe ausführt bzw. verantwortet.</span></div>
+        <div class="field"><span class="fname">Watcher</span><span class="fdesc" data-i18n="rules.g.watcher">Jemand, der einen Task beobachtet und deshalb jede Änderung in die Inbox bekommt.</span></div>
+        <div class="field"><span class="fname">Subtask</span><span class="fdesc" data-i18n="rules.g.subtask">Eine Teilaufgabe unter einem Task — bei Prio-Karten der Ort, an dem die eigentliche Arbeit passiert.</span></div>
+        <div class="field"><span class="fname" data-i18n="rules.g.priocard.n">Prio-Karte</span><span class="fdesc" data-i18n="rules.g.priocard">Ein Projekt im Prio Board. Sie bleibt immer beim verantwortlichen Manager, gearbeitet wird über Subtasks.</span></div>
+        <div class="field"><span class="fname">Inbox</span><span class="fdesc" data-i18n="rules.g.inbox">Die zentrale Benachrichtigungs-Ablage in ClickUp — wird jeden Tag auf null gebracht.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">06</span><span data-i18n="section.clickup">Zu finden in ClickUp</span></h3>
       <div class="path">
         <span class="crumb">🔔 INBOX</span>→
         <span class="crumb" data-i18n="rules.loc1">Glocken-Symbol oben links in der Sidebar</span>
@@ -3032,6 +3149,29 @@
       <div class="path" style="margin-top:8px;">
         <span class="crumb">💬 ZUGEWIESENE KOMMENTARE</span>→
         <span class="crumb" data-i18n="rules.loc2">Home → "Zugewiesene Kommentare"</span>
+      </div>
+      <div class="path" style="margin-top:8px;">
+        <span class="crumb">@ ERWÄHNEN</span>→
+        <span class="crumb" data-i18n="rules.loc3">Im Kommentar @ tippen und den Namen auswählen</span>
+      </div>
+      <div class="path" style="margin-top:8px;">
+        <span class="crumb">👁 BEOBACHTEN</span>→
+        <span class="crumb" data-i18n="rules.loc4">Im geöffneten Task das Watcher-Symbol</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="num">07</span><span data-i18n="donts.h3">Don'ts</span></h3>
+      <div class="inout no">
+        <div class="label" data-i18n="donts.label">✕ UNBEDINGT VERMEIDEN</div>
+        <ul>
+          <li data-i18n="rules.donts.1">Die Inbox über Tage ungelesen lassen</li>
+          <li data-i18n="rules.donts.2">Eine Rückfrage länger als 24 Stunden unbeantwortet lassen</li>
+          <li data-i18n="rules.donts.3">Einen Mini Task nur lesen, statt ihn zu erledigen und als erledigt zu markieren</li>
+          <li data-i18n="rules.donts.4">Jemanden in einem Kommentar ansprechen, ohne ihn zu erwähnen — und sich dann wundern, dass keine Antwort kommt</li>
+          <li data-i18n="rules.donts.5">Eine Erwähnung für alle, wenn es nur eine Person betrifft</li>
+          <li data-i18n="rules.donts.6">Absprachen nur mündlich oder in WhatsApp treffen, ohne sie in ClickUp festzuhalten</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -3135,7 +3275,7 @@
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
   const DEV_MODE = location.hash === '#dev';
-  const LOCKED_BOARDS = DEV_MODE ? [] : ['rules', 'team'];
+  const LOCKED_BOARDS = DEV_MODE ? [] : ['team'];
 
   function activate(board){
     panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + board));
@@ -3495,15 +3635,12 @@ const I18N = {
   "ov.eyebrow.boards": "DIE VIER BOARDS",
   "ov.rules.tag": "ALLGEMEINE REGELN",
   "ov.rules.h3": "Board-übergreifende Grundregeln",
-  "ov.rules.p": "Inbox, Antworten und zugewiesene Kommentare — die drei Dinge, die unabhängig vom Board regelmäßig abgearbeitet werden müssen.",
   "ov.rules.ex": "\"Inbox auf 0\"",
   "rules.h2": "Allgemeine Regeln von ClickUp",
-  "rules.tagline": "Kein eigenes Board — sondern drei Dinge, die board-unabhängig jeden Tag abgearbeitet werden müssen.",
   "rules.pzz.kicker": "Problem → Ziel → Zweck",
   "rules.pzz.problem": "<b>Das Problem:</b> Inbox, Antworten und zugewiesene Kommentare liegen außerhalb der vier Boards. Auch wer sein Board perfekt pflegt, verliert dort leicht den Überblick — eine Erwähnung, eine Rückfrage oder ein zugewiesener Kommentar bleibt einfach liegen, weil sie in keiner Liste auftaucht.",
   "rules.pzz.ziel": "<b>Das Ziel:</b> Inbox, Antworten und zugewiesene Kommentare werden genauso konsequent auf null abgearbeitet wie ein Board — unabhängig davon, welches Board gerade betroffen ist.",
   "rules.pzz.zweck": "<b>Der Zweck:</b> Damit nichts nur deshalb verloren geht, weil es zufällig nicht in einer Karte, sondern in einer Benachrichtigung steckte.",
-  "rules.steps.h3": "Die drei Grundregeln",
   "rules.r1.h": "Die Inbox immer abarbeiten",
   "rules.r1.p": "Die ClickUp-Inbox sammelt alles, was dich direkt betrifft: Erwähnungen, Zuweisungen, Kommentare an beobachteten Tasks, Statusänderungen. Genau wie bei \"Inbox Zero\" im E-Mail-Postfach gilt: <b>am Ende jedes Tages auf null bringen</b>. Ist etwas noch nicht klärbar, wird es <b>pausiert</b> statt einfach liegen gelassen — so bleibt die Inbox leer, ohne dass etwas untergeht. Bleibt sie tagelang ungelesen liegen, geht eine Zuweisung oder Erwähnung schlicht unter — nicht weil sie unwichtig war, sondern weil sie nie gesehen wurde.",
   "rules.r2.h": "Antworten beantworten",
@@ -3512,6 +3649,68 @@ const I18N = {
   "rules.r3.p": "Ein zugewiesener Kommentar ist ein <b>Mini Task</b>, also ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.",
   "rules.loc1": "Glocken-Symbol oben links in der Sidebar",
   "rules.loc2": "Home → \"Zugewiesene Kommentare\"",
+  "rules.tagline": "Kein eigenes Board — sondern die Grundregeln, die in jedem Board gelten: vom Grundprinzip über die Tagesroutine bis zum Glossar.",
+  "rules.steps.h3": "Die Grundregeln",
+  "ov.rules.p": "Das Grundprinzip, die Pflichtregeln für Inbox, Antworten und Erwähnungen, die Tagesroutine, Status, Wegweiser und Glossar — alles, was für jedes Board gilt.",
+  "rules.p0.kicker": "Das Grundprinzip",
+  "rules.p0.text": "<b>Was nicht in ClickUp steht, gibt es nicht.</b> Jede Aufgabe, jede Absprache und jede Entscheidung gehört in ClickUp — an den passenden Task, die passende Karte oder den passenden Agendapunkt. Was mündlich, im Chat, per WhatsApp oder per E-Mail besprochen wurde, wird nachgetragen. Rückfragen laufen als Kommentar am Task, nicht nebenher. Nur so kann jeder nachvollziehen, was vereinbart ist — auch in drei Wochen noch.",
+  "rules.r4.h": "Personen erwähnen, wenn du eine Reaktion willst",
+  "rules.r4.p": "Sprichst du in einem Kommentar eine bestimmte Person an und willst eine Reaktion — eine Antwort, eine Freigabe, eine Info —, dann <b>erwähnst du sie immer mit @Name</b>. Nur eine Erwähnung landet sicher in ihrer Inbox. <b>Bei Erwähnungen geht nichts verloren</b>; ohne Erwähnung sieht die Person deinen Kommentar nur, wenn sie den Task zufällig beobachtet oder öffnet.",
+  "rules.r4.l1": "<b>Direkt ansprechen:</b> „@Lisa, bitte schick mir bis 15 Uhr die Zahlen“ statt „kann das mal jemand machen?“",
+  "rules.r4.l2": "<b>Mehrere Personen?</b> Jede einzeln erwähnen, die etwas beitragen soll — und dazuschreiben, wer was tun soll.",
+  "rules.r4.l3": "<b>Erwähnungen für alle</b> (ganze Teams, @everyone) nur, wenn es wirklich alle betrifft — sonst füllst du die Inbox von Leuten, die nichts damit zu tun haben.",
+  "rules.r4.l4": "<b>Soll die Person etwas erledigen?</b> Dann reicht die Erwähnung nicht: Kommentar zuweisen (Mini Task) oder einen DELTA-Task anlegen — siehe Delegieren.",
+  "rules.r4.l5": "Wer erwähnt wird, antwortet <b>innerhalb von 24 Stunden</b> (Regel 2).",
+  "rules.r5.h": "Beobachten aufräumen",
+  "rules.r5.p": "Wer einen Task beobachtet (Watcher), bekommt jede Statusänderung und jeden Kommentar in die Inbox. Tasks, die du nicht mehr verfolgen musst, <b>entfolgst du</b> — sonst geht das Wichtige zwischen fremden Updates unter und die Inbox wird nie leer.",
+  "rules.routine.h3": "Die Tagesroutine",
+  "rules.routine.intro": "Fünf Minuten am Morgen, zehn am Abend — so greifen die Regeln aller Boards im Alltag ineinander.",
+  "rules.routine.am.label": "☀️ MORGENS",
+  "rules.routine.am1": "Inbox durchgehen: neue Erwähnungen, Zuweisungen und Rückfragen",
+  "rules.routine.am2": "Mini Tasks direkt erledigen und als erledigt markieren",
+  "rules.routine.am3": "Today's Worklist und Prioritätenbox prüfen — dann in dieser Reihenfolge abarbeiten",
+  "rules.routine.pm.label": "🌙 ABENDS",
+  "rules.routine.pm1": "Inbox auf null — was noch nicht klärbar ist, pausieren",
+  "rules.routine.pm2": "Alle Rückfragen beantworten, bevor sie älter als 24 Stunden werden",
+  "rules.routine.pm3": "Status der eigenen Karten aktualisieren (in progress, blocked, done)",
+  "rules.routine.pm4": "Den nächsten Tag planen: Today's Worklist für morgen setzen, maximal ca. 10 Aufgaben",
+  "rules.routine.note": "Mit eingeschränktem Account ohne MyTask Board? Dann entsteht der Tagesplan im Daily Stand-up des Team Task Boards.",
+  "rules.status.h3": "Die Status — in jedem Board gleich",
+  "rules.st.todo": "Noch nicht begonnen.",
+  "rules.st.inprogress": "Wird aktiv bearbeitet.",
+  "rules.st.blocked": "Du kommst nicht weiter, weil du auf jemand anderen wartest — eine Person, einen Partner, eine Freigabe.",
+  "rules.st.onhold": "Bewusst pausiert, ohne externen Blocker — du hast entschieden, später weiterzumachen.",
+  "rules.st.done": "Fertig aus Sicht des Bearbeiters — wartet, wo vorgesehen, noch auf die Prüfung.",
+  "rules.st.closed": "Geprüft und abgeschlossen — verschwindet aus der aktiven Liste.",
+  "rules.status.kicker": "Der häufigste Stolperstein",
+  "rules.status.rule": "<b>blocked</b> heißt: Es liegt an jemand anderem. <b>on hold</b> heißt: Es liegt bewusst an dir. Faustregel: Könntest du morgen weitermachen, wenn du wolltest? Ja → on hold. Nein → blocked.",
+  "rules.status.note": "Wer auf closed setzen darf, regelt jedes Board selbst: Beim Prio Board und Team Task Board ist es der Supervisor, bei delegierten Tasks der, der delegiert hat.",
+  "rules.route.h3": "Wohin damit?",
+  "rules.route.intro": "Der schnelle Wegweiser, wenn du nicht sicher bist, wo ein Eintrag hingehört:",
+  "rules.route.1": "Ein Thema, das besprochen oder entschieden werden muss",
+  "rules.route.2": "Ein Projekt, das über Tage oder Wochen läuft und ein Ziel voranbringt",
+  "rules.route.3": "Eine einzelne Aufgabe, die du selbst im Blick behalten musst",
+  "rules.route.4": "Tagesgeschäft eines Teams — Bugfix, Setup, Routine-Check. Auch persönliche Aufgaben von Teammitgliedern ohne eigenes MyTask Board (dort ins Backlog)",
+  "rules.route.5": "Eine Aufgabe, die jemand anderes erledigen soll — als Mini Task oder DELTA-Task",
+  "rules.gloss.h3": "Glossar",
+  "rules.g.ee": "Erwartetes Ergebnis — beschreibt, woran man erkennt, dass etwas wirklich fertig ist.",
+  "rules.g.delta": "Task Type für delegierte Tasks — daran erkennt jeder, dass der Task an jemanden übergeben wurde.",
+  "rules.g.mini": "Ein zugewiesener Kommentar für einen kurzen Handgriff, z. B. „Bitte schick mir das Dokument zu“.",
+  "rules.g.prioplan": "Dropdown-Feld für den Zeithorizont: im Prio Board und MyTask Board von Today's Worklist bis This Quartal, im Team Task Board Backlog, Weekly, Today und For Review.",
+  "rules.g.assignee": "Die Person, die eine Aufgabe ausführt bzw. verantwortet.",
+  "rules.g.watcher": "Jemand, der einen Task beobachtet und deshalb jede Änderung in die Inbox bekommt.",
+  "rules.g.subtask": "Eine Teilaufgabe unter einem Task — bei Prio-Karten der Ort, an dem die eigentliche Arbeit passiert.",
+  "rules.g.priocard.n": "Prio-Karte",
+  "rules.g.priocard": "Ein Projekt im Prio Board. Sie bleibt immer beim verantwortlichen Manager, gearbeitet wird über Subtasks.",
+  "rules.g.inbox": "Die zentrale Benachrichtigungs-Ablage in ClickUp — wird jeden Tag auf null gebracht.",
+  "rules.loc3": "Im Kommentar @ tippen und den Namen auswählen",
+  "rules.loc4": "Im geöffneten Task das Watcher-Symbol",
+  "rules.donts.1": "Die Inbox über Tage ungelesen lassen",
+  "rules.donts.2": "Eine Rückfrage länger als 24 Stunden unbeantwortet lassen",
+  "rules.donts.3": "Einen Mini Task nur lesen, statt ihn zu erledigen und als erledigt zu markieren",
+  "rules.donts.4": "Jemanden in einem Kommentar ansprechen, ohne ihn zu erwähnen — und sich dann wundern, dass keine Antwort kommt",
+  "rules.donts.5": "Eine Erwähnung für alle, wenn es nur eine Person betrifft",
+  "rules.donts.6": "Absprachen nur mündlich oder in WhatsApp treffen, ohne sie in ClickUp festzuhalten",
   "ov.delegate.tag": "PRAXIS",
   "ov.h1": "So nutzen wir ClickUp",
   "ov.lede": "Jedes Board hat einen klaren Job. Wenn alle denselben Eintrag ins gleiche Board packen, bleibt ClickUp für alle nutzbar. Hier steht, wofür wir jedes Board nutzen — für die genaue Anleitung einfach auf eine Karte klicken.",
@@ -4109,15 +4308,12 @@ const I18N = {
   "ov.eyebrow.boards": "THE FOUR BOARDS",
   "ov.rules.tag": "GENERAL RULES",
   "ov.rules.h3": "Cross-board basic rules",
-  "ov.rules.p": "Inbox, replies, and assigned comments — the three things that need to be processed regularly, regardless of which board they touch.",
   "ov.rules.ex": "\"Inbox at 0\"",
   "rules.h2": "General Rules of ClickUp",
-  "rules.tagline": "Not a board of its own — three things that get processed every day, independent of any board.",
   "rules.pzz.kicker": "Problem → Goal → Purpose",
   "rules.pzz.problem": "<b>The problem:</b> Inbox, replies, and assigned comments live outside the four boards. Even someone who keeps their board perfectly tidy can easily lose track there — a mention, a question, or an assigned comment just sits, simply because it never shows up in a list.",
   "rules.pzz.ziel": "<b>The goal:</b> Inbox, replies, and assigned comments get worked down to zero just as consistently as a board — no matter which board they happen to relate to.",
   "rules.pzz.zweck": "<b>The purpose:</b> So nothing gets lost just because it happened to live in a notification instead of a card.",
-  "rules.steps.h3": "The three basic rules",
   "rules.r1.h": "Always clear the Inbox",
   "rules.r1.p": "ClickUp's Inbox collects everything that directly concerns you: mentions, assignments, comments on watched tasks, status changes. Exactly like \"Inbox Zero\" for email: <b>bring it down to zero by the end of every day</b>. If something isn't ready to resolve yet, <b>snooze it</b> instead of just leaving it there — that keeps the Inbox empty without anything falling through. Leave it unread for days, and an assignment or mention simply disappears — not because it didn't matter, but because it was never seen.",
   "rules.r2.h": "Answer replies",
@@ -4126,6 +4322,68 @@ const I18N = {
   "rules.r3.p": "An assigned comment is a <b>mini task</b>, i.e. a small delegated task — not its own card in a board, but with a clear assignee and the expectation that it gets done and checked off. It deserves the same discipline as any other delegated item: handle it and mark it resolved in ClickUp, not just read it.",
   "rules.loc1": "Bell icon, top left in the sidebar",
   "rules.loc2": "Home → \"Assigned Comments\"",
+  "rules.tagline": "Not a board of its own — the ground rules that apply in every board: from the core principle to the daily routine and the glossary.",
+  "rules.steps.h3": "The ground rules",
+  "ov.rules.p": "The core principle, the rules for Inbox, replies and mentions, the daily routine, statuses, a signpost and a glossary — everything that applies to every board.",
+  "rules.p0.kicker": "The core principle",
+  "rules.p0.text": "<b>If it isn't in ClickUp, it doesn't exist.</b> Every task, every agreement and every decision belongs in ClickUp — on the right task, card or agenda point. Anything discussed verbally, in chat, on WhatsApp or by email gets added afterwards. Follow-up questions go as a comment on the task, not on the side. That's the only way everyone can see what was agreed — even three weeks later.",
+  "rules.r4.h": "Mention people when you want a reaction",
+  "rules.r4.p": "If you address a specific person in a comment and want a reaction — an answer, an approval, a piece of information — <b>always mention them with @name</b>. Only a mention reliably lands in their Inbox. <b>Nothing gets lost with a mention</b>; without one, the person only sees your comment if they happen to watch or open the task.",
+  "rules.r4.l1": "<b>Address them directly:</b> “@Lisa, please send me the numbers by 3 pm” instead of “can someone take care of this?”",
+  "rules.r4.l2": "<b>Several people?</b> Mention each one who needs to contribute — and say who should do what.",
+  "rules.r4.l3": "<b>Mentions for everyone</b> (whole teams, @everyone) only when it truly concerns everyone — otherwise you fill the Inbox of people who have nothing to do with it.",
+  "rules.r4.l4": "<b>Should the person get something done?</b> Then a mention isn't enough: assign the comment (mini task) or create a DELTA task — see Delegating.",
+  "rules.r4.l5": "Whoever is mentioned replies <b>within 24 hours</b> (rule 2).",
+  "rules.r5.h": "Clean up what you watch",
+  "rules.r5.p": "Watching a task means every status change and every comment lands in your Inbox. <b>Unwatch</b> tasks you no longer need to follow — otherwise the important things drown in other people's updates and your Inbox never gets empty.",
+  "rules.routine.h3": "The daily routine",
+  "rules.routine.intro": "Five minutes in the morning, ten in the evening — this is how the rules of all boards fit together day to day.",
+  "rules.routine.am.label": "☀️ MORNING",
+  "rules.routine.am1": "Go through the Inbox: new mentions, assignments and questions",
+  "rules.routine.am2": "Do mini tasks right away and mark them resolved",
+  "rules.routine.am3": "Check Today's Worklist and the priority box — then work through them in that order",
+  "rules.routine.pm.label": "🌙 EVENING",
+  "rules.routine.pm1": "Inbox to zero — snooze anything that can't be resolved yet",
+  "rules.routine.pm2": "Answer every question before it gets older than 24 hours",
+  "rules.routine.pm3": "Update the status of your own cards (in progress, blocked, done)",
+  "rules.routine.pm4": "Plan the next day: set Today's Worklist for tomorrow, about 10 tasks max",
+  "rules.routine.note": "Restricted account without a MyTask Board? Then the day's plan is set in the Team Task Board's daily stand-up.",
+  "rules.status.h3": "Statuses — the same in every board",
+  "rules.st.todo": "Not started yet.",
+  "rules.st.inprogress": "Being actively worked on.",
+  "rules.st.blocked": "You can't continue because you're waiting on someone else — a person, a partner, an approval.",
+  "rules.st.onhold": "Deliberately paused, no external blocker — you've decided to continue later.",
+  "rules.st.done": "Finished from the doer's point of view — waiting for review where that applies.",
+  "rules.st.closed": "Reviewed and completed — disappears from the active list.",
+  "rules.status.kicker": "The most common mix-up",
+  "rules.status.rule": "<b>blocked</b> means: it's down to someone else. <b>on hold</b> means: it's deliberately down to you. Rule of thumb: could you continue tomorrow if you wanted to? Yes → on hold. No → blocked.",
+  "rules.status.note": "Who may set closed is defined per board: on the Prio Board and Team Task Board it's the supervisor, for delegated tasks it's the person who delegated.",
+  "rules.route.h3": "Where does it go?",
+  "rules.route.intro": "The quick signpost when you're not sure where an entry belongs:",
+  "rules.route.1": "A topic that needs discussing or deciding",
+  "rules.route.2": "A project that runs over days or weeks and moves a goal forward",
+  "rules.route.3": "A single task you need to keep track of yourself",
+  "rules.route.4": "A team's day-to-day work — bug fix, setup, routine check. Also personal tasks of team members without their own MyTask Board (into Backlog there)",
+  "rules.route.5": "A task someone else should do — as a mini task or a DELTA task",
+  "rules.gloss.h3": "Glossary",
+  "rules.g.ee": "Expected result — describes how you can tell something is really done.",
+  "rules.g.delta": "Task type for delegated tasks — shows everyone the task has been handed to someone.",
+  "rules.g.mini": "An assigned comment for a quick one-step job, e.g. “Please send me the document”.",
+  "rules.g.prioplan": "Dropdown field for the time horizon: Today's Worklist to This Quartal on the Prio Board and MyTask Board; Backlog, Weekly, Today and For Review on the Team Task Board.",
+  "rules.g.assignee": "The person who carries out or owns a task.",
+  "rules.g.watcher": "Someone who watches a task and therefore gets every change in their Inbox.",
+  "rules.g.subtask": "A sub-item under a task — on Prio cards, where the actual work happens.",
+  "rules.g.priocard.n": "Prio card",
+  "rules.g.priocard": "A project on the Prio Board. It always stays with the responsible manager; the work happens in subtasks.",
+  "rules.g.inbox": "ClickUp's central notification tray — cleared to zero every day.",
+  "rules.loc3": "Type @ in a comment and pick the name",
+  "rules.loc4": "The watcher icon in the open task",
+  "rules.donts.1": "Leaving the Inbox unread for days",
+  "rules.donts.2": "Leaving a question unanswered for more than 24 hours",
+  "rules.donts.3": "Just reading a mini task instead of doing it and marking it resolved",
+  "rules.donts.4": "Addressing someone in a comment without mentioning them — and then wondering why no answer comes",
+  "rules.donts.5": "Mentioning everyone when it only concerns one person",
+  "rules.donts.6": "Making agreements only verbally or on WhatsApp without recording them in ClickUp",
   "ov.delegate.tag": "PRACTICE",
   "ov.h1": "How we use ClickUp",
   "ov.lede": "Every board has one clear job. When everyone puts the same kind of entry into the same board, ClickUp stays usable for everyone. Here's what each board is for — click a card for the full guide.",
