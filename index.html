@@ -932,6 +932,50 @@
   .howto-teaser .cta span{ transition:transform .15s ease; }
   .howto-teaser:hover .cta span{ transform:translateX(3px); }
 
+  .decide{ display:flex; flex-direction:column; gap:10px; }
+  .decide-q{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600; font-size:14.5px;
+  }
+  .decide-n{
+    width:24px; height:24px; border-radius:50%;
+    background:var(--delegate); color:#fff;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:12px; flex-shrink:0;
+  }
+  .decide-row{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    margin:0 0 6px 34px;
+  }
+  .decide-a{
+    background:var(--delegate-soft);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:13.5px;
+    line-height:1.45;
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .decide-a b{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.04em;
+    color:var(--delegate);
+    text-transform:uppercase;
+  }
+  .decide-a.next{ background:var(--paper); border:1px dashed var(--line); }
+  .role-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px; font-weight:600;
+    padding:2px 8px; border-radius:20px;
+    background:var(--paper); border:1px solid var(--line);
+    color:var(--ink-soft);
+    margin-left:4px; vertical-align:middle;
+  }
+  .decide-note{ margin:-2px 0 4px 34px; padding-top:0; border-top:none; }
+  @media (max-width:760px){
+    .decide-row{ grid-template-columns:1fr; margin-left:0; }
+  }
+
   .fname-inline{
     font-family:'IBM Plex Mono', monospace;
     font-size:11.5px;
@@ -1306,7 +1350,7 @@
     <nav class="tabs">
       <button class="tab-btn" data-board="overview"><span class="dot"></span><span data-i18n="nav.overview">Übersicht</span></button>
       <button class="tab-btn" data-board="rules"><span class="dot"></span><span data-i18n="nav.rules">Allgemeine Regeln</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
-      <button class="tab-btn" data-board="delegate"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span><span class="wip-emoji" aria-hidden="true">🚧</span></button>
+      <button class="tab-btn" data-board="delegate"><span class="dot"></span><span data-i18n="nav.delegate">Delegieren</span></button>
       <button class="tab-btn" data-board="agenda"><span class="dot"></span><span data-i18n="nav.agenda">Agenda</span></button>
       <button class="tab-btn" data-board="prio"><span class="dot"></span><span data-i18n="nav.prio">Prio Board</span></button>
       <button class="tab-btn" data-board="mytask"><span class="dot"></span><span data-i18n="nav.mytask">MyTask Board</span></button>
@@ -1336,7 +1380,6 @@
       <div class="howto-teaser" data-board="delegate">
         <div class="howto-text">
           <span class="tag" data-i18n="ov.delegate.tag">PRAXIS</span>
-          <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span>
           <h3 data-i18n="ov.delegate.h3">Wie delegiere ich Tasks?</h3>
           <p data-i18n="ov.delegate.p">Board ist das eine — richtig delegieren das andere. Kurze Anleitung, damit nichts zwischen den Stühlen landet.</p>
         </div>
@@ -2721,15 +2764,15 @@
         </svg>
       </div>
       <div>
-        <h2><span data-i18n="delegate.h2">Wie delegiere ich Tasks?</span> <span class="wip-badge" data-i18n="wip.badge">🚧 In Bearbeitung</span></h2>
+        <h2><span data-i18n="delegate.h2">Wie delegiere ich Tasks?</span></h2>
         <p data-i18n="delegate.tagline">Kein eigenes Board — sondern die Praxis, die in jedem Board gleich funktioniert.</p>
       </div>
     </div>
 
     <div class="quote-block" data-accent="delegate">
       <span class="quote-mark">"</span>
-      <p class="quote-text">Surround yourself with great people; delegate authority; get out of the way.</p>
-      <p class="quote-author">— Ronald Reagan</p>
+      <p class="quote-text">If you want to do a few small things right, do them yourself. If you want to do great things and make a big impact, learn to delegate.</p>
+      <p class="quote-author">— John C. Maxwell</p>
     </div>
 
     <div class="rule-box sky">
@@ -2740,65 +2783,140 @@
     </div>
 
     <div class="card">
-      <h3 data-i18n="delegate.steps.h3">In 5 Schritten</h3>
-      <div class="chain" style="margin-bottom:6px;">
-        <div class="step"><span class="n">1</span><span data-i18n="delegate.step1">Richtiges Board wählen</span></div>
-        <span class="arrow">→</span>
-        <div class="step"><span class="n">2</span><span data-i18n="delegate.step2">Assignee setzen</span></div>
-        <span class="arrow">→</span>
-        <div class="step"><span class="n">3</span><span data-i18n="delegate.step3">Klar beschreiben + Deadline</span></div>
-      </div>
-      <div class="chain" style="margin-top:12px;">
-        <div class="step"><span class="n">4</span><span data-i18n="delegate.step4">Im Blick behalten</span></div>
-        <span class="arrow">→</span>
-        <div class="step"><span class="n">5</span><span data-i18n="delegate.step5">Nachfassen statt neu anlegen</span></div>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="card">
-        <h3 data-i18n="delegate.d1.h3">1 · Richtiges Board</h3>
-        <p data-i18n="delegate.d1.p">Team-Aufgabe, die ins Tagesgeschäft einer Abteilung gehört? → <b>Team Task Board</b>. Bleibt es eher deine persönliche Merkaufgabe, die du nur an jemanden weitergibst? → <b>MyTask Board</b>.</p>
-      </div>
-      <div class="card">
-        <h3 data-i18n="delegate.d2.h3">2 · Assignee setzen</h3>
-        <p data-i18n="delegate.d2.p">Immer die Person eintragen, die die Aufgabe wirklich <b>ausführt</b> — nicht dich selbst. Ohne Assignee bleibt eine Aufgabe für alle unsichtbar, die nicht aktiv in der Liste suchen.</p>
+      <h3 data-i18n="delegate.flow.h3">Der Entscheidungsweg</h3>
+      <div class="decide">
+        <div class="decide-q"><span class="decide-n">1</span><span data-i18n="delegate.flow.q1">Ist es ein Mini Task?</span></div>
+        <div class="decide-row">
+          <div class="decide-a"><b data-i18n="delegate.flow.yes">Ja</b><span data-i18n="delegate.flow.a1yes">Kommentar der Person zuweisen</span></div>
+          <div class="decide-a next"><b data-i18n="delegate.flow.no">Nein</b><span data-i18n="delegate.flow.a1no">Eigenen Task vom Typ DELTA schreiben → weiter mit Frage 2</span></div>
+        </div>
+        <p class="note decide-note" data-i18n="delegate.flow.note">Unsicher, ob Mini Task oder Task? Dann lieber einen eigenen Task.</p>
+        <div class="decide-q"><span class="decide-n">2</span><span data-i18n="delegate.flow.q2">Gehört der Task zu einem Projekt bzw. einer Prio-Karte?</span></div>
+        <div class="decide-row">
+          <div class="decide-a"><b data-i18n="delegate.flow.yes">Ja</b><span data-i18n="delegate.flow.a2yes">Als Subtask an der Prio-Karte anlegen und zuweisen</span></div>
+          <div class="decide-a"><b data-i18n="delegate.flow.no">Nein</b><span data-i18n="delegate.flow.a2no">Im eigenen MyTask Board anlegen und zuweisen</span></div>
+        </div>
       </div>
     </div>
 
-    <div class="two-col">
-      <div class="card">
-        <h3 data-i18n="delegate.d3.h3">3 · Klar beschreiben + Deadline</h3>
-        <p data-i18n="delegate.d3.p">Eine Zeile reicht: was ist zu tun, was ist das Ergebnis. Ist ein Datum wichtig, immer ein <b>Fälligkeitsdatum</b> setzen — sonst gibt es keinen Anhaltspunkt, wann nachgefragt werden darf.</p>
+    <div class="card">
+      <h3 data-i18n="delegate.w1.h3">1 · Mini Task: Kommentar zuweisen</h3>
+      <p data-i18n="delegate.w1.p">Zugewiesene Kommentare sind <b>Mini Tasks</b> — kurze Handgriffe wie „Bitte schick mir das Dokument zu“ oder „Informiere den Rainer“. Du schreibst den Kommentar und weist ihn direkt der Person zu. Ein zugewiesener Kommentar heißt immer: <b>Hier ist etwas zu erledigen.</b> Die Person erledigt es und markiert den Kommentar als erledigt.</p>
+      <p class="note" data-i18n="delegate.w1.note">Wichtig: Eine normale Antwort bzw. ein normaler Kommentar ist <b>keine</b> zu erledigende Aufgabe — erst die Zuweisung macht daraus eine.</p>
+      <div class="two-col" style="margin-top:16px;">
+        <div class="inout yes">
+          <div class="label" data-i18n="delegate.mini.yes.label">✓ DAS SIND MINI TASKS</div>
+          <ul>
+            <li data-i18n="delegate.mini.yes1">„Bitte schick mir das Dokument zu“</li>
+            <li data-i18n="delegate.mini.yes2">„Informiere den Rainer über den neuen Termin“</li>
+            <li data-i18n="delegate.mini.yes3">„Leite die Rechnung an die Buchhaltung weiter“</li>
+            <li data-i18n="delegate.mini.yes4">„Schick mir bitte den Link zur Präsentation“</li>
+            <li data-i18n="delegate.mini.yes5"><b>Ein einzelner Handgriff, in wenigen Minuten erledigt, ohne Rückfragen</b></li>
+          </ul>
+        </div>
+        <div class="inout no">
+          <div class="label" data-i18n="delegate.mini.no.label">✕ DAS SIND KEINE MINI TASKS</div>
+          <ul>
+            <li data-i18n="delegate.mini.no1">„Bereite die Präsentation fürs Quartalsmeeting vor“</li>
+            <li data-i18n="delegate.mini.no2">„Prüf den Vertrag mit Partner X“</li>
+            <li data-i18n="delegate.mini.no3">„Recherchiere drei Anbieter für ein neues CRM“</li>
+            <li data-i18n="delegate.mini.no4"><b>Alles mit mehreren Schritten, einer Deadline oder einem Ergebnis, das man erst definieren muss</b></li>
+          </ul>
+        </div>
       </div>
-      <div class="card">
-        <h3 data-i18n="delegate.d4.h3">4 · Im Blick behalten</h3>
-        <p data-i18n="delegate.d4.p">Willst du selbst den Überblick behalten? Setze bei Prio-Board-Projekten das Feld <span class="fname-inline">PRIO PLAN</span> auf <b>&gt;&gt;&gt;DELEGATED&lt;&lt;&lt;</b>, oder lass dir die Aufgabe in deinem eigenen MyTask Board anzeigen.</p>
+      <div class="rule-box" style="margin-top:16px; margin-bottom:0;">
+        <span class="kicker" data-i18n="delegate.mini.doubt.kicker">Im Zweifel</span>
+        <span data-i18n="delegate.mini.doubt">Bist du dir nicht sicher, ob es ein Mini Task oder ein Task ist, schreib lieber <b>einen eigenen Task</b>. Der hat ein sauberes EE — und die Chance ist größer, dass du auch bekommst, was du delegiert hast.</span>
       </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="delegate.w2.h3">2 · Eigenen Task zuweisen</h3>
+      <p data-i18n="delegate.w2.p">Alles, was kein Mini Task ist, bekommt einen <b>eigenen Task</b>, der der Person zugewiesen wird, die ihn ausführt. So sieht ein delegierter Task aus:</p>
+      <div class="field-list" style="margin-top:12px;">
+        <div class="field"><span class="fname">Task Type</span><span class="fdesc" data-i18n="delegate.fd.type">Immer <b>DELTA</b> — daran erkennt jeder sofort, dass es ein delegierter Task ist.</span></div>
+        <div class="field"><span class="fname" data-i18n="field.titel">Titel</span><span class="fdesc" data-i18n="delegate.fd.titel">Kurz und konkret, verständlich ohne die Karte zu öffnen.</span></div>
+        <div class="field"><span class="fname" data-i18n="field.assignee">Assignee</span><span class="fdesc" data-i18n="delegate.fd.assignee">Die Person, die den Task wirklich ausführt.</span></div>
+        <div class="field"><span class="fname" data-i18n="delegate.fn.kontext">Kontext</span><span class="fdesc" data-i18n="delegate.fd.kontext">Immer mitschreiben: Worum geht es, warum ist es wichtig, wo liegen die Unterlagen? Mit Kontext kann der Empfänger <b>bessere Qualität</b> liefern.</span></div>
+        <div class="field"><span class="fname">EE</span><span class="fdesc" data-i18n="delegate.fd.ee">Das Erwartete Ergebnis — woran beide erkennen, dass der Task wirklich fertig ist.</span></div>
+        <div class="field"><span class="fname" data-i18n="delegate.fn.due">Fälligkeitsdatum</span><span class="fdesc" data-i18n="delegate.fd.due">Wenn ein Termin dranhängt — sonst gibt es keinen Anhaltspunkt, wann nachgefragt werden darf.</span></div>
+      </div>
+      <p style="margin-top:16px;" data-i18n="delegate.w2.where">Wo du den Task anlegst, hängt davon ab, ob er zu einem Projekt gehört:</p>
+      <div class="two-col" style="margin-top:10px;">
+        <div class="card" style="margin-bottom:0; background:var(--paper);">
+          <h3 data-i18n="delegate.w2a.h3">2a · Task gehört zu einem Projekt</h3>
+          <p data-i18n="delegate.w2a.p">Ist der Task Teil eines Projekts bzw. einer Prio-Karte — auch eine Prio-Karte ist ein Projekt —, legst du ihn als <b>Subtask an der Prio-Karte</b> an und weist ihn der Person zu. Wer den Task zuweist, ist dabei automatisch immer der <b>Projektmanager bzw. Manager der Prio-Karte</b>. Die Prio-Karte selbst bleibt bei dir.</p>
+        </div>
+        <div class="card" style="margin-bottom:0; background:var(--paper);">
+          <h3 data-i18n="delegate.w2b.h3">2b · Task ohne Projekt</h3>
+          <p data-i18n="delegate.w2b.p">Gehört die Aufgabe zu keinem Projekt, schreibst du sie <b>in dein eigenes MyTask Board</b> und weist sie dort der entsprechenden Person zu. So bleibt sie bei dir sichtbar, während die andere Person daran arbeitet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 data-i18n="delegate.w3.h3">3 · Nach dem Delegieren</h3>
+      <div class="steps-vertical">
+        <div class="step-v">
+          <span class="sv-num">1</span>
+          <div>
+            <h4><span data-i18n="delegate.w3.s1.h">Annahme bestätigen</span> <span class="role-tag" data-i18n="delegate.role.recv">Empfänger</span> <span class="pill on" style="margin-left:4px;" data-i18n="prio.n3.badge">Pflicht</span></h4>
+            <p data-i18n="delegate.w3.s1.p">Der Empfänger bestätigt den Task <b>innerhalb von 24 Stunden</b> per Kommentar — oder stellt dort seine Rückfragen. So weißt du, dass der Task angekommen ist. Es ist dieselbe 24-Stunden-Regel wie bei den Allgemeinen Regeln.</p>
+          </div>
+        </div>
+        <div class="step-v">
+          <span class="sv-num">2</span>
+          <div>
+            <h4><span data-i18n="delegate.w3.s2.h">Im Blick behalten</span> <span class="role-tag" data-i18n="delegate.role.you">Du</span></h4>
+            <p data-i18n="delegate.w3.s2.p">Leg dir in ClickUp eine gespeicherte Ansicht an: <b>Task Type = DELTA</b>, erstellt von dir, geschlossene Tasks ausgeblendet. Die gehst du <b>einmal pro Woche</b> durch — am besten vor dem Weekly Manager Meeting. So siehst du alle delegierten Tasks auf einen Blick, auch die Subtasks an deinen Prio-Karten.</p>
+          </div>
+        </div>
+        <div class="step-v">
+          <span class="sv-num">3</span>
+          <div>
+            <h4><span data-i18n="delegate.w3.s3.h">Fertig melden</span> <span class="role-tag" data-i18n="delegate.role.recv">Empfänger</span></h4>
+            <p data-i18n="delegate.w3.s3.p">Ist der Task erledigt, setzt der Empfänger den Status auf <b>done</b> und hinterlässt das Ergebnis als Kommentar am Task.</p>
+          </div>
+        </div>
+        <div class="step-v">
+          <span class="sv-num">4</span>
+          <div>
+            <h4><span data-i18n="delegate.w3.s4.h">Prüfen und schließen</span> <span class="role-tag" data-i18n="delegate.role.you">Du</span> <span class="pill on" style="margin-left:4px;" data-i18n="prio.n3.badge">Pflicht</span></h4>
+            <p data-i18n="delegate.w3.s4.p">Du prüfst das Ergebnis gegen das EE. Passt es, setzt du den Task auf <b>closed</b>. Passt es nicht, schreibst du als Kommentar, was fehlt, und setzt ihn zurück auf <b>in progress</b>. Schließen darf immer nur der, der delegiert hat — nie der Empfänger selbst.</p>
+          </div>
+        </div>
+      </div>
+      <p class="note" data-i18n="delegate.w3.mininote">Und bei Mini Tasks? Ein zugewiesener Kommentar landet beim Empfänger in der Inbox und unter „Zugewiesene Kommentare“. Laut den Allgemeinen Regeln wird die Inbox jeden Tag bis Feierabend auf null gebracht — auf Mini Tasks kannst du dich also verlassen. Ist er erledigt, markiert der Empfänger den Kommentar als erledigt.</p>
     </div>
 
     <div class="two-col">
       <div class="inout yes">
         <div class="label" data-i18n="delegate.clean.label">✓ SO WIRD ES SAUBER</div>
         <ul>
-          <li data-i18n="delegate.clean1">Ein Assignee, eine klare Aufgabe, ein Fälligkeitsdatum</li>
-          <li data-i18n="delegate.clean2">Rückfragen als Kommentar am Task, nicht per Chat nebenher</li>
-          <li data-i18n="delegate.clean3">Status erst auf "done"/"closed", wenn es wirklich fertig ist</li>
+          <li data-i18n="delegate.clean1">Mini Task → zugewiesener Kommentar, alles andere → eigener Task vom Typ DELTA</li>
+          <li data-i18n="delegate.clean5">Jeder delegierte Task mit Kontext und sauberem EE</li>
+          <li data-i18n="delegate.clean6">Delegierte Tasks einmal pro Woche über die DELTA-Ansicht durchgehen</li>
+          <li data-i18n="delegate.clean2">Projektaufgaben als Subtask an der Prio-Karte, alles andere im eigenen MyTask Board</li>
+          <li data-i18n="delegate.clean3">Rückfragen als Kommentar am Task, nicht per Chat nebenher</li>
+          <li data-i18n="delegate.clean4">Status erst auf "done"/"closed", wenn es wirklich fertig ist</li>
         </ul>
       </div>
       <div class="inout no">
         <div class="label" data-i18n="delegate.chaos.label">✕ DAS FÜHRT ZU CHAOS</div>
         <ul>
-          <li data-i18n="delegate.chaos1">Aufgabe ohne Assignee "irgendwo" ins Board werfen</li>
-          <li data-i18n="delegate.chaos2">Für jede Rückfrage einen neuen Task anlegen</li>
+          <li data-i18n="delegate.chaos4">Eine Aufgabe als normalen Kommentar schreiben, ohne ihn zuzuweisen — dann weiß niemand, dass etwas zu tun ist</li>
+          <li data-i18n="delegate.chaos6">Eine größere Aufgabe als Mini Task in einem Kommentar verstecken</li>
+          <li data-i18n="delegate.chaos7">Einen Task ohne Kontext delegieren — dann muss der Empfänger raten, was gemeint ist</li>
+          <li data-i18n="delegate.chaos5">Projektaufgaben lose ins MyTask Board legen statt als Subtask an die Prio-Karte</li>
           <li data-i18n="delegate.chaos3">Mündlich delegieren, ohne es in ClickUp festzuhalten</li>
+          <li data-i18n="delegate.chaos8">Als Empfänger den delegierten Task selbst auf „closed“ setzen</li>
         </ul>
       </div>
     </div>
 
     <button type="button" class="more-examples-link" id="toggleExamplesDelegate">
       <div class="mel-text">
-        <h4 data-i18n="delegate.moreex.h4">3 gute & 3 schlechte Delegations-Nachrichten ansehen</h4>
+        <h4 data-i18n="delegate.moreex.h4">3 gute & 3 schlechte Delegationen ansehen</h4>
         <p data-i18n="delegate.moreex.p">Mit Begründung, woran man eine schwache Delegation erkennt.</p>
       </div>
       <span class="mel-arrow">→</span>
@@ -2809,31 +2927,41 @@
         <h4 data-i18n="ex.goodhead.generic">✓ Gute Beispiele</h4>
       </div>
       <div class="ex-card good">
-        <div class="ex-top"><span class="ex-num">1</span><h5 data-i18n="ex.dg1.title">"Kannst du bis Freitag 12 Uhr den Payment-Flow testen? EE: alle drei Testkarten laufen durch, Ergebnis als Kommentar an der Karte."</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg1.why">Deadline, EE und Ort für die Rückmeldung sind gleich mitgeliefert.</span></div>
+        <div class="ex-top"><span class="ex-num">1</span><h5 data-i18n="ex.dg1.title">„Bitte schick mir bis 15 Uhr die aktuelle Preisliste als PDF.“</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.dg1.art">Zugewiesener Kommentar an Lisa</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg1.why">Ein einzelner Handgriff, als klare Anweisung formuliert und direkt zugewiesen — ein echter Mini Task.</span></div>
       </div>
       <div class="ex-card good">
-        <div class="ex-top"><span class="ex-num">2</span><h5 data-i18n="ex.dg2.title">"Du bist jetzt Assignee für 'SSL-Zertifikat erneuern' — alle Details stehen in der Karte."</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg2.why">Übergabe ist dokumentiert, nicht nur mündlich gesagt.</span></div>
+        <div class="ex-top"><span class="ex-num">2</span><h5 data-i18n="ex.dg2.title">Angebot von Anbieter X mit unseren aktuellen Konditionen vergleichen</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.dg2.art">Task Type DELTA im eigenen MyTask Board, zugewiesen an Tomas</span></div>
+        <div class="ex-field"><span class="flabel" data-i18n="delegate.fn.kontext">Kontext</span><span data-i18n="ex.dg2.ctx">Wir verhandeln nächste Woche neu. Unsere Konditionen liegen im Ordner „Einkauf 2026“.</span></div>
+        <div class="ex-field"><span class="flabel">EE</span><span data-i18n="ex.dg2.ee">Vergleichstabelle mit Preis, Laufzeit und Kündigungsfrist als Kommentar an der Karte.</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg2.why">Kein Projekt, also im eigenen MyTask Board. Mit Kontext und EE weiß der Empfänger, warum, womit und wann er fertig ist.</span></div>
       </div>
       <div class="ex-card good">
-        <div class="ex-top"><span class="ex-num">3</span><h5 data-i18n="ex.dg3.title">"Ich hab dir eine Karte mit dem EE angelegt — meld dich dort, falls was unklar ist."</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg3.why">Schriftlich und nachvollziehbar, auch für Dritte später noch.</span></div>
+        <div class="ex-top"><span class="ex-num">3</span><h5 data-i18n="ex.dg3.title">Payment-Flow mit drei Testkarten testen</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.dg3.art">DELTA-Subtask an der Prio-Karte „MVP-Launch für neue Marke“, zugewiesen an Lukas</span></div>
+        <div class="ex-field"><span class="flabel" data-i18n="delegate.fn.kontext">Kontext</span><span data-i18n="ex.dg3.ctx">Der Launch ist am Monatsersten, die Testkarten stehen in der Beschreibung der Prio-Karte.</span></div>
+        <div class="ex-field"><span class="flabel">EE</span><span data-i18n="ex.dg3.ee">Alle drei Testkarten laufen durch, Ergebnis als Kommentar am Subtask.</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.good">Warum gut</b><span data-i18n="ex.dg3.why">Gehört zum Projekt, also als Subtask an der Prio-Karte. Die Prio-Karte selbst bleibt beim Manager.</span></div>
       </div>
       <div class="ex-section-head bad">
         <h4 data-i18n="ex.badhead.generic">✕ Schlechte Beispiele</h4>
       </div>
       <div class="ex-card bad">
-        <div class="ex-top"><span class="ex-num">1</span><h5 data-i18n="ex.db1.title">"Kannst du dich kurz um die Landingpage kümmern?"</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db1.why">Kein EE, keine Deadline, keine Karte — nichts, worauf man später zurückgreifen kann.</span></div>
+        <div class="ex-top"><span class="ex-num">1</span><h5 data-i18n="ex.db1.title">„Jemand müsste mal die Rechnung an die Buchhaltung schicken.“</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.db1.art">Normaler Kommentar, niemandem zugewiesen</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db1.why">Ohne Zuweisung ist es keine Aufgabe — niemand fühlt sich zuständig, und die Rechnung bleibt liegen.</span></div>
       </div>
       <div class="ex-card bad">
-        <div class="ex-top"><span class="ex-num">2</span><h5 data-i18n="ex.db2.title">"Mach doch mal die Rechnungen, wenn du Zeit hast" (mündlich im Vorbeigehen)</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db2.why">Komplett unverbindlich und nirgends dokumentiert — leicht vergessen, schwer nachzuweisen.</span></div>
+        <div class="ex-top"><span class="ex-num">2</span><h5 data-i18n="ex.db2.title">„Bitte bereite die Präsentation fürs Quartalsmeeting vor.“</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.db2.art">Zugewiesener Kommentar</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db2.why">Mehrere Schritte, kein Kontext, kein EE — das ist kein Mini Task, sondern gehört in einen eigenen DELTA-Task.</span></div>
       </div>
       <div class="ex-card bad">
-        <div class="ex-top"><span class="ex-num">3</span><h5 data-i18n="ex.db3.title">Für jede Rückfrage eine neue Aufgabe statt Kommentar an der bestehenden Karte</h5></div>
-        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db3.why">Zersplittert den Kontext — am Ende findet niemand mehr den Überblick.</span></div>
+        <div class="ex-top"><span class="ex-num">3</span><h5 data-i18n="ex.db3.title">Landingpage</h5></div>
+        <div class="ex-field"><span class="flabel" data-i18n="ex.fl.art">Art</span><span data-i18n="ex.db3.art">Task Type DELTA, ohne Beschreibung</span></div>
+        <div class="ex-why"><b data-i18n="ex.why.bad">Warum schlecht</b><span data-i18n="ex.db3.why">Kein Kontext, kein EE — der Empfänger muss raten, was gemeint ist und wann er fertig ist.</span></div>
       </div>
     </div>
   </section>
@@ -2889,7 +3017,7 @@
           <span class="sv-num">3</span>
           <div>
             <h4><span data-i18n="rules.r3.h">Zugewiesene Kommentare abarbeiten</span> <span class="pill on" style="margin-left:4px;" data-i18n="prio.n3.badge">Pflicht</span></h4>
-            <p data-i18n="rules.r3.p">Ein zugewiesener Kommentar ist ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.</p>
+            <p data-i18n="rules.r3.p">Ein zugewiesener Kommentar ist ein <b>Mini Task</b>, also ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.</p>
           </div>
         </div>
       </div>
@@ -2923,14 +3051,14 @@
       </div>
       <div>
         <h2><span data-i18n="play2learn.h2">Play 2 Learn</span></h2>
-        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 Quizze mit je 50 Fragen, 10 zufällige Runden pro Durchgang.</p>
+        <p data-i18n="play2learn.tagline">Die Board-Regeln spielerisch lernen, statt nur zu lesen — 6 Quizze mit je 50 Fragen, 10 zufällige Runden pro Durchgang.</p>
       </div>
     </div>
 
     <div id="p2lMasterBanner" class="p2l-master-banner" style="display:none;">
-      🏆 <b>Gold Member!</b> Du hast in allen 5 Spielen die Gold-Medaille (0 Fehler in einer Runde) geholt.
+      🏆 <b>Gold Member!</b> Du hast in allen 6 Spielen die Gold-Medaille (0 Fehler in einer Runde) geholt.
     </div>
-    <div id="p2lProgressLine" class="p2l-progress-line">🥇 0/5 Gold-Medaillen — spiel eine Runde ohne Fehler, um eine Medaille zu holen.</div>
+    <div id="p2lProgressLine" class="p2l-progress-line">🥇 0/6 Gold-Medaillen — spiel eine Runde ohne Fehler, um eine Medaille zu holen.</div>
 
     <div id="p2lHub" class="p2l-hub-grid">
       <div class="p2l-game-card" data-game="board" style="--p2l-c:#5B6470;">
@@ -2961,6 +3089,12 @@
         <div class="p2l-game-icon">🧩<span class="p2l-medal" data-medal="prioplan"></span></div>
         <h4>PRIO PLAN Quiz</h4>
         <p>10 von 50 Runden rund um die PRIO-PLAN-Werte von Prio Board und Team Task Board.</p>
+        <div class="p2l-play-cta">Spielen →</div>
+      </div>
+      <div class="p2l-game-card" data-game="delegate" style="--p2l-c:#2563EB;">
+        <div class="p2l-game-icon">🤝<span class="p2l-medal" data-medal="delegate"></span></div>
+        <h4>Mini Task oder DELTA-Task?</h4>
+        <p>10 von 50 Situationen — wie delegierst du richtig: Mini Task, Subtask an der Prio-Karte oder Task im eigenen MyTask Board?</p>
         <div class="p2l-play-cta">Spielen →</div>
       </div>
     </div>
@@ -3000,7 +3134,8 @@
   const buttons = document.querySelectorAll('.tab-btn, .lookup-cell, .back-link, .howto-teaser, .play-btn');
   const panels = document.querySelectorAll('.board-panel');
   const navButtons = document.querySelectorAll('.tab-btn');
-  const LOCKED_BOARDS = ['rules', 'delegate', 'team'];
+  const DEV_MODE = location.hash === '#dev';
+  const LOCKED_BOARDS = DEV_MODE ? [] : ['rules', 'team'];
 
   function activate(board){
     panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + board));
@@ -3149,49 +3284,105 @@ const I18N = {
   "brand.sub": "Intermax Group · interne Referenz",
   "cta.details": "Details ansehen",
   "delegate.chaos.label": "✕ DAS FÜHRT ZU CHAOS",
-  "delegate.chaos1": "Aufgabe ohne Assignee \"irgendwo\" ins Board werfen",
-  "delegate.chaos2": "Für jede Rückfrage einen neuen Task anlegen",
   "delegate.chaos3": "Mündlich delegieren, ohne es in ClickUp festzuhalten",
   "delegate.clean.label": "✓ SO WIRD ES SAUBER",
-  "delegate.clean1": "Ein Assignee, eine klare Aufgabe, ein Fälligkeitsdatum",
-  "delegate.clean2": "Rückfragen als Kommentar am Task, nicht per Chat nebenher",
-  "delegate.clean3": "Status erst auf \"done\"/\"closed\", wenn es wirklich fertig ist",
-  "delegate.d1.h3": "1 · Richtiges Board",
-  "delegate.d1.p": "Team-Aufgabe, die ins Tagesgeschäft einer Abteilung gehört? → <b>Team Task Board</b>. Bleibt es eher deine persönliche Merkaufgabe, die du nur an jemanden weitergibst? → <b>MyTask Board</b>.",
-  "delegate.d2.h3": "2 · Assignee setzen",
-  "delegate.d2.p": "Immer die Person eintragen, die die Aufgabe wirklich <b>ausführt</b> — nicht dich selbst. Ohne Assignee bleibt eine Aufgabe für alle unsichtbar, die nicht aktiv in der Liste suchen.",
-  "delegate.d3.h3": "3 · Klar beschreiben + Deadline",
-  "delegate.d3.p": "Eine Zeile reicht: was ist zu tun, was ist das Ergebnis. Ist ein Datum wichtig, immer ein <b>Fälligkeitsdatum</b> setzen — sonst gibt es keinen Anhaltspunkt, wann nachgefragt werden darf.",
-  "delegate.d4.h3": "4 · Im Blick behalten",
-  "delegate.d4.p": "Willst du selbst den Überblick behalten? Setze bei Prio-Board-Projekten das Feld <span class=\"fname-inline\">PRIO PLAN</span> auf <b>&gt;&gt;&gt;DELEGATED&lt;&lt;&lt;</b>, oder lass dir die Aufgabe in deinem eigenen MyTask Board anzeigen.",
   "delegate.h2": "Wie delegiere ich Tasks?",
   "delegate.kicker": "Kurz gesagt",
-  "delegate.step1": "Richtiges Board wählen",
-  "delegate.step2": "Assignee setzen",
-  "delegate.step3": "Klar beschreiben + Deadline",
-  "delegate.step4": "Im Blick behalten",
-  "delegate.step5": "Nachfassen statt neu anlegen",
-  "delegate.steps.h3": "In 5 Schritten",
   "delegate.summary": "Eine delegierte Aufgabe braucht drei Dinge: einen <b>klaren Assignee</b>, eine <b>klare Beschreibung</b> und einen Ort, an dem <b>du</b> den Fortschritt siehst.",
   "delegate.tagline": "Kein eigenes Board — sondern die Praxis, die in jedem Board gleich funktioniert.",
   "delegate.pzz.kicker": "Problem → Ziel → Zweck",
   "delegate.pzz.problem": "<b>Das Problem:</b> Ohne klare Delegation passiert eins von zwei Dingen: Entweder macht der Manager doch alles selbst und wundert sich, warum er nie fertig wird — oder die Aufgabe verschwindet irgendwo zwischen zwei Chat-Nachrichten und taucht erst drei Wochen später wieder auf, wenn sie explodiert.",
   "delegate.pzz.ziel": "<b>Das Ziel:</b> Jede delegierte Aufgabe hat einen klaren Assignee, eine klare Beschreibung und einen Ort, an dem der Fortschritt sichtbar ist.",
   "delegate.pzz.zweck": "<b>Der Zweck:</b> Damit Delegieren nicht heißt \"loslassen und hoffen\", sondern \"übergeben und im Blick behalten\".",
-  "delegate.moreex.h4": "3 gute & 3 schlechte Delegations-Nachrichten ansehen",
   "delegate.moreex.p": "Mit Begründung, woran man eine schwache Delegation erkennt.",
-  "ex.dg1.title": "\"Kannst du bis Freitag 12 Uhr den Payment-Flow testen? EE: alle drei Testkarten laufen durch, Ergebnis als Kommentar an der Karte.\"",
-  "ex.dg1.why": "Deadline, EE und Ort für die Rückmeldung sind gleich mitgeliefert.",
-  "ex.dg2.title": "\"Du bist jetzt Assignee für \'SSL-Zertifikat erneuern\' — alle Details stehen in der Karte.\"",
-  "ex.dg2.why": "Übergabe ist dokumentiert, nicht nur mündlich gesagt.",
-  "ex.dg3.title": "\"Ich hab dir eine Karte mit dem EE angelegt — meld dich dort, falls was unklar ist.\"",
-  "ex.dg3.why": "Schriftlich und nachvollziehbar, auch für Dritte später noch.",
-  "ex.db1.title": "\"Kannst du dich kurz um die Landingpage kümmern?\"",
-  "ex.db1.why": "Kein EE, keine Deadline, keine Karte — nichts, worauf man später zurückgreifen kann.",
-  "ex.db2.title": "\"Mach doch mal die Rechnungen, wenn du Zeit hast\" (mündlich im Vorbeigehen)",
-  "ex.db2.why": "Komplett unverbindlich und nirgends dokumentiert — leicht vergessen, schwer nachzuweisen.",
-  "ex.db3.title": "Für jede Rückfrage eine neue Aufgabe statt Kommentar an der bestehenden Karte",
-  "ex.db3.why": "Zersplittert den Kontext — am Ende findet niemand mehr den Überblick.",
+  "delegate.w3.h3": "3 · Nach dem Delegieren",
+  "delegate.role.recv": "Empfänger",
+  "delegate.role.you": "Du",
+  "delegate.w3.s1.h": "Annahme bestätigen",
+  "delegate.w3.s1.p": "Der Empfänger bestätigt den Task <b>innerhalb von 24 Stunden</b> per Kommentar — oder stellt dort seine Rückfragen. So weißt du, dass der Task angekommen ist. Es ist dieselbe 24-Stunden-Regel wie bei den Allgemeinen Regeln.",
+  "delegate.w3.s2.h": "Im Blick behalten",
+  "delegate.w3.s2.p": "Leg dir in ClickUp eine gespeicherte Ansicht an: <b>Task Type = DELTA</b>, erstellt von dir, geschlossene Tasks ausgeblendet. Die gehst du <b>einmal pro Woche</b> durch — am besten vor dem Weekly Manager Meeting. So siehst du alle delegierten Tasks auf einen Blick, auch die Subtasks an deinen Prio-Karten.",
+  "delegate.w3.s3.h": "Fertig melden",
+  "delegate.w3.s3.p": "Ist der Task erledigt, setzt der Empfänger den Status auf <b>done</b> und hinterlässt das Ergebnis als Kommentar am Task.",
+  "delegate.w3.s4.h": "Prüfen und schließen",
+  "delegate.w3.s4.p": "Du prüfst das Ergebnis gegen das EE. Passt es, setzt du den Task auf <b>closed</b>. Passt es nicht, schreibst du als Kommentar, was fehlt, und setzt ihn zurück auf <b>in progress</b>. Schließen darf immer nur der, der delegiert hat — nie der Empfänger selbst.",
+  "delegate.w3.mininote": "Und bei Mini Tasks? Ein zugewiesener Kommentar landet beim Empfänger in der Inbox und unter „Zugewiesene Kommentare“. Laut den Allgemeinen Regeln wird die Inbox jeden Tag bis Feierabend auf null gebracht — auf Mini Tasks kannst du dich also verlassen. Ist er erledigt, markiert der Empfänger den Kommentar als erledigt.",
+  "delegate.clean6": "Delegierte Tasks einmal pro Woche über die DELTA-Ansicht durchgehen",
+  "delegate.chaos8": "Als Empfänger den delegierten Task selbst auf „closed“ setzen",
+  "delegate.moreex.h4": "3 gute & 3 schlechte Delegationen ansehen",
+  "ex.fl.art": "Art",
+  "ex.dg1.title": "„Bitte schick mir bis 15 Uhr die aktuelle Preisliste als PDF.“",
+  "ex.dg1.art": "Zugewiesener Kommentar an Lisa",
+  "ex.dg1.why": "Ein einzelner Handgriff, als klare Anweisung formuliert und direkt zugewiesen — ein echter Mini Task.",
+  "ex.dg2.title": "Angebot von Anbieter X mit unseren aktuellen Konditionen vergleichen",
+  "ex.dg2.art": "Task Type DELTA im eigenen MyTask Board, zugewiesen an Tomas",
+  "ex.dg2.ctx": "Wir verhandeln nächste Woche neu. Unsere Konditionen liegen im Ordner „Einkauf 2026“.",
+  "ex.dg2.ee": "Vergleichstabelle mit Preis, Laufzeit und Kündigungsfrist als Kommentar an der Karte.",
+  "ex.dg2.why": "Kein Projekt, also im eigenen MyTask Board. Mit Kontext und EE weiß der Empfänger, warum, womit und wann er fertig ist.",
+  "ex.dg3.title": "Payment-Flow mit drei Testkarten testen",
+  "ex.dg3.art": "DELTA-Subtask an der Prio-Karte „MVP-Launch für neue Marke“, zugewiesen an Lukas",
+  "ex.dg3.ctx": "Der Launch ist am Monatsersten, die Testkarten stehen in der Beschreibung der Prio-Karte.",
+  "ex.dg3.ee": "Alle drei Testkarten laufen durch, Ergebnis als Kommentar am Subtask.",
+  "ex.dg3.why": "Gehört zum Projekt, also als Subtask an der Prio-Karte. Die Prio-Karte selbst bleibt beim Manager.",
+  "ex.db1.title": "„Jemand müsste mal die Rechnung an die Buchhaltung schicken.“",
+  "ex.db1.art": "Normaler Kommentar, niemandem zugewiesen",
+  "ex.db1.why": "Ohne Zuweisung ist es keine Aufgabe — niemand fühlt sich zuständig, und die Rechnung bleibt liegen.",
+  "ex.db2.title": "„Bitte bereite die Präsentation fürs Quartalsmeeting vor.“",
+  "ex.db2.art": "Zugewiesener Kommentar",
+  "ex.db2.why": "Mehrere Schritte, kein Kontext, kein EE — das ist kein Mini Task, sondern gehört in einen eigenen DELTA-Task.",
+  "ex.db3.title": "Landingpage",
+  "ex.db3.art": "Task Type DELTA, ohne Beschreibung",
+  "ex.db3.why": "Kein Kontext, kein EE — der Empfänger muss raten, was gemeint ist und wann er fertig ist.",
+  "delegate.flow.q1": "Ist es ein Mini Task?",
+  "delegate.flow.a1no": "Eigenen Task vom Typ DELTA schreiben → weiter mit Frage 2",
+  "delegate.flow.note": "Unsicher, ob Mini Task oder Task? Dann lieber einen eigenen Task.",
+  "delegate.w1.h3": "1 · Mini Task: Kommentar zuweisen",
+  "delegate.w1.p": "Zugewiesene Kommentare sind <b>Mini Tasks</b> — kurze Handgriffe wie „Bitte schick mir das Dokument zu“ oder „Informiere den Rainer“. Du schreibst den Kommentar und weist ihn direkt der Person zu. Ein zugewiesener Kommentar heißt immer: <b>Hier ist etwas zu erledigen.</b> Die Person erledigt es und markiert den Kommentar als erledigt.",
+  "delegate.mini.yes.label": "✓ DAS SIND MINI TASKS",
+  "delegate.mini.yes1": "„Bitte schick mir das Dokument zu“",
+  "delegate.mini.yes2": "„Informiere den Rainer über den neuen Termin“",
+  "delegate.mini.yes3": "„Leite die Rechnung an die Buchhaltung weiter“",
+  "delegate.mini.yes4": "„Schick mir bitte den Link zur Präsentation“",
+  "delegate.mini.yes5": "<b>Ein einzelner Handgriff, in wenigen Minuten erledigt, ohne Rückfragen</b>",
+  "delegate.mini.no.label": "✕ DAS SIND KEINE MINI TASKS",
+  "delegate.mini.no1": "„Bereite die Präsentation fürs Quartalsmeeting vor“",
+  "delegate.mini.no2": "„Prüf den Vertrag mit Partner X“",
+  "delegate.mini.no3": "„Recherchiere drei Anbieter für ein neues CRM“",
+  "delegate.mini.no4": "<b>Alles mit mehreren Schritten, einer Deadline oder einem Ergebnis, das man erst definieren muss</b>",
+  "delegate.mini.doubt.kicker": "Im Zweifel",
+  "delegate.mini.doubt": "Bist du dir nicht sicher, ob es ein Mini Task oder ein Task ist, schreib lieber <b>einen eigenen Task</b>. Der hat ein sauberes EE — und die Chance ist größer, dass du auch bekommst, was du delegiert hast.",
+  "delegate.w2.p": "Alles, was kein Mini Task ist, bekommt einen <b>eigenen Task</b>, der der Person zugewiesen wird, die ihn ausführt. So sieht ein delegierter Task aus:",
+  "delegate.fd.type": "Immer <b>DELTA</b> — daran erkennt jeder sofort, dass es ein delegierter Task ist.",
+  "delegate.fd.titel": "Kurz und konkret, verständlich ohne die Karte zu öffnen.",
+  "delegate.fd.assignee": "Die Person, die den Task wirklich ausführt.",
+  "delegate.fn.kontext": "Kontext",
+  "delegate.fd.kontext": "Immer mitschreiben: Worum geht es, warum ist es wichtig, wo liegen die Unterlagen? Mit Kontext kann der Empfänger <b>bessere Qualität</b> liefern.",
+  "delegate.fd.ee": "Das Erwartete Ergebnis — woran beide erkennen, dass der Task wirklich fertig ist.",
+  "delegate.fn.due": "Fälligkeitsdatum",
+  "delegate.fd.due": "Wenn ein Termin dranhängt — sonst gibt es keinen Anhaltspunkt, wann nachgefragt werden darf.",
+  "delegate.w2.where": "Wo du den Task anlegst, hängt davon ab, ob er zu einem Projekt gehört:",
+  "delegate.clean1": "Mini Task → zugewiesener Kommentar, alles andere → eigener Task vom Typ DELTA",
+  "delegate.clean5": "Jeder delegierte Task mit Kontext und sauberem EE",
+  "delegate.chaos6": "Eine größere Aufgabe als Mini Task in einem Kommentar verstecken",
+  "delegate.chaos7": "Einen Task ohne Kontext delegieren — dann muss der Empfänger raten, was gemeint ist",
+  "delegate.flow.h3": "Der Entscheidungsweg",
+  "delegate.flow.q2": "Gehört der Task zu einem Projekt bzw. einer Prio-Karte?",
+  "delegate.flow.yes": "Ja",
+  "delegate.flow.no": "Nein",
+  "delegate.flow.a1yes": "Kommentar der Person zuweisen",
+  "delegate.flow.a2yes": "Als Subtask an der Prio-Karte anlegen und zuweisen",
+  "delegate.flow.a2no": "Im eigenen MyTask Board anlegen und zuweisen",
+  "delegate.w1.note": "Wichtig: Eine normale Antwort bzw. ein normaler Kommentar ist <b>keine</b> zu erledigende Aufgabe — erst die Zuweisung macht daraus eine.",
+  "delegate.w2.h3": "2 · Eigenen Task zuweisen",
+  "delegate.w2a.h3": "2a · Task gehört zu einem Projekt",
+  "delegate.w2a.p": "Ist der Task Teil eines Projekts bzw. einer Prio-Karte — auch eine Prio-Karte ist ein Projekt —, legst du ihn als <b>Subtask an der Prio-Karte</b> an und weist ihn der Person zu. Wer den Task zuweist, ist dabei automatisch immer der <b>Projektmanager bzw. Manager der Prio-Karte</b>. Die Prio-Karte selbst bleibt bei dir.",
+  "delegate.w2b.h3": "2b · Task ohne Projekt",
+  "delegate.w2b.p": "Gehört die Aufgabe zu keinem Projekt, schreibst du sie <b>in dein eigenes MyTask Board</b> und weist sie dort der entsprechenden Person zu. So bleibt sie bei dir sichtbar, während die andere Person daran arbeitet.",
+  "delegate.clean2": "Projektaufgaben als Subtask an der Prio-Karte, alles andere im eigenen MyTask Board",
+  "delegate.clean3": "Rückfragen als Kommentar am Task, nicht per Chat nebenher",
+  "delegate.clean4": "Status erst auf \"done\"/\"closed\", wenn es wirklich fertig ist",
+  "delegate.chaos4": "Eine Aufgabe als normalen Kommentar schreiben, ohne ihn zuzuweisen — dann weiß niemand, dass etwas zu tun ist",
+  "delegate.chaos5": "Projektaufgaben lose ins MyTask Board legen statt als Subtask an die Prio-Karte",
   "field.assignee": "Assignee",
   "field.subtasks": "Subtasks",
   "field.titel": "Titel",
@@ -3294,7 +3485,7 @@ const I18N = {
   "nav.rules": "Allgemeine Regeln",
   "nav.play2learn": "Play 2 Learn",
   "play2learn.h2": "Play 2 Learn",
-  "play2learn.tagline": "Die Board-Regeln spielerisch lernen, statt nur zu lesen — 5 kurze Quizze, je 10 Runden.",
+  "play2learn.tagline": "Die Board-Regeln spielerisch lernen, statt nur zu lesen — 6 Quizze mit je 50 Fragen, 10 zufällige Runden pro Durchgang.",
   "nofields": "Keine eigenen Pflichtfelder. Es reichen die ClickUp-Standardfelder — Assignee, Fälligkeitsdatum, Priorität.",
   "ov.agenda.h3": "Für Themen, die wir besprechen müssen",
   "ov.agenda.p": "Der Ort für alles, was zwei Personen oder ein Team gemeinsam klären müssen — im 1-2-1, im Team-Meeting oder in der Quartalsplanung. Hier sammelt man Themen, bevor man sie im Termin klärt, und hält fest, wenn sie geklärt sind.",
@@ -3318,7 +3509,7 @@ const I18N = {
   "rules.r2.h": "Antworten beantworten",
   "rules.r2.p": "Kommentiert jemand einen Task, eine Karte oder einen Agendapunkt, an dem du beteiligt bist, wird <b>innerhalb von 24 Stunden</b> geantwortet — nicht erst, wenn zufällig wieder danach gesucht wird. Eine offene Rückfrage ohne Antwort blockiert die andere Person und bremst genau die schriftliche Klärung, die den ganzen Board-Ansatz erst schnell macht.",
   "rules.r3.h": "Zugewiesene Kommentare abarbeiten",
-  "rules.r3.p": "Ein zugewiesener Kommentar ist ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.",
+  "rules.r3.p": "Ein zugewiesener Kommentar ist ein <b>Mini Task</b>, also ein kleiner delegierter Task — keine eigene Karte in einem Board, aber mit klarem Assignee und der Erwartung, erledigt und abgehakt zu werden. Er verdient dieselbe Disziplin wie jede andere delegierte Aufgabe: erledigen und in ClickUp als resolved markieren, nicht einfach nur lesen.",
   "rules.loc1": "Glocken-Symbol oben links in der Sidebar",
   "rules.loc2": "Home → \"Zugewiesene Kommentare\"",
   "ov.delegate.tag": "PRAXIS",
@@ -3707,49 +3898,105 @@ const I18N = {
   "brand.sub": "Intermax Group · internal reference",
   "cta.details": "View details",
   "delegate.chaos.label": "✕ THIS LEADS TO CHAOS",
-  "delegate.chaos1": "Dropping a task into the board with no assignee, \"somewhere\"",
-  "delegate.chaos2": "Creating a new task for every follow-up question",
   "delegate.chaos3": "Delegating verbally without recording it in ClickUp",
   "delegate.clean.label": "✓ THIS KEEPS IT CLEAN",
-  "delegate.clean1": "One assignee, one clear task, one due date",
-  "delegate.clean2": "Follow-up questions as a comment on the task, not on the side in chat",
-  "delegate.clean3": "Status only moves to \"done\"/\"closed\" once it's actually finished",
-  "delegate.d1.h3": "1 · The right board",
-  "delegate.d1.p": "A team task that belongs to a department's day-to-day work? → <b>Team Task Board</b>. More of a personal reminder you're just handing off to someone? → <b>MyTask Board</b>.",
-  "delegate.d2.h3": "2 · Set the assignee",
-  "delegate.d2.p": "Always enter the person who actually <b>does</b> the task — not yourself. Without an assignee, a task stays invisible to everyone who isn't actively searching the list.",
-  "delegate.d3.h3": "3 · Describe clearly + deadline",
-  "delegate.d3.p": "One line is enough: what needs doing, what the result should be. If a date matters, always set a <b>due date</b> — otherwise there's no reference point for when it's fair to follow up.",
-  "delegate.d4.h3": "4 · Keep an eye on it",
-  "delegate.d4.p": "Want to keep track yourself? For Prio Board projects, set the <span class=\"fname-inline\">PRIO PLAN</span> field to <b>&gt;&gt;&gt;DELEGATED&lt;&lt;&lt;</b>, or have the task show up in your own MyTask Board.",
   "delegate.h2": "How do I delegate tasks?",
   "delegate.kicker": "In short",
-  "delegate.step1": "Pick the right board",
-  "delegate.step2": "Set assignee",
-  "delegate.step3": "Describe clearly + deadline",
-  "delegate.step4": "Keep an eye on it",
-  "delegate.step5": "Follow up, don't recreate",
-  "delegate.steps.h3": "In 5 steps",
   "delegate.summary": "A delegated task needs three things: a <b>clear assignee</b>, a <b>clear description</b>, and a place where <b>you</b> can see the progress.",
   "delegate.tagline": "Not a board of its own — a practice that works the same way across every board.",
   "delegate.pzz.kicker": "Problem → Goal → Purpose",
   "delegate.pzz.problem": "<b>The problem:</b> Without clear delegation, one of two things happens: either the manager ends up doing everything themselves and wonders why they're never done — or the task disappears somewhere between two chat messages and only resurfaces three weeks later, once it's blown up.",
   "delegate.pzz.ziel": "<b>The goal:</b> Every delegated task has a clear assignee, a clear description, and a place where progress is visible.",
   "delegate.pzz.zweck": "<b>The purpose:</b> So delegating doesn't mean \"let go and hope\", but \"hand off and keep an eye on it\".",
-  "delegate.moreex.h4": "See 3 good & 3 bad delegation messages",
   "delegate.moreex.p": "With explanations of how to spot weak delegation.",
-  "ex.dg1.title": "\"Can you test the payment flow by Friday noon? EE: all three test cards go through, results as a comment on the card.\"",
-  "ex.dg1.why": "Deadline, EE, and a place for the reply are all included.",
-  "ex.dg2.title": "\"You're now the assignee for \'renew SSL certificate\' — all the details are in the card.\"",
-  "ex.dg2.why": "The handoff is documented, not just said out loud.",
-  "ex.dg3.title": "\"I've created a card with the EE for you — post there if anything's unclear.\"",
-  "ex.dg3.why": "Written down and traceable, even for others later on.",
-  "ex.db1.title": "\"Can you take care of the landing page real quick?\"",
-  "ex.db1.why": "No EE, no deadline, no card — nothing to refer back to later.",
-  "ex.db2.title": "\"Do the invoices at some point if you have time\" (said in passing)",
-  "ex.db2.why": "Completely non-binding and undocumented — easy to forget, hard to prove.",
-  "ex.db3.title": "Creating a new task for every follow-up instead of a comment on the existing card",
-  "ex.db3.why": "Splits the context apart — in the end nobody can find the full picture anymore.",
+  "delegate.w3.h3": "3 · After delegating",
+  "delegate.role.recv": "Recipient",
+  "delegate.role.you": "You",
+  "delegate.w3.s1.h": "Confirm receipt",
+  "delegate.w3.s1.p": "The recipient confirms the task <b>within 24 hours</b> with a comment — or asks their questions there. That way you know the task has arrived. It’s the same 24-hour rule as in the General Rules.",
+  "delegate.w3.s2.h": "Keep track of it",
+  "delegate.w3.s2.p": "Set up a saved view in ClickUp: <b>Task Type = DELTA</b>, created by you, closed tasks hidden. Go through it <b>once a week</b> — ideally before the Weekly Manager Meeting. That way you see all delegated tasks at a glance, including the subtasks on your Prio cards.",
+  "delegate.w3.s3.h": "Report it done",
+  "delegate.w3.s3.p": "Once the task is finished, the recipient sets the status to <b>done</b> and leaves the result as a comment on the task.",
+  "delegate.w3.s4.h": "Check and close",
+  "delegate.w3.s4.p": "You check the result against the EE. If it fits, you set the task to <b>closed</b>. If it doesn’t, you add a comment saying what’s missing and set it back to <b>in progress</b>. Only the person who delegated may close it — never the recipient.",
+  "delegate.w3.mininote": "And mini tasks? An assigned comment lands in the recipient’s Inbox and under “Assigned Comments”. Per the General Rules, the Inbox is cleared to zero by the end of every day — so you can rely on mini tasks. Once it’s done, the recipient marks the comment as resolved.",
+  "delegate.clean6": "Go through delegated tasks once a week using the DELTA view",
+  "delegate.chaos8": "Closing the delegated task yourself as the recipient",
+  "delegate.moreex.h4": "See 3 good & 3 bad delegations",
+  "ex.fl.art": "Type",
+  "ex.dg1.title": "“Please send me the current price list as a PDF by 3 pm.”",
+  "ex.dg1.art": "Assigned comment to Lisa",
+  "ex.dg1.why": "A single step, phrased as a clear instruction and assigned directly — a genuine mini task.",
+  "ex.dg2.title": "Compare vendor X’s offer with our current terms",
+  "ex.dg2.art": "Task type DELTA in your own MyTask Board, assigned to Tomas",
+  "ex.dg2.ctx": "We’re renegotiating next week. Our current terms are in the “Purchasing 2026” folder.",
+  "ex.dg2.ee": "Comparison table with price, term and notice period as a comment on the card.",
+  "ex.dg2.why": "No project, so it goes in your own MyTask Board. With context and an EE, the recipient knows why, with what, and when they’re done.",
+  "ex.dg3.title": "Test the payment flow with three test cards",
+  "ex.dg3.art": "DELTA subtask on the Prio card “MVP launch for new brand”, assigned to Lukas",
+  "ex.dg3.ctx": "Launch is on the first of the month; the test cards are listed in the Prio card’s description.",
+  "ex.dg3.ee": "All three test cards go through, result as a comment on the subtask.",
+  "ex.dg3.why": "It belongs to the project, so it’s a subtask on the Prio card. The Prio card itself stays with the manager.",
+  "ex.db1.title": "“Someone should send the invoice to accounting.”",
+  "ex.db1.art": "Normal comment, not assigned to anyone",
+  "ex.db1.why": "Without an assignment it isn’t a task — nobody feels responsible, and the invoice just sits there.",
+  "ex.db2.title": "“Please prepare the presentation for the quarterly meeting.”",
+  "ex.db2.art": "Assigned comment",
+  "ex.db2.why": "Several steps, no context, no EE — that’s not a mini task; it belongs in a separate DELTA task.",
+  "ex.db3.title": "Landing page",
+  "ex.db3.art": "Task type DELTA, no description",
+  "ex.db3.why": "No context, no EE — the recipient has to guess what’s meant and when they’re done.",
+  "delegate.flow.q1": "Is it a mini task?",
+  "delegate.flow.a1no": "Write a separate task of type DELTA → continue with question 2",
+  "delegate.flow.note": "Not sure whether it’s a mini task or a task? Then write a separate task.",
+  "delegate.w1.h3": "1 · Mini task: assign a comment",
+  "delegate.w1.p": "Assigned comments are <b>mini tasks</b> — quick one-step things like “Please send me the document” or “Let Rainer know”. You write the comment and assign it directly to the person. An assigned comment always means: <b>something needs doing here.</b> The person does it and marks the comment as resolved.",
+  "delegate.mini.yes.label": "✓ THESE ARE MINI TASKS",
+  "delegate.mini.yes1": "“Please send me the document”",
+  "delegate.mini.yes2": "“Let Rainer know about the new date”",
+  "delegate.mini.yes3": "“Forward the invoice to accounting”",
+  "delegate.mini.yes4": "“Please send me the link to the presentation”",
+  "delegate.mini.yes5": "<b>A single step, done in a few minutes, no follow-up questions needed</b>",
+  "delegate.mini.no.label": "✕ THESE ARE NOT MINI TASKS",
+  "delegate.mini.no1": "“Prepare the presentation for the quarterly meeting”",
+  "delegate.mini.no2": "“Review the contract with partner X”",
+  "delegate.mini.no3": "“Research three vendors for a new CRM”",
+  "delegate.mini.no4": "<b>Anything with several steps, a deadline, or a result that first has to be defined</b>",
+  "delegate.mini.doubt.kicker": "When in doubt",
+  "delegate.mini.doubt": "If you’re not sure whether it’s a mini task or a task, write <b>a separate task</b>. It has a clean EE — and the chances are better that you actually get what you delegated.",
+  "delegate.w2.p": "Anything that isn’t a mini task gets its <b>own task</b>, assigned to the person who carries it out. This is what a delegated task looks like:",
+  "delegate.fd.type": "Always <b>DELTA</b> — so everyone immediately recognizes it as a delegated task.",
+  "delegate.fd.titel": "Short and concrete, understandable without opening the card.",
+  "delegate.fd.assignee": "The person who actually carries out the task.",
+  "delegate.fn.kontext": "Context",
+  "delegate.fd.kontext": "Always include it: what is it about, why does it matter, where are the materials? With context, the recipient can deliver <b>better quality</b>.",
+  "delegate.fd.ee": "The expected result — how both sides know the task is really done.",
+  "delegate.fn.due": "Due date",
+  "delegate.fd.due": "If a date matters — otherwise there’s no reference point for when it’s fair to follow up.",
+  "delegate.w2.where": "Where you create the task depends on whether it belongs to a project:",
+  "delegate.clean1": "Mini task → assigned comment, everything else → a separate task of type DELTA",
+  "delegate.clean5": "Every delegated task with context and a clean EE",
+  "delegate.chaos6": "Hiding a bigger task as a mini task in a comment",
+  "delegate.chaos7": "Delegating a task without context — then the recipient has to guess what’s meant",
+  "delegate.flow.h3": "The decision path",
+  "delegate.flow.q2": "Does the task belong to a project or a Prio card?",
+  "delegate.flow.yes": "Yes",
+  "delegate.flow.no": "No",
+  "delegate.flow.a1yes": "Assign a comment to the person",
+  "delegate.flow.a2yes": "Create it as a subtask on the Prio card and assign it",
+  "delegate.flow.a2no": "Create it in your own MyTask Board and assign it",
+  "delegate.w1.note": "Important: a normal reply or a normal comment is <b>not</b> a task to be done — only the assignment turns it into one.",
+  "delegate.w2.h3": "2 · Assign a separate task",
+  "delegate.w2a.h3": "2a · The task belongs to a project",
+  "delegate.w2a.p": "If the task is part of a project or a Prio card — a Prio card is a project too — you create it as a <b>subtask on the Prio card</b> and assign it to the person. Whoever assigns the task is always automatically the <b>project manager or manager of the Prio card</b>. The Prio card itself stays with you.",
+  "delegate.w2b.h3": "2b · A task without a project",
+  "delegate.w2b.p": "If the task doesn't belong to any project, you write it <b>in your own MyTask Board</b> and assign it to the right person there. That way it stays visible to you while the other person works on it.",
+  "delegate.clean2": "Project tasks as a subtask on the Prio card, everything else in your own MyTask Board",
+  "delegate.clean3": "Follow-up questions as a comment on the task, not on the side in chat",
+  "delegate.clean4": "Status only moves to \"done\"/\"closed\" once it's actually finished",
+  "delegate.chaos4": "Writing a task as a normal comment without assigning it — then nobody knows something needs doing",
+  "delegate.chaos5": "Dropping project tasks loosely into the MyTask Board instead of as a subtask on the Prio card",
   "field.assignee": "Assignee",
   "field.subtasks": "Subtasks",
   "field.titel": "Title",
@@ -3852,7 +4099,7 @@ const I18N = {
   "nav.rules": "General Rules",
   "nav.play2learn": "Play 2 Learn",
   "play2learn.h2": "Play 2 Learn",
-  "play2learn.tagline": "Learn the board rules by playing instead of just reading — 5 short quizzes, 10 rounds each.",
+  "play2learn.tagline": "Learn the board rules by playing instead of just reading — 6 quizzes with 50 questions each, 10 random rounds per run.",
   "nofields": "No dedicated required fields. The standard ClickUp fields are enough — assignee, due date, priority.",
   "ov.agenda.h3": "For topics we need to discuss",
   "ov.agenda.p": "The place for everything two people or a team need to work out together — in a 1-on-1, a team meeting, or quarterly planning. This is where topics get collected before the meeting, and marked as resolved once they are.",
@@ -3876,7 +4123,7 @@ const I18N = {
   "rules.r2.h": "Answer replies",
   "rules.r2.p": "If someone comments on a task, a card, or an agenda point you're involved in, reply <b>within 24 hours</b> — not only once someone happens to go looking for it again. An unanswered question blocks the other person and slows down exactly the kind of written clarification that makes the whole board approach fast in the first place.",
   "rules.r3.h": "Process assigned comments",
-  "rules.r3.p": "An assigned comment is a small delegated task — not its own card in a board, but with a clear assignee and the expectation that it gets done and checked off. It deserves the same discipline as any other delegated item: handle it and mark it resolved in ClickUp, not just read it.",
+  "rules.r3.p": "An assigned comment is a <b>mini task</b>, i.e. a small delegated task — not its own card in a board, but with a clear assignee and the expectation that it gets done and checked off. It deserves the same discipline as any other delegated item: handle it and mark it resolved in ClickUp, not just read it.",
   "rules.loc1": "Bell icon, top left in the sidebar",
   "rules.loc2": "Home → \"Assigned Comments\"",
   "ov.delegate.tag": "PRACTICE",
@@ -6943,6 +7190,511 @@ const I18N = {
         "explain": "Today's Worklist sticht farblich bewusst heraus, weil es der kürzeste Zeithorizont ist."
       }
     ]
+  },
+  "delegate": {
+    "questions" : [
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Du brauchst von Lisa die aktuelle Preisliste als PDF."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Rainer soll erfahren, dass das Meeting auf Donnerstag verschoben ist."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Die Rechnung von Anbieter Y soll an die Buchhaltung weitergeleitet werden."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Du brauchst von Tomas den Link zur Präsentation vom letzten Meeting."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll dir die Telefonnummer des neuen Ansprechpartners bei Partner X schicken."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Svatava soll den neuen Termin in den Team-Kalender eintragen."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Auch wenn es ein Projekt betrifft: Es ist nur ein Handgriff — Frage 1 kommt zuerst, also Mini Task.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „MVP-Launch“ brauchst du nur kurz das aktuelle Logo als Datei."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lukas soll dir die Rechnungsnummer der letzten Hosting-Rechnung nennen."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lisa soll das unterschriebene Dokument in den richtigen Ordner hochladen."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll dem Kunden kurz den Eingang der Bestellung bestätigen."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Tomas soll dir die Datei mit den Q3-Zahlen weiterleiten, die er schon hat."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Rainer soll dem Team Bescheid geben, dass das Büro morgen geschlossen ist."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lisa soll den Besprechungsraum für Freitag buchen."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Die Buchhaltung soll dir kurz bestätigen, dass die Zahlung an Anbieter Y raus ist."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Projektbezug hin oder her: Es ist nur eine kurze Info — also ein Mini Task.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „Stripe LATAM“ soll Lukas dir nur den Namen des Ansprechpartners bei Stripe schicken."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Svatava soll dir die E-Mail vom Steuerberater weiterleiten."
+      },
+      {
+        "correct" : 0,
+        "explain" : "Ein einzelner Handgriff in wenigen Minuten — ein zugewiesener Kommentar reicht.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll die Teilnehmerliste fürs Meeting an alle schicken."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „CRM-Einführung“ sollen drei Anbieter verglichen werden."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „MVP-Launch für neue Marke“ soll Lukas den Payment-Flow mit drei Testkarten testen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „Website-Relaunch“ muss die neue Startseite getextet werden."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Rahmen der Prio-Karte „Expansion LATAM“ soll Tomas die rechtlichen Anforderungen in Brasilien recherchieren."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für das Projekt „Onboarding-Prozess überarbeiten“ soll HR eine Checkliste für den ersten Arbeitstag erstellen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Die Prio-Karte „Affiliate-Programm Q4“ braucht eine Vertragsvorlage für neue Partner."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „Migration Zahlungsplattform“ sollen alle bestehenden Abos übertragen und geprüft werden."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „TES Prague 2026“ soll Svatava drei Locations anfragen und Angebote einholen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „Wissensdatenbank einführen“ sollen die ersten 20 Artikel geschrieben werden."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „Neue Preisstruktur“ soll Edson eine Wettbewerbsanalyse mit fünf Konkurrenten erstellen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „Checkout-Redesign“ soll das Designteam drei Entwürfe für die Bezahlseite liefern."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Die Prio-Karte „Automatisierte Rechnungsstellung“ braucht einen Test mit zehn echten Rechnungen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für das Projekt „Employer Branding“ soll Lisa einen Social-Media-Plan für zwei Monate erstellen."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Rahmen der Prio-Karte „Support-Chat einführen“ soll das Support-Team Antwortvorlagen für die zehn häufigsten Fragen schreiben."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „2FA für alle Admins“ soll Lukas eine Schritt-für-Schritt-Anleitung fürs Wiki schreiben."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Im Projekt „A/B-Test Checkout“ soll Tomas nach zwei Wochen die Ergebnisse auswerten und eine Empfehlung schreiben."
+      },
+      {
+        "correct" : 1,
+        "explain" : "Gehört zu einem Projekt bzw. einer Prio-Karte — also als DELTA-Subtask an der Prio-Karte, die Prio-Karte selbst bleibt bei dir.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Für die Prio-Karte „Recruiting Entwickler“ sollen fünf Varianten der Stellenanzeige getestet werden."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Tomas soll das Angebot von Anbieter X prüfen — ein Projekt steht nicht dahinter."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lisa soll einmalig eine Übersicht aller laufenden Software-Abos mit Kosten erstellen, ohne Projektbezug."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll den Vertrag mit dem Reinigungsdienst prüfen und Verbesserungen vorschlagen. Kein Projekt dahinter."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Svatava soll die Weihnachtsfeier organisieren — das ist kein Prio-Board-Projekt."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lukas soll die Präsentation für deinen Kundentermin nächste Woche vorbereiten. Sie gehört zu keinem Projekt."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Tomas soll drei Angebote für neue Bürostühle einholen und vergleichen, ohne Projektbezug."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Rainer soll die Reisekostenabrechnungen des letzten Quartals prüfen — eine einmalige Aufgabe ohne Projekt."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lisa soll ein neues Formular für Urlaubsanträge entwerfen. Ein Projekt gibt es dafür nicht."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll die alte Kundenliste bereinigen und Dubletten entfernen — keine Prio-Karte dahinter."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Svatava soll einen Entwurf für den Newsletter nächsten Monat schreiben, unabhängig von einem Projekt."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Lukas soll prüfen, ob alle Domain-Verträge rechtzeitig verlängert werden — ohne Projektbezug."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Tomas soll die Unterlagen für die Steuerprüfung zusammenstellen. Es gibt kein Projekt dazu."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Rainer soll einen Vorschlag für eine neue Meeting-Struktur im Team ausarbeiten — keine Prio-Karte."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Im Zweifel lieber einen eigenen Task: Der hat ein sauberes EE, und du bekommst eher, was du brauchst — ohne Projekt also im eigenen MyTask Board.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Tomas soll „kurz die Q3-Zahlen zusammenfassen“ — du bist unsicher, ob das ein Mini Task ist. Kein Projekt dahinter."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Edson soll ein Angebot für einen Neukunden erstellen. Das gehört zu keinem Projekt."
+      },
+      {
+        "correct" : 2,
+        "explain" : "Mehr als ein Handgriff und kein Projekt dahinter — also ein DELTA-Task im eigenen MyTask Board, mit Kontext und EE.",
+        "options" : [
+          "Mini Task (Kommentar zuweisen)",
+          "DELTA-Subtask an der Prio-Karte",
+          "DELTA-Task im eigenen MyTask Board"
+        ],
+        "q" : "Svatava soll die Unterlagen für den neuen Kollegen vorbereiten, der nächste Woche anfängt — ohne Projekt dahinter."
+      }
+    ],
+    "title" : "Mini Task oder DELTA-Task?"
   }
 };
 
@@ -7095,7 +7847,7 @@ const I18N = {
         const goldCount = renderMedals();
         resultMedal.style.display = 'block';
         resultMedal.textContent = (goldCount === GAME_IDS.length)
-          ? '🏆 0 Fehler — Gold-Medaille geholt! Und damit hast du jetzt in allen 5 Spielen Gold: Gold Member / MASTER!'
+          ? '🏆 0 Fehler — Gold-Medaille geholt! Und damit hast du jetzt in allen 6 Spielen Gold: Gold Member / MASTER!'
           : '🥇 0 Fehler — Gold-Medaille für dieses Spiel geholt!';
       } else {
         resultMedal.style.display = 'block';
